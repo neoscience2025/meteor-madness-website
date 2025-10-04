@@ -196,6 +196,7 @@ export default function OurTeam({
               {/* Foto */}
               <div
                 style={{
+                  position: "relative",
                   width: "100%",
                   aspectRatio: "1.2/1",
                   borderRadius: 12,
@@ -209,11 +210,8 @@ export default function OurTeam({
                   src={m.photo}
                   alt={`${m.name} photo`}
                   fill
+                  className="object-cover"
                   style={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                    display: "block",
                     filter: "saturate(0.9) contrast(1.05)",
                   }}
                 />
