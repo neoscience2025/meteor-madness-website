@@ -27,6 +27,12 @@
             "role": "Líder de Backend e Integración",
             "photo": "/team/OscarBG.png",
             "linkedin": "https://www.linkedin.com/in/oscarchiriboga/"
+        }, {
+            "name": "José Navas",
+            "profession": "Físico",
+            "role": "Líder de Modelado Matemático",
+            "photo": "/team/JoseBG.png",
+            "linkedin": "https://www.linkedin.com/in/jose-miguel-navas/"
         }
     ]
 }
