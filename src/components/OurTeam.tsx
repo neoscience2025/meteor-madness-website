@@ -149,8 +149,9 @@ export default function OurTeam({
           maxWidth: 1100,
           margin: "0 auto",
           display: "grid",
+          
           gap: 18,
-          gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))",
+          gridTemplateColumns: "repeat(3, minmax(0, 1fr))", // ⬅️ tres por fila
         }}
       >
         {team.map((m, i) => (
