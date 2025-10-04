@@ -18,19 +18,19 @@ export default function PreviewSection() {
       title: "Story Telling",
       desc:
         "Discover the fascinating story of Near-Earth Objects and how they shaped our planet's history through an interactive narrative experience.",
-      img: "/preview/storyPreview.JPEG",
+      img: "/preview/storyPreview.jpeg",
     },
     {
       title: "Game",
       desc:
         "Defend Earth from incoming asteroids in our interactive space defense game. Test your reflexes and strategic thinking.",
-      img: "/preview/gamePreview.JPEG",
+      img: "/preview/gamePreview.jpeg",
     },
     {
       title: "Simulation",
       desc:
         "Explore our 2D simulation of the solar system, NEOs, and PHAs. Manipulate time and discover orbital mechanics.",
-      img: "/preview/simulationPreview.JPEG",
+      img: "/preview/simulationPreview.jpeg",
     },
   ];
 
