@@ -36,23 +36,23 @@ const maps = Object.freeze({
 })
 
 const MapContainer = dynamic(
-  () => import('react-leaflet/MapContainer').then((mod) => ({ default: mod.MapContainer })),
+  () => import('react-leaflet').then((mod) => ({ default: mod.MapContainer })),
   { ssr: false }
 );
 const TileLayer = dynamic(
-  () => import('react-leaflet/TileLayer').then((mod) => ({ default: mod.TileLayer })),
+  () => import('react-leaflet').then((mod) => ({ default: mod.TileLayer })),
   { ssr: false }
 );
 const Marker = dynamic(
-  () => import('react-leaflet/Marker').then((mod) => ({ default: mod.Marker })),
+  () => import('react-leaflet').then((mod) => ({ default: mod.Marker })),
   { ssr: false }
 );
 const Circle = dynamic(
-  () => import('react-leaflet/Circle').then((mod) => ({ default: mod.Circle })),
+  () => import('react-leaflet').then((mod) => ({ default: mod.Circle })),
   { ssr: false }
 );
 const ImageOverlay = dynamic(
-  () => import('react-leaflet/ImageOverlay').then((mod) => ({ default: mod.ImageOverlay })),
+  () => import('react-leaflet').then((mod) => ({ default: mod.ImageOverlay })),
   { ssr: false }
 );
 
@@ -205,11 +205,11 @@ const AffectedAreaCircle = ({ affectedArea, backgroundImage = "/crater.png" }) =
   if (!affectedArea) return null;
 
   const { center, radiusDegrees } = affectedArea;
-  const position = [center.latitude, center.longitude];
+  const position: [number, number] = [center.latitude, center.longitude];
 
   // Calculate bounds for the image overlay - make it larger to ensure full circle coverage
   const boundsPadding = radiusDegrees * 1.2; // 20% padding to ensure full coverage
-  const bounds = [
+  const bounds: [[number, number], [number, number]] = [
     [center.latitude - boundsPadding, center.longitude - boundsPadding],
     [center.latitude + boundsPadding, center.longitude + boundsPadding]
   ];
