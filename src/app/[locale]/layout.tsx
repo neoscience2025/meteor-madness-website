@@ -5,6 +5,9 @@ import initTranslations from "../i18n";
 import { NeoscienceParams } from "@/interfaces/common";
 import { dir } from "i18next";
 import TranslationsProvider from "@/components/translation-provider";
+import styles from "./layout.module.css";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -46,14 +49,29 @@ export default async function RootLayout({
           resources={resources}
         >
           <body
-            className={`antialiased`}
-            suppressHydrationWarning={true}
+            className={`antialiased ${styles.wrap}`}
+            suppressHydrationWarning
           >
-            <main>
+
+            <header className={styles.header}>
+              <div className="container">
+
+                <Header />
+              </div>
+            </header>
+
+            <main className={styles.main}>
               <div>
                 {children}
               </div>
             </main>
+
+            <footer className={styles.footer}>
+              <div className="container">
+                <Footer t={t} />
+              </div>
+            </footer>
+
           </body>
         </TranslationsProvider>
       </body>
