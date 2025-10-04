@@ -1,0 +1,24 @@
+import { Map } from "@/components/impactZone/Map";
+import TranslationsProvider from "../../../components/translation-provider";
+import initTranslations from "../../i18n/index";
+
+const NAMESPACES_REQUIRED = [
+  'menu',
+  'footer'
+];
+
+export default async function ImpactZone({ params }) {
+  const { locale } = await params;
+  const { resources } = await initTranslations(locale, NAMESPACES_REQUIRED);
+
+  return <TranslationsProvider
+    namespaces={NAMESPACES_REQUIRED}
+    locale={locale}
+    resources={resources}
+  >
+    <div className="container mx-auto px-4 py-8">
+      <h1 className="text-3xl font-bold mb-4">💥 Impact Zone</h1>
+      <Map />
+    </div>
+  </TranslationsProvider>
+}
