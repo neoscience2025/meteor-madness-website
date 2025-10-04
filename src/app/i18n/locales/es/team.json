@@ -1,0 +1,32 @@
+{
+    "members": [
+        {
+            "name": "Nolasco Ramírez",
+            "profession": "Físico",
+            "role": "Líder del Proyecto",
+            "photo": "/team/NolascoBG.png",
+            "linkedin": "https://www.linkedin.com/in/nolasco-ramírez-560891280"
+        },
+        {
+            "name": "Alexander Panchi",
+            "profession": "Físico",
+            "role": "Líder de Modelado Matemático",
+            "photo": "/team/MarcoBG.png",
+            "linkedin": "www.linkedin.com/in/ira-quimby7991"
+        },
+        {
+            "name": "Marian Paredes",
+            "profession": "Ingeniera en Sistemas",
+            "role": "Líder de Ingeniería de Productos con IA",
+            "photo": "/team/MaggieBG.png",
+            "linkedin": "https://www.linkedin.com/in/marian-paredes/"
+        },
+        {
+            "name": "Oscar Chiriboga",
+            "profession": "Ingeniero en Ciencias de la Computación",
+            "role": "Líder de Backend e Integración",
+            "photo": "/team/OscarBG.png",
+            "linkedin": "https://www.linkedin.com/in/oscarchiriboga/"
+        }
+    ]
+}

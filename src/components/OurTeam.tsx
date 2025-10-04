@@ -4,6 +4,7 @@ import { useMemo } from "react";
 import { motion, type Variants } from "framer-motion";
 import { Orbitron } from "next/font/google";
 import Image from "next/image";
+import { useTranslation } from "react-i18next";
 
 // Fuente sci-fi para títulos / nombres
 const orbitron = Orbitron({
@@ -22,37 +23,6 @@ export type Member = {
   photo: string;      // URL absoluta o /public/*
   linkedin: string;   // URL perfil LinkedIn
 };
-
-const DEFAULT_TEAM: Member[] = [
-  {
-    name: "Nolasco Ramírez",
-    profession: "Physicist",
-    role: "Project Leader",
-    photo: "/team/NolascoBG.png",
-    linkedin: "https://www.linkedin.com/in/nolasco-ramírez-560891280",
-  },
-  {
-    name: "Alexander Panchi",
-    profession: "Physicist",
-    role: "Mathematical Modeling Lead",
-    photo: "/team/MarcoBG.png",
-    linkedin: "www.linkedin.com/in/ira-quimby7991",
-  },
-  {
-    name: "Marian Paredes",
-    profession: "Systems Engineer",
-    role: "AI Product Engineering Lead",
-    photo: "/team/MaggieBG.png",
-    linkedin: "https://www.linkedin.com/in/marian-paredes/",
-  },
-  {
-    name: "Oscar Chiriboga",
-    profession: "Computer Science Engineer",
-    role: "Backend & Integration Lead",
-    photo: "/team/OscarBG.png",
-    linkedin: "https://www.linkedin.com/in/oscarchiriboga/",
-  },
-];
 
 // =====================
 // Animaciones (Variants)
@@ -103,11 +73,9 @@ function LinkedInIcon(props: React.SVGProps<SVGSVGElement>) {
 export default function OurTeam({
   title = "Our Team",
   subtitle = "People behind Neoscience",
-  team = DEFAULT_TEAM,
 }: {
   title?: string;
   subtitle?: string;
-  team?: Member[];
 }) {
   const colors = useMemo(
     () => ({
@@ -123,13 +91,17 @@ export default function OurTeam({
     []
   );
 
+  const { t } = useTranslation();
+
+  const team: Member[] = t("team:members", { returnObjects: true }) as Member[];
+
   return (
     <section
       aria-label="Our Team"
       style={{
         width: "100%",
         padding: "64px 16px 72px",
-         background:
+        background:
           "radial-gradient(circle at 50% -40%, #03071aff 0%, #000 55%, #000 100%)",
         color: colors.text,
       }}
@@ -143,17 +115,17 @@ export default function OurTeam({
         }}
       >
         <h2
-  style={{
-    margin: 0,
-    fontFamily: orbitron.style.fontFamily,
-    fontSize: "clamp(28px, 5vw, 42px)",
-    fontWeight: 900,
-    letterSpacing: "0.05em",
-    lineHeight: 1.1,
-    color: "#176b70ff", // 👈 color sólido diferente (violeta espacial)
-    textShadow: "0 0 24px rgba(3, 57, 70, 0.28)", // glow en tono violeta
-  }}
->
+          style={{
+            margin: 0,
+            fontFamily: orbitron.style.fontFamily,
+            fontSize: "clamp(28px, 5vw, 42px)",
+            fontWeight: 900,
+            letterSpacing: "0.05em",
+            lineHeight: 1.1,
+            color: "#176b70ff", // 👈 color sólido diferente (violeta espacial)
+            textShadow: "0 0 24px rgba(3, 57, 70, 0.28)", // glow en tono violeta
+          }}
+        >
           {title}
         </h2>
         <p
@@ -163,7 +135,7 @@ export default function OurTeam({
             fontSize: "clamp(14px, 2.2vw, 16px)",
           }}
         >
-          
+
         </p>
       </div>
 
@@ -236,6 +208,7 @@ export default function OurTeam({
                 <Image
                   src={m.photo}
                   alt={`${m.name} photo`}
+                  fill
                   style={{
                     width: "100%",
                     height: "100%",

@@ -166,6 +166,7 @@ export default function PreviewSection() {
                 <Image
                   src={item.img}
                   alt={`${item.title} photo`}
+                  fill
                   style={{
                     width: "100%",
                     height: "100%",
