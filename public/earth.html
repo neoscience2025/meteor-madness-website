@@ -63,6 +63,9 @@
     controls.minDistance = 3;
     controls.maxDistance = 25;
 
+    // 🚫 Desactivar zoom (ruedita del mouse)
+controls.enableZoom = false;
+
     // --- Fondo de estrellas ---
     const starCount = 5000;
     const starGeometry = new THREE.BufferGeometry();
@@ -108,8 +111,8 @@
         map: textureLoader.load(texturePath),
         roughness: 0.8,
         metalness: 0.1,
-        emissive: new THREE.Color(0x222222),
-        emissiveIntensity: 0.2
+        emissive: new THREE.Color(0xb0b0b0),
+        emissiveIntensity: 0.3
       });
       const planet = new THREE.Mesh(planetGeo, planetMat);
       planet.position.set(x, y, z);
@@ -245,7 +248,9 @@
       }
     }
     function createMeteorInstance() {
-      meteors.push(new Meteor());
+      if (meteors.length < 5) { // 👈 máximo 5 activos
+    meteors.push(new Meteor());
+  }
     }
     setInterval(createMeteorInstance, 6000);
 

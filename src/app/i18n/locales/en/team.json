@@ -2,36 +2,36 @@
     "members": [
         {
             "name": "Nolasco Ramírez",
-            "profession": "Físico",
-            "role": "Líder del Proyecto",
+            "profession": "Physicist",
+            "role": "Project Leader",
             "photo": "/team/NolascoBG.png",
             "linkedin": "https://www.linkedin.com/in/nolasco-ramírez-560891280"
         },
         {
             "name": "Alexander Panchi",
-            "profession": "Físico",
-            "role": "Líder de Modelado Matemático e IA",
+            "profession": "Physicist",
+            "role": "Mathematical Modeling & AI Lead",
             "photo": "/team/MarcoBG.png",
             "linkedin": "www.linkedin.com/in/ira-quimby7991"
         },
         {
             "name": "Marian Paredes",
-            "profession": "Ingeniera en Sistemas",
-            "role": "Líder de Producto de IA y Datos",
+            "profession": "Systems Engineer",
+            "role": "AI & Data Product Lead",
             "photo": "/team/MaggieBG.png",
             "linkedin": "https://www.linkedin.com/in/marian-paredes/"
         },
         {
             "name": "Oscar Chiriboga",
-            "profession": "Ingeniero en Ciencias de la Computación",
-            "role": "Líder de Backend e Integración",
+            "profession": "Computer Science Engineer",
+            "role": "Backend & Integration Lead",
             "photo": "/team/OscarBG.png",
             "linkedin": "https://www.linkedin.com/in/oscarchiriboga/"
         },
         {
             "name": "José Navas",
-            "profession": "Físico",
-            "role": "Líder de Física y Simulación",
+            "profession": "Physicist",
+            "role": "Physics & Simulation Lead",
             "photo": "/team/JoseBG.png",
             "linkedin": "https://www.linkedin.com/in/jose-miguel-navas/"
         }
