@@ -37,6 +37,7 @@ export default async function RootLayout({
     >
       <body
         className="antialiased"
+        suppressHydrationWarning={true}
       >
         {children}
       </body>
