@@ -7,7 +7,7 @@ import PreviewSection from "@/components/PreviewSection";
 
 
 const NAMESPACES_REQUIRED = [
-  "team"
+  "team",
 ];
 
 export default async function Home({ params }) {
@@ -19,12 +19,9 @@ export default async function Home({ params }) {
     locale={locale}
     resources={resources}
   >
-    <main>
-      <Banner />
-      <MottosSection />
-      <OurTeam />
-      <PreviewSection />
-    </main>
-
+    <Banner />
+    <MottosSection />
+    <OurTeam />
+    <PreviewSection />
   </TranslationsProvider>
 }

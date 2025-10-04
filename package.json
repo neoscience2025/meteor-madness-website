@@ -43,6 +43,7 @@
     "tailwindcss": "^4",
     "typescript": "^5",
     "canvas-confetti": "^1.9.3",
-    "react-confetti": "^6.4.0"
+    "react-confetti": "^6.4.0",
+    "react-pageflip": "^2.0.3"
   }
 }
