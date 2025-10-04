@@ -1,8 +1,23 @@
 @import "tailwindcss";
 
+/* Neoscience Theme Tokens */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #0a0a1a;
+  --bg-2: #1a1a2e;
+  --bg-3: #16213e;
+  --card: rgba(255, 255, 255, 0.06);
+  --card-90: rgba(255, 255, 255, 0.90);
+  --accent: #5a9eff;
+  /* tu "accent" */
+  --accent-30: rgba(90, 158, 255, 0.30);
+  --foreground: #e5e7eb;
+  /* texto claro */
+  --border: rgba(255, 255, 255, 0.18);
+  --radius: 14px;
+  --container: 1200px;
+
+  /* Next.js theme compatibility */
+  --background: var(--bg);
 }
 
 @theme inline {
@@ -10,17 +25,45 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  /* Custom blue-950 to match header color */
+  --color-blue-950: #101328;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Neoscience Global Styles */
+* {
+  box-sizing: border-box
+}
+
+html,
+body {
+  height: 100%
 }
 
 body {
-  background: var(--background);
+  margin: 0;
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background:
+    linear-gradient(135deg, #0a0a1a 0%, #1a1a2e 25%, #16213e 50%, #0f0f23 75%, #0a0a1a 100%),
+    radial-gradient(circle at 20% 80%, rgba(120, 119, 198, .1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 119, 198, .1) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(120, 219, 255, .1) 0%, transparent 50%);
+  background-attachment: fixed;
+  font-family: ui-sans-serif, system-ui, Segoe UI, Roboto, Arial;
+}
+
+a {
+  color: inherit;
+  text-decoration: none
+}
+
+img {
+  max-width: 100%;
+  display: block
+}
+
+.container {
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: 16px
 }
