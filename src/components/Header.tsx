@@ -144,7 +144,7 @@ export default function Header() {
         to: "",
         subitems: [
           { key: "story-telling", label: t("menu:storyTelling"), to: `/story-telling` },
-          { key: "aboutTeam", label: t("menu:aboutTeam"), to: `/aboutTeam` },
+          { key: "about-team", label: t("menu:aboutTeam"), to: `/about-team` },
         ],
       },
       {
@@ -161,8 +161,9 @@ export default function Header() {
         label: t("menu:simulation"),
         to: "",
         subitems: [
+           { key: "neopha2d", label: t("menu:neopha2d"), to: `/neopha2d` },
           { key: "impact-zone", label: t("menu:impact"), to: `/impact-zone` },
-          { key: "mitigation", label: t("menu:mitigation"), to: `/impact-mitigation` },
+         
         ],
       },
       {
@@ -171,7 +172,6 @@ export default function Header() {
         to: "",
         subitems: [
           { key: "newsOfWeek", label: t("menu:newsOfWeek"), to: `/newsOfWeek` },
-          { key: "machine-learning", label: t("menu:machineLearning"), to: `/machine-learning` },
           { key: "aiAssistant", label: t("menu:aiAssistant"), to: `/aiAssistant` },
         ],
       },
