@@ -4,6 +4,7 @@ import i18nConfig from "../../../i18nConfig";
 import initTranslations from "../i18n";
 import { NeoscienceParams } from "@/interfaces.ts/common";
 import { dir } from "i18next";
+import TranslationsProvider from "@/components/translation-provider";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -39,7 +40,22 @@ export default async function RootLayout({
         className="antialiased"
         suppressHydrationWarning={true}
       >
-        {children}
+        <TranslationsProvider
+          namespaces={NAMESPACES_REQUIRED}
+          locale={locale}
+          resources={resources}
+        >
+          <body
+            className={`antialiased`}
+            suppressHydrationWarning={true}
+          >
+            <main>
+              <div>
+                {children}
+              </div>
+            </main>
+          </body>
+        </TranslationsProvider>
       </body>
     </html>
   );
