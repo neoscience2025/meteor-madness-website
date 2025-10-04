@@ -1,5 +1,5 @@
 const defaultLocale = "es"
-const locales = [defaultLocale, "en", "qu"];
+const locales = [defaultLocale, "en"];
 
 const i18nConfig = {
     locales,
