@@ -41,7 +41,6 @@ export function BentoCard({
           <div className="absolute inset-0 bg-gradient-to-b from-white to-50% group-data-[dark]:from-gray-950 group-data-[dark]:from-[-25%]" />
         )}
         {fade.includes("bottom") && (
-          // eslint-disable-next-line
           <div className="absolute inset-0 bg-gradient-to-t from-white to-50% group-data-[dark]:from-gray-950 group-data-[dark]:from-[-25%]" />
         )}
       </div>

@@ -1,0 +1,81 @@
+.languageChanger {
+  position: relative;
+  display: inline-block;
+}
+
+.triggerButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: transparent;
+  color: var(--cosmic-latte, #FFF8E7);
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.triggerButton:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.flagIcon {
+  width: 20px;
+  height: 15px;
+  border-radius: 2px;
+}
+
+.chevron {
+  width: 16px;
+  height: 16px;
+  transition: transform .2s ease;
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+/* Dropdown styling to match Header dropdown exactly */
+.dropdown {
+  position: absolute;
+  top: calc(100% + 14px);
+  right: 0;
+  min-width: 120px;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  border-radius: 14px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  z-index: 1000;
+  margin-top: 14px;
+}
+
+.dropdownItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  color: var(--text-light, #FFFFFF);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-align: left;
+  width: 100%;
+}
+
+.dropdownItem:hover {
+  background: linear-gradient(45deg, rgba(107, 127, 215, 0.25), rgba(157, 78, 221, 0.25));
+}
+
+.dropdownItemActive {
+  background: linear-gradient(45deg, rgba(107, 127, 215, 0.35), rgba(157, 78, 221, 0.35));
+}

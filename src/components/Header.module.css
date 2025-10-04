@@ -1,0 +1,315 @@
+:root {
+  --cosmic-latte: #FFF8E7;
+  --deep-space: #0C0C1D;
+  --star-yellow: #FFE87C;
+  --nebula-blue: #6B7FD7;
+  --galaxy-purple: #9D4EDD;
+  --exploration-red: #D62246;
+  --text-light: #FFFFFF;
+}
+
+/* Header glassy + shrink */
+.header {
+  position: sticky;
+  width: 100%;
+  background: transparent;
+  transition: padding .3s ease, background .3s ease, box-shadow .3s ease;
+  padding: 18px 0;
+  box-sizing: border-box;
+    z-index: 2000;          /* arriba de cualquier canvas/section */
+  top: 0;
+}
+
+
+.header,
+.inner,
+.item {
+  overflow: visible;
+}
+
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+/* Brand (usa tus clases existentes) */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo {
+  font-size: 24px;
+  filter: drop-shadow(0 0 8px rgba(255, 232, 124, 0.35));
+}
+
+.title {
+  font-size: 0;
+}
+
+.brandLink {
+  display: flex;
+ 
+  height: 40px;            /* 👈 el mismo alto que la barra */
+}
+
+.brandText {
+  font-size: 20px;         /* 👈 lo pediste en 14px */
+  line-height: 1.7;
+  font-weight: 600;
+  white-space: nowrap;     /* no haga salto de línea */
+  display: inline-block;   /* que no estire el header */
+}
+
+/* Forzar el Morphing a respetar tamaño */
+.brandText * {
+  font-size: inherit !important;
+  line-height: inherit !important;
+}
+
+/* Nav + items */
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.item {
+  position: relative;
+}
+
+/* Botón/link principal con subrayado animado */
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  /* antes tenías 8px 4px */
+  color: var(--text-light);
+  text-decoration: none;
+  font-weight: 500;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.btn::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0;
+  height: 2px;
+  background: var(--star-yellow);
+  transition: width .25s ease;
+}
+
+.btn:hover::after {
+  width: 100%;
+}
+
+.btnActive {
+  color: var(--star-yellow);
+}
+
+/* Chevron */
+.chev {
+  width: 16px;
+  height: 16px;
+  transition: transform .2s ease;
+}
+
+.chevOpen {
+  transform: rotate(180deg);
+}
+
+/* Dropdown glassmorphism */
+.dropdown {
+  position: absolute;
+  top: calc(100% + 14px);
+  left: 0;
+  min-width: 230px;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  border-radius: 14px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  top: 100%;
+  z-index: 2100;  /* mayor que el header */
+}
+
+.dropBtn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  color: var(--text-light);
+  text-decoration: none;
+}
+
+.dropBtn:hover {
+  background: linear-gradient(45deg, rgba(107, 127, 215, 0.25), rgba(157, 78, 221, 0.25));
+}
+
+.dropBtnActive {
+  background: linear-gradient(45deg, rgba(107, 127, 215, 0.35), rgba(157, 78, 221, 0.35));
+}
+
+.dropIcon {
+  width: 18px;
+  text-align: center;
+}
+
+/* Actions existentes (solo por si las usas) */
+.auth {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ghost {
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: transparent;
+  color: var(--cosmic-latte);
+  padding: 6px 10px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+/* Burger (móvil) */
+.burger {
+  display: none;
+  background: none;
+  border: none;
+  padding: 8px;
+  border-radius: 10px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.burger:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.burgerIcon {
+  width: 22px;
+  height: 22px;
+}
+
+/* Responsive: menú móvil como panel bajo el header */
+@media (max-width: 1024px) {
+  .nav {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100vw;
+    height: auto;
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    padding: 10px 16px;
+    background: rgba(12, 12, 29, 0.96);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    z-index: 1000;
+  }
+
+  .navOpen {
+    display: flex;
+  }
+
+  .item {
+    width: 100%;
+  }
+
+  .btn,
+  .dropBtn {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .dropdown {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-shadow: none;
+    background: rgba(255, 255, 255, 0.04);
+    margin-bottom: 6px;
+    margin-top: 16px;
+  }
+
+  .burger {
+    display: inline-flex;
+  }
+}
+
+
+/* asegura mismo tamaño/peso y baseline para todos */
+.btn,
+.dropBtn {
+  font-size: 1rem;
+  font-weight: 600;
+  /* sube a 600 para que no se sienta más “fino” */
+  line-height: 1.2;
+  letter-spacing: 0.2px;
+  /* opcional, mejora legibilidad */
+}
+
+.btnLabel {
+  display: inline-block;
+  line-height: 1.2;
+}
+
+.chev {
+  width: 16px;
+  height: 16px;
+  margin-left: 2px;
+  /* separa del texto */
+  vertical-align: middle;
+  flex-shrink: 0;
+  transform-origin: center;
+}
+
+.dropdown {
+  background: rgba(12, 12, 29, 0.9);
+  /* fondo oscuro sólido con 90% */
+  backdrop-filter: blur(10px);
+  top: 100%;
+  /* nada de calc(100% + 14px) */
+  z-index: 1001;
+  margin-top: 24px;
+  /* súbelo por encima del header */
+}
+
+
+
+/* Opcional 1: añade puente invisible para tolerancia de 10px */
+.dropdown::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: 0;
+  right: 0;
+  height: 20px;
+}
+
+/* Opcional 2: si quieres conservar la “sensación” de separación, úsala con translate en la animación (no con gap real) */
+.item {
+  position: relative;
+  padding-bottom: 8px;
+}

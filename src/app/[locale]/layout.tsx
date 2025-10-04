@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "../globals.css";
 import i18nConfig from "../../../i18nConfig";
 import initTranslations from "../i18n";
-import { NeoscienceParams } from "@/interfaces.ts/common";
+import { NeoscienceParams } from "@/interfaces/common";
 import { dir } from "i18next";
 import TranslationsProvider from "@/components/translation-provider";
 

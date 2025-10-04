@@ -1,0 +1,2 @@
+.wrap{position:fixed; inset:0; overflow:hidden; pointer-events:none; z-index:0}
+.star{position:absolute; width:4px; height:4px; background:white; border-radius:999px; opacity:.8}
