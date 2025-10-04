@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "../globals.css";
+import "leaflet/dist/leaflet.css";
 import i18nConfig from "../../../i18nConfig";
 import initTranslations from "../i18n";
 import { NeoscienceParams } from "@/interfaces/common";
