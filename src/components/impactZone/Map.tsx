@@ -244,7 +244,6 @@ const AffectedAreaCircle = ({ affectedArea, backgroundImage = "/crater.png" }) =
 export function Map({
   lat = -1.65899,
   lon = -78.67901,
-  backgroundImage,
 }) {
 
   const { i18n } = useTranslation();
@@ -396,7 +395,6 @@ export function Map({
           {(impactState === 'showing-impact' || impactState === 'ready-for-new') && impactData && (
             <AffectedAreaCircle
               affectedArea={impactData.affectedArea}
-              backgroundImage={backgroundImage}
             />
           )}
           <div className="absolute top-4 right-4 z-[1000]">

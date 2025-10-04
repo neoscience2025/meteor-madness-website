@@ -8,7 +8,7 @@ import {
   TbAngle
 } from "react-icons/tb";
 import { formatDistance, convertKmsToMs, convertMsToKms } from "../../lib/map/utils";
-import { CalculationData, ImpactFormData } from "@/interfaces/impactForm";
+import { CalculationData, ImpactFormData } from "@/lib/map/impactForm";
 import { retrieveImpactData } from "@/lib/map/retrieveImpactData";
 
 const LaunchAsteroidButton = ({ onClick, isLoading = false, text = "Launch Asteroid", disabled = false }) => {
@@ -248,3 +248,5 @@ export const ImpactForm = forwardRef<ImpactFormRef, {
     </div>
   );
 });
+
+ImpactForm.displayName = 'ImpactForm';
