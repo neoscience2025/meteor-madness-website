@@ -12,7 +12,7 @@ const PHRASES = [
   "Together we protect our world",
 ];
 
-const LOGO_SRC  = "/preview/logo.PNG";
+const LOGO_SRC  = "/preview/logo.png";
 const LOGO_SIZE = 200;
 
 // Timings
