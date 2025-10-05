@@ -118,6 +118,16 @@ const ImpactAnimation = ({ position, onComplete }) => {
   return (
     <>
       <MapEventsComponent />
+      
+      {/* Full-screen flash overlay to illuminate entire map */}
+      <div
+        className="absolute inset-0 z-[1999] pointer-events-none"
+        style={{
+          animation: 'mapIllumination 0.6s ease-out forwards',
+          background: `radial-gradient(circle at ${screenPosition.x}px ${screenPosition.y}px, rgba(255,255,255,0.95) 0%, rgba(255,255,0,0.8) 15%, rgba(255,165,0,0.6) 35%, rgba(255,200,100,0.3) 60%, rgba(255,220,150,0.1) 80%, transparent 100%)`
+        }}
+      />
+      
       <div
         className="absolute z-[2000] pointer-events-none"
         style={{
@@ -126,7 +136,7 @@ const ImpactAnimation = ({ position, onComplete }) => {
           transform: 'translate(-50%, -50%)'
         }}
       >
-        {/* Bright flash of light */}
+        {/* Intense impact flash */}
         <div
           className="absolute"
           style={{
@@ -139,11 +149,11 @@ const ImpactAnimation = ({ position, onComplete }) => {
           <div
             className="rounded-full"
             style={{
-              width: '40px',
-              height: '40px',
-              background: 'radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(255,255,0,0.9) 30%, rgba(255,200,0,0.6) 60%, transparent 100%)',
-              filter: 'blur(2px)',
-              boxShadow: '0 0 60px 30px rgba(255,255,255,0.8), 0 0 120px 60px rgba(255,255,0,0.6)'
+              width: '60px',
+              height: '60px',
+              background: 'radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(255,255,0,0.95) 30%, rgba(255,165,0,0.9) 60%, rgba(255,200,100,0.7) 80%, transparent 100%)',
+              filter: 'blur(3px)',
+              boxShadow: '0 0 120px 60px rgba(255,255,255,1), 0 0 240px 120px rgba(255,255,0,0.9), 0 0 360px 180px rgba(255,165,0,0.7)'
             }}
           />
         </div>
@@ -163,9 +173,9 @@ const ImpactAnimation = ({ position, onComplete }) => {
             style={{
               width: '20px',
               height: '20px',
-              background: 'radial-gradient(circle, transparent 80%, rgba(255,255,255,0.8) 85%, rgba(255,255,0,0.6) 90%, rgba(255,200,0,0.4) 95%, transparent 100%)',
+              background: 'radial-gradient(circle, transparent 80%, rgba(255,255,255,0.9) 85%, rgba(255,255,0,0.7) 90%, rgba(255,165,0,0.5) 95%, transparent 100%)',
               filter: 'blur(1px)',
-              boxShadow: '0 0 40px rgba(255,255,255,0.5), inset 0 0 20px rgba(255,255,0,0.3)'
+              boxShadow: '0 0 50px rgba(255,255,0,0.7), inset 0 0 25px rgba(255,165,0,0.4)'
             }}
           />
         </div>
@@ -185,24 +195,40 @@ const ImpactAnimation = ({ position, onComplete }) => {
             style={{
               width: '80px',
               height: '80px',
-              background: 'radial-gradient(circle, rgba(255,255,255,0.3) 0%, rgba(255,255,0,0.2) 50%, transparent 100%)',
+              background: 'radial-gradient(circle, rgba(255,255,255,0.4) 0%, rgba(255,255,0,0.3) 40%, rgba(255,165,0,0.2) 70%, transparent 100%)',
               filter: 'blur(8px)'
             }}
           />
         </div>
 
         <style jsx>{`
+          @keyframes mapIllumination {
+            0% {
+              opacity: 0;
+            }
+            25% {
+              opacity: 1;
+            }
+            100% {
+              opacity: 0;
+            }
+          }
+
           @keyframes impactFlash {
             0% {
               transform: translate(-50%, -50%) scale(0);
               opacity: 1;
             }
-            30% {
-              transform: translate(-50%, -50%) scale(2);
+            20% {
+              transform: translate(-50%, -50%) scale(1.5);
+              opacity: 1;
+            }
+            40% {
+              transform: translate(-50%, -50%) scale(3);
               opacity: 1;
             }
             100% {
-              transform: translate(-50%, -50%) scale(4);
+              transform: translate(-50%, -50%) scale(5);
               opacity: 0;
             }
           }
