@@ -91,7 +91,23 @@ export const MeteoriteSelector = ({
             </div>
 
             {/* Carousel Selector */}
-            <div className="space-y-4">
+            <div className="flex items-center justify-between">
+                {/* Previous Button */}
+                <button
+                    onClick={goToPrevious}
+                    disabled={disabled}
+                    className={cn(
+                        "flex items-center justify-center w-12 h-12 rounded-full transition-all duration-200",
+                        "bg-neutral-100 dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-600",
+                        "hover:bg-neutral-200 dark:hover:bg-neutral-700 hover:scale-105",
+                        "disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100",
+                        "shadow-lg hover:shadow-xl"
+                    )}
+                >
+                    <TbChevronLeft className="w-6 h-6 text-neutral-600 dark:text-neutral-400" />
+                </button>
+
+                {/* Meteorite Info - Centered between controls */}
                 <div className="text-center">
                     <h3 className="text-lg font-semibold text-neutral-200 mb-1">
                         {METEORITE_OPTIONS[selectedMeteorite]?.name?.charAt(0).toUpperCase() + METEORITE_OPTIONS[selectedMeteorite]?.name?.slice(1) || selectedMeteorite}
@@ -101,57 +117,20 @@ export const MeteoriteSelector = ({
                     </p>
                 </div>
 
-                <div className="flex items-center justify-center space-x-4">
-                    {/* Previous Button */}
-                    <button
-                        onClick={goToPrevious}
-                        disabled={disabled}
-                        className={cn(
-                            "flex items-center justify-center w-12 h-12 rounded-full transition-all duration-200",
-                            "bg-neutral-100 dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-600",
-                            "hover:bg-neutral-200 dark:hover:bg-neutral-700 hover:scale-105",
-                            "disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100",
-                            "shadow-lg hover:shadow-xl"
-                        )}
-                    >
-                        <TbChevronLeft className="w-6 h-6 text-neutral-600 dark:text-neutral-400" />
-                    </button>
-
-                    {/* Meteorite Indicators */}
-                    <div className="flex space-x-2">
-                        {meteoriteNames.map((meteorite, index) => (
-                            <button
-                                key={meteorite}
-                                onClick={() => handleMeteoriteChange(meteorite)}
-                                disabled={disabled}
-                                className={cn(
-                                    "w-3 h-3 rounded-full transition-all duration-200",
-                                    "border-2",
-                                    index === currentIndex
-                                        ? "bg-blue-600 border-blue-600 scale-125"
-                                        : "bg-neutral-300 dark:bg-neutral-600 border-neutral-400 dark:border-neutral-500 hover:bg-neutral-400 dark:hover:bg-neutral-500",
-                                    "disabled:opacity-50 disabled:cursor-not-allowed"
-                                )}
-                                title={meteorite}
-                            />
-                        ))}
-                    </div>
-
-                    {/* Next Button */}
-                    <button
-                        onClick={goToNext}
-                        disabled={disabled}
-                        className={cn(
-                            "flex items-center justify-center w-12 h-12 rounded-full transition-all duration-200",
-                            "bg-neutral-100 dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-600",
-                            "hover:bg-neutral-200 dark:hover:bg-neutral-700 hover:scale-105",
-                            "disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100",
-                            "shadow-lg hover:shadow-xl"
-                        )}
-                    >
-                        <TbChevronRight className="w-6 h-6 text-neutral-600 dark:text-neutral-400" />
-                    </button>
-                </div>
+                {/* Next Button */}
+                <button
+                    onClick={goToNext}
+                    disabled={disabled}
+                    className={cn(
+                        "flex items-center justify-center w-12 h-12 rounded-full transition-all duration-200",
+                        "bg-neutral-100 dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-600",
+                        "hover:bg-neutral-200 dark:hover:bg-neutral-700 hover:scale-105",
+                        "disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100",
+                        "shadow-lg hover:shadow-xl"
+                    )}
+                >
+                    <TbChevronRight className="w-6 h-6 text-neutral-600 dark:text-neutral-400" />
+                </button>
             </div>
         </div>
     );
