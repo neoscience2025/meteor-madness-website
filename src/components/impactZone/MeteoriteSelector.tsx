@@ -68,11 +68,10 @@ export const MeteoriteSelector = ({
 
     return (
         <div className="flex flex-col justify-between h-full">
-            {/* 3D Model Display - Responsive height */}
             <div
                 className={cn(
                     "grid relative overflow-hidden rounded-[15px] bg-black/50",
-                    "h-32 md:h-36 lg:h-40", // Smaller, more compact height
+                    "h-56",
                     "place-content-center",
                     disabled && "opacity-50"
                 )}
