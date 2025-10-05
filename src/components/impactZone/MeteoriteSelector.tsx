@@ -67,12 +67,12 @@ export const MeteoriteSelector = ({
     const modelPath = `/models/meteorites/${selectedMeteorite}.glb`;
 
     return (
-        <div className="space-y-3">
+        <div className="flex flex-col justify-between h-full">
             {/* 3D Model Display - Responsive height */}
             <div
                 className={cn(
                     "grid relative overflow-hidden rounded-[15px] bg-black/50",
-                    "h-48 md:h-64 lg:h-80", // Responsive height
+                    "h-32 md:h-36 lg:h-40", // Smaller, more compact height
                     "place-content-center",
                     disabled && "opacity-50"
                 )}
@@ -94,8 +94,9 @@ export const MeteoriteSelector = ({
                 </Canvas>
             </div>
 
-            {/* Carousel Selector */}
-            <div className="flex items-center justify-center space-x-4">
+            {/* Carousel Selector - Aligned to bottom */}
+            <div className="flex items-end">
+                <div className="flex items-center justify-center space-x-4 w-full">
                 {/* Previous Button */}
                 <button
                     type="button"
@@ -131,6 +132,7 @@ export const MeteoriteSelector = ({
                 >
                     <TbChevronRight className="w-10 h-10 text-white hover:text-blue-900 active:text-blue-900 transition-colors duration-200" />
                 </button>
+                </div>
             </div>
         </div>
     );
