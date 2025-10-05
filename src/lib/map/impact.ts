@@ -1,4 +1,4 @@
-import { CalculationData } from "./impactForm";
+import { CalculationData } from "../../interfaces/impactForm";
 
 // Constants
 const GRAVITY = 9.81;

@@ -1,6 +1,6 @@
 "use server";
 
-import { ImpactFormData } from "./impactForm";
+import { ImpactFormData } from "../../interfaces/impactForm";
 import { calculateImpact, calculateAffectedArea } from "./impact";
 
 export async function retrieveImpactData({
@@ -32,3 +32,5 @@ export async function retrieveImpactData({
         affectedArea
     };
 }
+
+

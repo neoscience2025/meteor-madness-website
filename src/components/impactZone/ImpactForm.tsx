@@ -8,8 +8,9 @@ import {
   TbAngle
 } from "react-icons/tb";
 import { formatDistance, convertKmsToMs, convertMsToKms } from "../../lib/map/utils";
-import { CalculationData, ImpactFormData } from "@/lib/map/impactForm";
+import { CalculationData, ImpactFormData } from "@/interfaces/impactForm";
 import { retrieveImpactData } from "@/lib/map/retrieveImpactData";
+import { MeteoriteSelector } from "./MeteoriteSelector";
 
 const LaunchAsteroidButton = ({ onClick, isLoading = false, text = "Launch Asteroid", disabled = false }) => {
   return (
@@ -79,9 +80,8 @@ const SliderField = ({
           value={value}
           onChange={(e) => onChange(parseFloat(e.target.value))}
           disabled={disabled}
-          className={`w-full h-2 bg-neutral-700 rounded-lg appearance-none slider ${
-            disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'
-          }`}
+          className={`w-full h-2 bg-neutral-700 rounded-lg appearance-none slider ${disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'
+            }`}
         />
         <style jsx>{`
           .slider::-webkit-slider-thumb {
@@ -121,11 +121,11 @@ export const ImpactForm = forwardRef<ImpactFormRef, {
   isReadyForNew?: boolean;
   disabled?: boolean;
   inputsDisabled?: boolean;
-}>(({ 
-  latitude, 
-  longitude, 
-  onImpactResult, 
-  onNewLaunch, 
+}>(({
+  latitude,
+  longitude,
+  onImpactResult,
+  onNewLaunch,
   buttonText = "Launch Asteroid",
   isReadyForNew = false,
   disabled = false,
@@ -166,7 +166,7 @@ export const ImpactForm = forwardRef<ImpactFormRef, {
 
     try {
       const result = await retrieveImpactData(impactData);
-      console.log("the result is:",result)
+      console.log("the result is:", result)
       if (onImpactResult) {
         onImpactResult(result);
       }
@@ -181,6 +181,7 @@ export const ImpactForm = forwardRef<ImpactFormRef, {
     <div className="p-6">
       <form onSubmit={handleSubmit(onSubmit)} className="md:grid md:grid-cols-2 md:gap-6 md:h-full">
         <div className="space-y-6">
+          <MeteoriteSelector />
           <Controller
             name="diameter"
             control={control}
@@ -237,8 +238,8 @@ export const ImpactForm = forwardRef<ImpactFormRef, {
         </div>
 
         <div className="pt-6 md:pt-0 md:flex md:items-end md:justify-end">
-          <LaunchAsteroidButton 
-            onClick={handleSubmit(onSubmit)} 
+          <LaunchAsteroidButton
+            onClick={handleSubmit(onSubmit)}
             isLoading={isLoading}
             text={buttonText}
             disabled={disabled}
