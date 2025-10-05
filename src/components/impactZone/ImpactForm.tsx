@@ -11,8 +11,11 @@ import { formatDistance, convertKmsToMs, convertMsToKms } from "../../lib/map/ut
 import { CalculationData, ImpactFormData } from "@/interfaces/impactForm";
 import { retrieveImpactData } from "@/lib/map/retrieveImpactData";
 import { MeteoriteSelector } from "./MeteoriteSelector";
+import { useTranslation } from "react-i18next";
 
 const LaunchAsteroidButton = ({ onClick, isLoading = false, text = "Launch Asteroid", disabled = false }) => {
+  const { t } = useTranslation();
+  
   return (
     <button
       onClick={onClick}
@@ -20,7 +23,7 @@ const LaunchAsteroidButton = ({ onClick, isLoading = false, text = "Launch Aster
       className="group/button relative inline-flex h-[calc(48px+8px)] items-center justify-center rounded-full bg-blue-950 py-1 pl-6 pr-14 font-medium text-neutral-50 disabled:opacity-50 disabled:cursor-not-allowed"
     >
       <span className="z-10 pr-2">
-        {isLoading ? "Launching..." : text}
+        {isLoading ? t('impactZone:form.launching') : text}
       </span>
       <div className="absolute right-1 inline-flex h-12 w-12 items-center justify-end rounded-full bg-blue-900 transition-[width] group-hover/button:w-[calc(100%-8px)] group-disabled/button:hover:w-12">
         <div className="mr-3.5 flex items-center justify-center">
@@ -126,11 +129,12 @@ export const ImpactForm = forwardRef<ImpactFormRef, {
   longitude,
   onImpactResult,
   onNewLaunch,
-  buttonText = "Launch Asteroid",
+  buttonText,
   isReadyForNew = false,
   disabled = false,
   inputsDisabled = false
 }, ref) => {
+  const { t } = useTranslation();
   const { control, handleSubmit, watch, reset } = useForm({
     defaultValues: {
       diameter: 100,
@@ -205,7 +209,7 @@ export const ImpactForm = forwardRef<ImpactFormRef, {
             render={({ field }) => (
               <SliderField
                 icon={TbRuler2}
-                label="Diameter"
+                label={t('impactZone:form.diameter')}
                 value={field.value}
                 onChange={field.onChange}
                 min={1}
@@ -223,7 +227,7 @@ export const ImpactForm = forwardRef<ImpactFormRef, {
             render={({ field }) => (
               <SliderField
                 icon={TbGauge}
-                label="Speed"
+                label={t('impactZone:form.speed')}
                 value={field.value}
                 onChange={field.onChange}
                 min={1}
@@ -241,7 +245,7 @@ export const ImpactForm = forwardRef<ImpactFormRef, {
             render={({ field }) => (
               <SliderField
                 icon={TbAngle}
-                label="Impact angle"
+                label={t('impactZone:form.impactAngle')}
                 value={field.value}
                 onChange={field.onChange}
                 min={5}
@@ -257,7 +261,7 @@ export const ImpactForm = forwardRef<ImpactFormRef, {
             <LaunchAsteroidButton
               onClick={handleSubmit(onSubmit)}
               isLoading={isLoading}
-              text={buttonText}
+              text={buttonText || t('impactZone:form.launchAsteroid')}
               disabled={disabled}
             />
           </div>

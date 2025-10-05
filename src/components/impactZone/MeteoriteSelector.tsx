@@ -7,6 +7,7 @@ import { Suspense, useState, useEffect, useRef } from "react";
 import { TbChevronLeft, TbChevronRight } from "react-icons/tb";
 import { METEORITE_OPTIONS } from "@/lib/map/meteorites";
 import { MeteoriteName } from "@/interfaces/meteorites";
+import { useTranslation } from "react-i18next";
 
 interface MeteoriteModelProps {
     modelPath: string;
@@ -46,6 +47,7 @@ export const MeteoriteSelector = ({
     onChange,
     disabled = false
 }: MeteoriteSelectorProps) => {
+    const { t } = useTranslation();
     const [selectedMeteorite, setSelectedMeteorite] = useState<MeteoriteName>(value);
     const meteoriteNames = Object.keys(METEORITE_OPTIONS) as MeteoriteName[];
     const currentIndex = meteoriteNames.indexOf(selectedMeteorite);
@@ -123,10 +125,10 @@ export const MeteoriteSelector = ({
                 {/* Meteorite Info - Centered between controls */}
                 <div className="text-center w-40 min-w-40">
                     <h3 className="text-lg font-semibold text-neutral-200 mb-1">
-                        {METEORITE_OPTIONS[selectedMeteorite]?.name?.charAt(0).toUpperCase() + METEORITE_OPTIONS[selectedMeteorite]?.name?.slice(1) || selectedMeteorite}
+                        {t(`impactZone:form.materials.${selectedMeteorite}`)}
                     </h3>
                     <p className="text-sm text-neutral-400">
-                        Density: {METEORITE_OPTIONS[selectedMeteorite]?.density.toLocaleString()} kg/m³
+                        {t('impactZone:form.density', { density: METEORITE_OPTIONS[selectedMeteorite]?.density.toLocaleString() })}
                     </p>
                 </div>
 

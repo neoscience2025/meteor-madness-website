@@ -3,8 +3,7 @@ import TranslationsProvider from "../../../components/translation-provider";
 import initTranslations from "../../i18n/index";
 
 const NAMESPACES_REQUIRED = [
-  'menu',
-  'footer'
+  "impactZone"
 ];
 
 export default async function ImpactZone({ params }) {

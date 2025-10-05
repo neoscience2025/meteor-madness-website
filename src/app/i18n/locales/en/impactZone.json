@@ -1,0 +1,25 @@
+{
+  "mapTitle": "Impact Zone: {{result}}",
+  "loading": "Impact Zone: Loading...",
+  "locationError": "Impact Zone: Location Error",
+  "unknownLocation": "Unknown Location",
+  "mapView": {
+    "street": "Street",
+    "satellite": "Satellite"
+  },
+  "form": {
+    "diameter": "Diameter",
+    "speed": "Speed",
+    "impactAngle": "Impact angle",
+    "launchAsteroid": "Launch Asteroid",
+    "launching": "Launching...",
+    "density": "Density: {{density}} kg/m³",
+    "materials": {
+      "gold": "Gold",
+      "iron": "Iron",
+      "carbon": "Carbon",
+      "comet": "Comet",
+      "stone": "Stone"
+    }
+  }
+}

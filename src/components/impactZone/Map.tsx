@@ -407,7 +407,7 @@ export function Map({
   lon = -78.67901,
 }) {
 
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
   const [markerPosition, setMarkerPosition] = useState<number[]>([lat, lon]);
   const [placeName, setPlaceName] = useState('');
   const [isLoadingPlace, setIsLoadingPlace] = useState(false);
@@ -431,7 +431,7 @@ export function Map({
       setPlaceName(place);
     } catch (error) {
       setPlaceError('Failed to load location');
-      setPlaceName('Unknown Location');
+      setPlaceName(t('impactZone:unknownLocation'));
     } finally {
       setIsLoadingPlace(false);
     }
@@ -479,10 +479,10 @@ export function Map({
 
 
   const getTitle = () => {
-    if (isLoadingPlace) return "Impact Zone: Loading...";
-    if (placeError) return "Impact Zone: Location Error";
-    if (placeName) return `Impact Zone: ${placeName}`;
-    return "Impact Zone Map";
+    if (isLoadingPlace) return t('impactZone:loading');
+    if (placeError) return t('impactZone:locationError');
+    if (placeName) return t('impactZone:mapTitle', { result: placeName });
+    return t('impactZone:mapTitle', { result: 'Map' });
   };
 
   return (
@@ -561,7 +561,7 @@ export function Map({
                     : 'bg-blue-950 text-white hover:bg-blue-800'
                     }`}
                 >
-                  Street
+                  {t('impactZone:mapView.street')}
                 </button>
                 <button
                   onClick={() => setMapType('satellite')}
@@ -570,7 +570,7 @@ export function Map({
                     : 'bg-blue-950 text-white hover:bg-blue-800'
                     }`}
                 >
-                  Satellite
+                  {t('impactZone:mapView.satellite')}
                 </button>
               </div>
             </div>
