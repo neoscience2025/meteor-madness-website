@@ -30,30 +30,23 @@ type Scene = {
 const scenes: Scene[] = Array.from({ length: 13 }).map((_, i) => ({
   src: `/videos/${i + 1}.mp4`,
   title: i === 0
-    ? "El deporte cambia vidas"
+    ? " "
     : i === 6
-    ? "Juegan, aprenden y sonríen"
+    ? " "
     : i === 12
-    ? "Gracias por apoyar esta misión"
+    ? " "
     : undefined,
   subtitle:
     i === 0
-      ? "En un rincón de Guatemala, los sueños corren más rápido que el miedo"
+      ? " "
       : i === 6
-      ? "Cada pase es una oportunidad. Cada risa, un avance."
+      ? " "
       : i === 12
-      ? "Sumate: lacanterafer.netlify.app"
+      ? ""
       : undefined,
   minMs: 1200,
 }));
 
-// Texto para el cierre con CTA (se muestra al terminar la lista)
-const closing = {
-  title: "Ayudanos a llegar a más niños",
-  subtitle: "Con tu apoyo, el deporte se convierte en futuro",
-  ctaText: "Conocer el proyecto",
-  ctaHref: "https://lacanterafer.netlify.app/",
-};
 
 // ============================ Componente ============================
 export default function StoryPlayer() {
@@ -227,16 +220,9 @@ export default function StoryPlayer() {
           animate={{ opacity: 1, y: 0 }}
           className="mt-4 rounded-2xl border bg-white p-6 shadow"
         >
-          <h3 className="text-xl font-bold">{closing.title}</h3>
-          <p className="mt-1 text-gray-600">{closing.subtitle}</p>
+          
           <div className="mt-4 flex flex-wrap items-center gap-3">
-            <a
-              href={closing.ctaHref}
-              target="_blank"
-              className="rounded-xl bg-black px-4 py-2 text-white hover:opacity-90"
-            >
-              {closing.ctaText}
-            </a>
+           
             <button
               className="rounded-xl border px-4 py-2 hover:bg-gray-50"
               onClick={() => {
