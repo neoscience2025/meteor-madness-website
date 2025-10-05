@@ -161,7 +161,7 @@ export default function Header() {
         label: t("menu:simulation"),
         to: "",
         subitems: [
-           { key: "neo-pha", label: t("menu:neo-pha"), to: `/neo-pha` },
+           { key: "neo-pha", label: t("menu:neo-pha"), to: `https://nolaskote.github.io/simulatio_next` },
           { key: "impact-zone", label: t("menu:impact"), to: `/impact-zone` },
          
         ],
