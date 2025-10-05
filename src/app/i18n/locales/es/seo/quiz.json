@@ -1,24 +1,26 @@
 {
-  "title": "Quiz Locura de Meteoritos - Pon a Prueba tu Conocimiento NEO",
-  "description": "Desafía tu conocimiento sobre Objetos Cercanos a la Tierra y defensa planetaria con nuestro quiz interactivo Locura de Meteoritos. ¡Aprende mientras pones a prueba tu experiencia en ciencia espacial!",
-  "keywords": "quiz espacial, quiz asteroides, quiz NEO, quiz defensa planetaria, prueba ciencia espacial, quiz meteoritos, quiz educativo, quiz astronomía, prueba conocimiento espacial",
-  "openGraph": {
-    "title": "Quiz Locura de Meteoritos - Pon a Prueba tu Conocimiento Espacial",
-    "description": "¡Pon a prueba tu conocimiento sobre Objetos Cercanos a la Tierra y defensa planetaria con nuestro quiz atractivo!",
-    "type": "website",
-    "images": [
-      {
-        "url": "/asteroideVolcan.png",
-        "width": 1200,
-        "height": 630,
-        "alt": "Interfaz del Quiz Locura de Meteoritos"
-      }
-    ]
-  },
-  "twitter": {
-    "card": "summary_large_image",
-    "title": "Quiz Locura de Meteoritos - Pon a Prueba tu Conocimiento Espacial",
-    "description": "¡Desafíate con nuestro quiz interactivo sobre Objetos Cercanos a la Tierra y defensa planetaria!",
-    "images": ["/asteroideVolcan.png"]
+  "metadata": {
+    "title": "Quiz Locura de Meteoritos - Pon a Prueba tu Conocimiento NEO",
+    "description": "Desafía tu conocimiento sobre Objetos Cercanos a la Tierra y defensa planetaria con nuestro quiz interactivo Locura de Meteoritos. ¡Aprende mientras pones a prueba tu experiencia en ciencia espacial!",
+    "keywords": "quiz espacial, quiz asteroides, quiz NEO, quiz defensa planetaria, prueba ciencia espacial, quiz meteoritos, quiz educativo, quiz astronomía, prueba conocimiento espacial",
+    "openGraph": {
+      "title": "Quiz Locura de Meteoritos - Pon a Prueba tu Conocimiento Espacial",
+      "description": "¡Pon a prueba tu conocimiento sobre Objetos Cercanos a la Tierra y defensa planetaria con nuestro quiz atractivo!",
+      "type": "website",
+      "images": [
+        {
+          "url": "/asteroideVolcan.png",
+          "width": 1200,
+          "height": 630,
+          "alt": "Interfaz del Quiz Locura de Meteoritos"
+        }
+      ]
+    },
+    "twitter": {
+      "card": "summary_large_image",
+      "title": "Quiz Locura de Meteoritos - Pon a Prueba tu Conocimiento Espacial",
+      "description": "¡Desafíatete con nuestro quiz interactivo sobre Objetos Cercanos a la Tierra y defensa planetaria!",
+      "images": ["/asteroideVolcan.png"]
+    }
   }
 }

@@ -1,24 +1,26 @@
 {
-  "title": "Detección de Asteroides con IA - Aprendizaje Automático para Análisis NEO",
-  "description": "Descubre cómo la inteligencia artificial y el aprendizaje automático mejoran la detección y análisis de Objetos Cercanos a la Tierra. Algoritmos avanzados para identificación de asteroides y evaluación de riesgos.",
-  "keywords": "aprendizaje automático asteroides, detección IA asteroides, NEO aprendizaje automático, inteligencia artificial espacio, seguimiento automatizado asteroides, ML defensa planetaria, IA ciencia espacial",
-  "openGraph": {
-    "title": "Detección de Asteroides con IA - Análisis NEO con Aprendizaje Automático",
-    "description": "Explora cómo el aprendizaje automático revoluciona la detección de Objetos Cercanos a la Tierra y las estrategias de defensa planetaria.",
-    "type": "website",
-    "images": [
-      {
-        "url": "/preview/logo.png",
-        "width": 1200,
-        "height": 630,
-        "alt": "Interfaz de Detección de Asteroides con Aprendizaje Automático"
-      }
-    ]
-  },
-  "twitter": {
-    "card": "summary_large_image",
-    "title": "Detección de Asteroides con IA - Análisis NEO con Aprendizaje Automático",
-    "description": "Ve cómo la IA y el aprendizaje automático mejoran la detección de asteroides y las capacidades de defensa planetaria.",
-    "images": ["/preview/logo.png"]
+  "metadata": {
+    "title": "Detección de Asteroides con IA - Aprendizaje Automático para Análisis NEO",
+    "description": "Descubre cómo la inteligencia artificial y el aprendizaje automático mejoran la detección y análisis de Objetos Cercanos a la Tierra. Algoritmos avanzados para identificación de asteroides y evaluación de riesgos.",
+    "keywords": "aprendizaje automático asteroides, detección IA asteroides, NEO aprendizaje automático, inteligencia artificial espacio, seguimiento automatizado asteroides, ML defensa planetaria, IA ciencia espacial",
+    "openGraph": {
+      "title": "Detección de Asteroides con IA - Análisis NEO con Aprendizaje Automático",
+      "description": "Explora cómo el aprendizaje automático revoluciona la detección de Objetos Cercanos a la Tierra y las estrategias de defensa planetaria.",
+      "type": "website",
+      "images": [
+        {
+          "url": "/preview/logo.png",
+          "width": 1200,
+          "height": 630,
+          "alt": "Interfaz de Detección de Asteroides con Aprendizaje Automático"
+        }
+      ]
+    },
+    "twitter": {
+      "card": "summary_large_image",
+      "title": "Detección de Asteroides con IA - Análisis NEO con Aprendizaje Automático",
+      "description": "Ve cómo la IA y el aprendizaje automático mejoran la detección de asteroides y las capacidades de defensa planetaria.",
+      "images": ["/preview/logo.png"]
+    }
   }
 }

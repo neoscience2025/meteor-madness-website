@@ -1,24 +1,26 @@
 {
-  "title": "Mapeo de Zona de Impacto de Asteroides - Visualización de Impacto NEO",
-  "description": "Explora zonas de impacto potencial de asteroides con nuestra herramienta de mapeo interactivo. Visualiza y analiza dónde podrían impactar los Objetos Cercanos a la Tierra y evalúa las consecuencias.",
-  "keywords": "zona impacto asteroides, mapeo impactos, visualización impacto NEO, análisis impacto asteroides, evaluación impacto planetario, mapeo cráteres, consecuencias impacto",
-  "openGraph": {
-    "title": "Mapeo Zona de Impacto - Visualización Impacto Asteroides",
-    "description": "Descubre zonas de impacto potencial de asteroides y analiza consecuencias con nuestra plataforma de mapeo interactivo.",
-    "type": "website",
-    "images": [
-      {
-        "url": "/crater.png",
-        "width": 1200,
-        "height": 630,
-        "alt": "Interfaz de Mapeo de Zona de Impacto de Asteroides"
-      }
-    ]
-  },
-  "twitter": {
-    "card": "summary_large_image",
-    "title": "Mapeo Zona de Impacto - Visualización Impacto Asteroides",
-    "description": "Explora y analiza zonas de impacto potencial de asteroides con nuestra herramienta de mapeo interactivo.",
-    "images": ["/crater.png"]
+  "metadata": {
+    "title": "Mapeo de Zona de Impacto de Asteroides - Visualización de Impacto NEO",
+    "description": "Explora zonas de impacto potencial de asteroides con nuestra herramienta de mapeo interactivo. Visualiza y analiza dónde podrían impactar los Objetos Cercanos a la Tierra y evalúa las consecuencias.",
+    "keywords": "zona impacto asteroides, mapeo impactos, visualización impacto NEO, análisis impacto asteroides, evaluación impacto planetario, mapeo cráteres, consecuencias impacto",
+    "openGraph": {
+      "title": "Mapeo Zona de Impacto - Visualización Impacto Asteroides",
+      "description": "Descubre zonas de impacto potencial de asteroides y analiza consecuencias con nuestra plataforma de mapeo interactivo.",
+      "type": "website",
+      "images": [
+        {
+          "url": "/crater.png",
+          "width": 1200,
+          "height": 630,
+          "alt": "Interfaz de Mapeo de Zona de Impacto de Asteroides"
+        }
+      ]
+    },
+    "twitter": {
+      "card": "summary_large_image",
+      "title": "Mapeo Zona de Impacto - Visualización Impacto Asteroides",
+      "description": "Explora y analiza zonas de impacto potencial de asteroides con nuestra herramienta de mapeo interactivo.",
+      "images": ["/crater.png"]
+    }
   }
 }

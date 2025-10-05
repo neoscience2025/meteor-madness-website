@@ -1,11 +1,17 @@
 import TranslationsProvider from "@/components/translation-provider";
 import initTranslations from "@/app/i18n";
+import { getMetadata } from "@/lib/seo";
 
 const NAMESPACES_REQUIRED = [
   'menu',
   'footer',
-  'seo'
+  'seo/simulation'
 ];
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  return await getMetadata(locale, "seo/simulation");
+}
 
 export default async function Simulation({ params }) {
   const { locale } = await params;

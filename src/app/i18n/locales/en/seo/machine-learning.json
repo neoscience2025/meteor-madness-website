@@ -1,24 +1,26 @@
 {
-  "title": "AI-Powered Asteroid Detection - Machine Learning for NEO Analysis",
-  "description": "Discover how artificial intelligence and machine learning enhance Near-Earth Object detection and analysis. Advanced algorithms for asteroid identification and risk assessment.",
-  "keywords": "machine learning asteroids, AI asteroid detection, NEO machine learning, artificial intelligence space, automated asteroid tracking, ML planetary defense, AI space science",
-  "openGraph": {
-    "title": "AI-Powered Asteroid Detection - Machine Learning NEO Analysis",
-    "description": "Explore how machine learning revolutionizes Near-Earth Object detection and planetary defense strategies.",
-    "type": "website",
-    "images": [
-      {
-        "url": "/preview/logo.png",
-        "width": 1200,
-        "height": 630,
-        "alt": "Machine Learning Asteroid Detection Interface"
-      }
-    ]
-  },
-  "twitter": {
-    "card": "summary_large_image",
-    "title": "AI-Powered Asteroid Detection - Machine Learning NEO Analysis",
-    "description": "See how AI and machine learning enhance asteroid detection and planetary defense capabilities.",
-    "images": ["/preview/logo.png"]
+  "metadata": {
+    "title": "AI-Powered Asteroid Detection - Machine Learning for NEO Analysis",
+    "description": "Discover how artificial intelligence and machine learning enhance Near-Earth Object detection and analysis. Advanced algorithms for asteroid identification and risk assessment.",
+    "keywords": "machine learning asteroids, AI asteroid detection, NEO machine learning, artificial intelligence space, automated asteroid tracking, ML planetary defense, AI space science",
+    "openGraph": {
+      "title": "AI-Powered Asteroid Detection - Machine Learning NEO Analysis",
+      "description": "Explore how machine learning revolutionizes Near-Earth Object detection and planetary defense strategies.",
+      "type": "website",
+      "images": [
+        {
+          "url": "/preview/logo.png",
+          "width": 1200,
+          "height": 630,
+          "alt": "Machine Learning Asteroid Detection Interface"
+        }
+      ]
+    },
+    "twitter": {
+      "card": "summary_large_image",
+      "title": "AI-Powered Asteroid Detection - Machine Learning NEO Analysis",
+      "description": "See how AI and machine learning enhance asteroid detection and planetary defense capabilities.",
+      "images": ["/preview/logo.png"]
+    }
   }
 }

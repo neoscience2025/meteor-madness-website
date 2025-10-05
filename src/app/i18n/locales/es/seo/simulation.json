@@ -1,24 +1,26 @@
 {
-  "title": "Simulación de Impacto de Asteroides - Modelado Interactivo de Impacto NEO",
-  "description": "Experimenta simulaciones realistas de impacto de asteroides usando conjuntos de datos de NASA y USGS. Modela escenarios de impacto, predice consecuencias y evalúa estrategias de mitigación para defensa planetaria.",
-  "keywords": "simulación asteroides, simulación impacto, modelado NEO, simulación defensa planetaria, modelado impacto asteroides, simulación espacial, simulación prevención desastres, simulación NASA",
-  "openGraph": {
-    "title": "Simulación de Impacto de Asteroides - Modelado Interactivo NEO",
-    "description": "Ejecuta simulaciones realistas de impacto de asteroides y explora estrategias de defensa planetaria con nuestra plataforma de modelado avanzado.",
-    "type": "website",
-    "images": [
-      {
-        "url": "/preview/simulationPreview.jpeg",
-        "width": 1200,
-        "height": 630,
-        "alt": "Interfaz de Simulación de Impacto de Asteroides"
-      }
-    ]
-  },
-  "twitter": {
-    "card": "summary_large_image",
-    "title": "Simulación de Impacto de Asteroides - Modelado Interactivo NEO",
-    "description": "Experimenta escenarios realistas de impacto de asteroides y desarrolla estrategias de defensa planetaria.",
-    "images": ["/preview/simulationPreview.jpeg"]
+  "metadata": {
+    "title": "Simulación de Impacto de Asteroides - Modelado Interactivo de Impacto NEO",
+    "description": "Experimenta simulaciones realistas de impacto de asteroides usando conjuntos de datos de NASA y USGS. Modela escenarios de impacto, predice consecuencias y evalúa estrategias de mitigación para defensa planetaria.",
+    "keywords": "simulación asteroides, simulación impacto, modelado NEO, simulación defensa planetaria, modelado impacto asteroides, simulación espacial, simulación prevención desastres, simulación NASA",
+    "openGraph": {
+      "title": "Simulación de Impacto de Asteroides - Modelado Interactivo NEO",
+      "description": "Ejecuta simulaciones realistas de impacto de asteroides y explora estrategias de defensa planetaria con nuestra plataforma de modelado avanzado.",
+      "type": "website",
+      "images": [
+        {
+          "url": "/preview/simulationPreview.jpeg",
+          "width": 1200,
+          "height": 630,
+          "alt": "Interfaz de Simulación de Impacto de Asteroides"
+        }
+      ]
+    },
+    "twitter": {
+      "card": "summary_large_image",
+      "title": "Simulación de Impacto de Asteroides - Modelado Interactivo NEO",
+      "description": "Experimenta escenarios realistas de impacto de asteroides y desarrolla estrategias de defensa planetaria.",
+      "images": ["/preview/simulationPreview.jpeg"]
+    }
   }
 }

@@ -1,24 +1,26 @@
 {
-  "title": "NeoScience - Plataforma Interactiva de Objetos Cercanos a la Tierra",
-  "description": "Explora Objetos Cercanos a la Tierra (NEO) y Asteroides Potencialmente Peligrosos (PHA) con nuestra plataforma interactiva. Simula impactos de asteroides, desarrolla estrategias de mitigación y únete a nuestra misión para proteger la Tierra.",
-  "keywords": "Objetos Cercanos a la Tierra, NEO, PHA, Asteroides Potencialmente Peligrosos, simulación de asteroides, defensa planetaria, ciencia espacial, plataforma interactiva, datos NASA, conjuntos de datos USGS",
-  "openGraph": {
-    "title": "NeoScience - Plataforma Interactiva NEO & PHA",
-    "description": "Únete a NeoScience para crear simulaciones interactivas de Objetos Cercanos a la Tierra y desarrollar soluciones para prevenir posibles desastres de asteroides.",
-    "type": "website",
-    "images": [
-      {
-        "url": "/preview/logo.png",
-        "width": 1200,
-        "height": 630,
-        "alt": "Logo NeoScience - Plataforma Interactiva NEO"
-      }
-    ]
-  },
-  "twitter": {
-    "card": "summary_large_image",
-    "title": "NeoScience - Plataforma Interactiva NEO & PHA",
-    "description": "Explora Objetos Cercanos a la Tierra y desarrolla estrategias de defensa planetaria con nuestra plataforma interactiva.",
-    "images": ["/preview/logo.png"]
+  "metadata": {
+    "title": "NeoScience - Plataforma Interactiva de Objetos Cercanos a la Tierra",
+    "description": "Explora Objetos Cercanos a la Tierra (NEO) y Asteroides Potencialmente Peligrosos (PHA) con nuestra plataforma interactiva. Simula impactos de asteroides, desarrolla estrategias de mitigación y únete a nuestra misión para proteger la Tierra.",
+    "keywords": "Objetos Cercanos a la Tierra, NEO, PHA, Asteroides Potencialmente Peligrosos, simulación de asteroides, defensa planetaria, ciencia espacial, plataforma interactiva, datos NASA, conjuntos de datos USGS",
+    "openGraph": {
+      "title": "NeoScience - Plataforma Interactiva NEO & PHA",
+      "description": "Únete a NeoScience para crear simulaciones interactivas de Objetos Cercanos a la Tierra y desarrollar soluciones para prevenir posibles desastres de asteroides.",
+      "type": "website",
+      "images": [
+        {
+          "url": "/preview/logo.png",
+          "width": 1200,
+          "height": 630,
+          "alt": "Logo NeoScience - Plataforma Interactiva NEO"
+        }
+      ]
+    },
+    "twitter": {
+      "card": "summary_large_image",
+      "title": "NeoScience - Plataforma Interactiva NEO & PHA",
+      "description": "Explora Objetos Cercanos a la Tierra y desarrolla estrategias de defensa planetaria con nuestra plataforma interactiva.",
+      "images": ["/preview/logo.png"]
+    }
   }
 }
