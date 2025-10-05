@@ -1,16 +1,10 @@
 "use client";
 
-import React, { useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import { useParams } from "next/navigation";
 
-// ---------------------------------------------------------------------
-// NeoScience Chatbot — SKELETON PAGE (Compact/Centered Card)
-// - Usa TailwindCSS.
-// - Más angosto (max-w-2xl), centrado y con "card".
-// - Sin backend: reemplaza los TODO por tu fetch/stream.
-// ---------------------------------------------------------------------
-
+/* ───────────────── Types ───────────────── */
 type Role = "user" | "assistant" | "system";
-
 type ChatMessage = {
   id: string;
   role: Role;
@@ -18,60 +12,105 @@ type ChatMessage = {
   ts: number; // Unix ms
 };
 
+/* ───────────────── Utils ───────────────── */
 const uid = () => Math.random().toString(36).slice(2);
 
-function timeLabel(ts: number) {
-  const d = new Date(ts);
-  return d.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
-}
+// ⚠️ Forzamos locale para evitar mismatch de SSR vs client
+const timeLabel = (ts: number, locale: string) =>
+  new Date(ts).toLocaleTimeString(locale, {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
 
-export default function ChatbotPage() {
+/* ───────────────── Page ───────────────── */
+export default function AiAssistantPage() {
+  const params = useParams<{ locale: string }>();
+  // Locale activo según la ruta /[locale]/...
+  const routeLocale = (params?.locale || "es") as "es" | "en";
+  const dateLocale = routeLocale === "en" ? "en-US" : "es-ES";
+
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       id: uid(),
       role: "system",
       content:
-        "Bienvenido a NeoScience Chat. Este es un prototipo sin backend. La lógica IA aquí.",
-      ts: Date.now(),
+        "🚀 Bienvenido a NeoScience Chatbot. Preguntame sobre NEOs, asteroides y defensa planetaria.",
+      ts: Date.now(), // ✅ siempre timestamp
     },
   ]);
-
   const [input, setInput] = useState("");
   const [isSending, setIsSending] = useState(false);
   const [model, setModel] = useState("neoscience-sim");
-  const [lang, setLang] = useState("es");
+  const [lang, setLang] = useState<"es" | "en">(routeLocale);
 
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  React.useEffect(() => {
+  // Auto-scroll
+  useEffect(() => {
     const el = scrollRef.current;
     if (!el) return;
     el.scrollTop = el.scrollHeight;
   }, [messages.length]);
 
+  // Prompts rápidos
+  const quickPrompts = useMemo(
+    () => [
+      "¿Qué es un NEO y por qué importa?",
+      "Muestra un ejemplo de trayectoria simulada",
+      "Explica el flujo de mitigación de riesgo",
+      "Genera un quiz sobre meteoroides",
+    ],
+    []
+  );
+
+  /* ──────────── Send ──────────── */
   async function handleSend(e: React.FormEvent) {
     e.preventDefault();
     const text = input.trim();
-    if (!text) return;
+    if (!text || isSending) return;
 
     const userMsg: ChatMessage = {
       id: uid(),
       role: "user",
       content: text,
-      ts: Date.now(),
+      ts: Date.now(), // ✅
     };
+
     setMessages((prev) => [...prev, userMsg]);
     setInput("");
-
     setIsSending(true);
+
     try {
-      await new Promise((r) => setTimeout(r, 600));
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          history: [...messages, userMsg].map(({ id, ...m }) => m), // sin id
+          model,
+          lang,
+        }),
+      });
+
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = await res.json();
+
       const botMsg: ChatMessage = {
         id: uid(),
         role: "assistant",
         content:
-          "[SKELETON] Aquí respondería el chatbot de NeoScience. Conecta tu API y reemplaza este texto.",
-        ts: Date.now(),
+          typeof data?.reply === "string" && data.reply.length
+            ? data.reply
+            : "No hubo respuesta del modelo.",
+        ts: Date.now(), // ✅
+      };
+      setMessages((prev) => [...prev, botMsg]);
+    } catch (err) {
+      const botMsg: ChatMessage = {
+        id: uid(),
+        role: "assistant",
+        content:
+          "⚠️ Error: no se pudo conectar con el backend. Revisá /api/chat o la consola.",
+        ts: Date.now(), // ✅
       };
       setMessages((prev) => [...prev, botMsg]);
     } finally {
@@ -79,39 +118,31 @@ export default function ChatbotPage() {
     }
   }
 
+  /* ──────────── Reset ──────────── */
   function handleReset() {
     setMessages([
       {
         id: uid(),
         role: "system",
         content:
-          "Nuevo chat iniciado. Recuerda: este es solo el esqueleto (sin IA real).",
-        ts: Date.now(),
+          "🌀 Nuevo chat iniciado. Preguntá sobre asteroides, defensa planetaria o NEOs.",
+        ts: Date.now(), // ✅
       },
     ]);
     setInput("");
   }
 
-  const quickPrompts = useMemo(
-    () => [
-      "¿Qué es un NEO y por qué importa?",
-      "Muestra un ejemplo de trayectoria simulada",
-      "Explícame el flujo de mitigación de riesgo",
-      "Genera preguntas para un quiz de meteoroides",
-    ],
-    []
-  );
-
+  /* ──────────── Render ──────────── */
   return (
     <main className="min-h-screen w-full bg-[#040916] text-slate-100">
-      {/* Top bar compacta (se integra con tu navbar existente) */}
-      <header className="sticky top-0 z-10 border-b border-white/10 bg-black/30 backdrop-blur">
+      {/* Header */}
+      <header className="sticky top-0 z-10 border-b border-white/10 bg-black/40 backdrop-blur">
         <div className="mx-auto flex max-w-2xl items-center justify-between px-3 py-2">
           <div className="flex items-center gap-2">
             <div className="h-6 w-6 rounded bg-cyan-500/20 ring-1 ring-cyan-300/30" />
             <div>
               <h1 className="text-[13px] font-semibold tracking-wide text-cyan-200">
-                NeoScience · Chatbot (Demo)
+                NeoScience · Chatbot
               </h1>
               <p className="text-[11px] text-slate-400">from data → defense</p>
             </div>
@@ -131,7 +162,7 @@ export default function ChatbotPage() {
             <label className="ml-2 text-slate-400">Idioma</label>
             <select
               value={lang}
-              onChange={(e) => setLang(e.target.value)}
+              onChange={(e) => setLang(e.target.value as "es" | "en")}
               className="rounded-md border border-white/10 bg-slate-900/70 px-2 py-1"
             >
               <option value="es">ES</option>
@@ -150,17 +181,17 @@ export default function ChatbotPage() {
         </div>
       </header>
 
-      {/* CONTENEDOR COMPACTO CENTRADO */}
+      {/* Chat card */}
       <section className="mx-auto max-w-2xl px-3 py-6">
         <div className="rounded-2xl border-2 border-cyan-400/70 shadow-lg shadow-cyan-500/30">
-          {/* Mensajes */}
+          {/* Messages */}
           <div
             ref={scrollRef}
-            className="h-[45vh] w-full overflow-y-auto rounded-t-2xl bg-gradient-to-b from-slate-950/60 to-slate-950/10 p-3 sm:p-4"
+            className="h-[55vh] w-full overflow-y-auto rounded-t-2xl bg-gradient-to-b from-slate-950/60 to-slate-950/10 p-3 sm:p-4"
           >
-            <ul className="flex flex-col gap-2 sm:gap-3">
+            <ul className="flex flex-col gap-3">
               {messages.map((m) => (
-                <li key={m.id} className="group">
+                <li key={m.id}>
                   <div
                     className={[
                       "max-w-[92%] rounded-2xl px-3 py-2 text-[13px] leading-relaxed shadow-sm sm:px-4 sm:py-3",
@@ -174,15 +205,23 @@ export default function ChatbotPage() {
                     <div className="mb-1 flex items-center gap-2 text-[10px] uppercase tracking-wide text-slate-400">
                       <span>
                         {m.role === "user"
-                          ? "You"
+                          ? "Tú"
                           : m.role === "assistant"
                           ? "NeoScience Bot"
-                          : "System"}
+                          : "Sistema"}
                       </span>
                       <span>•</span>
-                      <span className="tabular-nums">{timeLabel(m.ts)}</span>
+                      {/* ✅ Forzamos locale y suprimimos warning de hidratación */}
+                      <span
+                        className="tabular-nums"
+                        suppressHydrationWarning
+                      >
+                        {m.ts ? timeLabel(m.ts, dateLocale) : "--:--"}
+                      </span>
                     </div>
-                    <p className="whitespace-pre-wrap text-slate-100">{m.content}</p>
+                    <p className="whitespace-pre-wrap text-slate-100">
+                      {m.content}
+                    </p>
                   </div>
                 </li>
               ))}
@@ -203,7 +242,10 @@ export default function ChatbotPage() {
           </div>
 
           {/* Composer */}
-          <form onSubmit={handleSend} className="rounded-b-2xl border-t border-white/10 bg-slate-950/60 p-3 sm:p-4">
+          <form
+            onSubmit={handleSend}
+            className="rounded-b-2xl border-t border-white/10 bg-slate-950/60 p-3 sm:p-4"
+          >
             <div className="flex items-end gap-2 sm:gap-3">
               <div className="flex-1">
                 <label htmlFor="prompt" className="sr-only">
@@ -239,13 +281,8 @@ export default function ChatbotPage() {
                 {isSending ? "Enviando…" : "Enviar"}
               </button>
             </div>
-
-           
           </form>
         </div>
-
-        {/* Links secundarios (opcionales) */}
-     
       </section>
     </main>
   );
