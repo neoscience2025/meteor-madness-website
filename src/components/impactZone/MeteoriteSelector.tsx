@@ -67,7 +67,7 @@ export const MeteoriteSelector = ({
     const modelPath = `/models/meteorites/${selectedMeteorite}.glb`;
 
     return (
-        <div className="flex flex-col justify-between h-full">
+        <div className="flex flex-col justify-between h-full space-y-4 md:space-y-0">
             <div
                 className={cn(
                     "grid relative overflow-hidden rounded-[15px] bg-black/50",
