@@ -27,6 +27,7 @@ const InteractiveBook: React.FC<InteractiveBookProps> = ({ bookData }) => {
   const flipBookRef = useRef<any>(null);
   const [currentPage, setCurrentPage] = useState(0);
   const videoRefs = useRef<{ [key: number]: HTMLIFrameElement }>({});
+  const [iframesLoaded, setIframesLoaded] = useState(false);
 
   const isImagePage = (page: Page): page is ImagePage => {
     return 'imgUrl' in page;
@@ -73,7 +74,7 @@ const InteractiveBook: React.FC<InteractiveBookProps> = ({ bookData }) => {
       );
     } else {
       return (
-        <div className="h-full w-full flex items-center justify-center p-4">
+        <div className="h-full w-full flex items-center justify-center p-4 relative">
           <iframe
             ref={(el) => {
               if (el) videoRefs.current[pageIndex] = el;
@@ -84,6 +85,7 @@ const InteractiveBook: React.FC<InteractiveBookProps> = ({ bookData }) => {
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
             title={`Video page ${pageIndex}`}
+            loading="eager"
           />
         </div>
       );
@@ -131,6 +133,23 @@ const InteractiveBook: React.FC<InteractiveBookProps> = ({ bookData }) => {
 
   return (
     <div className="flex flex-col justify-center items-center min-h-screen p-2 sm:p-4 w-full max-w-full overflow-hidden">
+      {/* Preload video iframes (hidden) */}
+      <div className="hidden">
+        {bookData.pages.map((page, index) => {
+          if (isVideoPage(page)) {
+            return (
+              <iframe
+                key={`preload-${index}`}
+                src={convertYouTubeToEmbed(page.videoUrl)}
+                title={`Preload video ${index}`}
+                loading="eager"
+              />
+            );
+          }
+          return null;
+        })}
+      </div>
+      
       <div className="relative w-full max-w-full flex justify-center mb-4 sm:mb-6" role="application" aria-label="Interactive Book">
         <HTMLFlipBook
           ref={flipBookRef}
