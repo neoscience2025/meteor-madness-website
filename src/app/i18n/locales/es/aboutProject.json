@@ -1,0 +1,64 @@
+{
+  "sectionTitle": "Sobre el Proyecto",
+  "objective": "El objetivo de nuestro equipo es transformar los datos espaciales abiertos en decisiones accionables mediante visualizaciones interactivas, simulaciones ajustables y microlecciones que convierten la teoría en práctica.",
+  "badge": "2025 NASA Space Apps Challenge",
+  "challenge": {
+    "title": "El Desafío",
+    "subtitle": "Meteor Madness",
+    "description": "Construir una aplicación que convierta los datos abiertos sobre meteoros y NEOs (Objetos Cercanos a la Tierra) en decisiones útiles. Esto implica visualizar trayectorias y eventos, estimar energía/impacto y simular escenarios hipotéticos ('qué pasaría si'). La aplicación debe comunicar el riesgo de forma clara y educativa, con interacción casi en tiempo real."
+  },
+  "dataSources": {
+    "title": "Fuentes de Datos",
+    "items": [
+      "NASA News Feed (Comunicados de prensa)",
+      "NASA News Feed",
+      "JPL News Feed",
+      "Centro de APIs Abiertas de la NASA"
+    ]
+  },
+  "stack": {
+    "title": "Tecnologías",
+    "items": [
+      "React",
+      "Next.js",
+      "TailwindCSS",
+      "Framer Motion",
+      "Aprendizaje Automático",
+      "Chatbot de IA",
+      "Estándares de Seguridad OWASP"
+    ]
+  },
+  "uiux": {
+    "title": "UI / UX",
+    "items": [
+      "Figma (prototipos y wireframes)",
+      "Diseño centrado en el usuario",
+      "Interfaces responsivas",
+      "Pruebas iterativas"
+    ]
+  },
+  "methodology": {
+    "title": "Metodología",
+    "items": [
+      "Ágil / Scrum",
+      "Planificación de Sprints",
+      "Trello (gestión de tareas)",
+      "Colaboración y revisión en equipo",
+      "Pruebas y Validación Continua (QA)"
+    ]
+  },
+  "impact": {
+    "title": "Impacto / Propósito",
+    "items": [
+      "Generar conciencia sobre los Objetos Cercanos a la Tierra (NEOs) y la defensa planetaria",
+      "Inspirar a la próxima generación mediante la ciencia y la tecnología",
+      "Transformar los datos de la NASA en información clara y útil para todos"
+    ]
+  },
+  "comments": {
+    "title": "¿Comentarios o ideas?",
+    "description": "Escríbenos y cuéntanos qué te gustaría explorar. La ciencia se construye en equipo.",
+    "button": "Contáctanos",
+    "mailto": "mailto:marian.paredes@gmail.com"
+  }
+}

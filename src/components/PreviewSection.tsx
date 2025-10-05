@@ -2,37 +2,29 @@
 
 import { motion } from "framer-motion";
 import { Orbitron } from "next/font/google";
-import MottosEndSection from "@/components/MottosEndSection";
 import Image from "next/image";
+import { useTranslation } from "react-i18next";
+import MottosEndSection from "@/components/MottosEndSection";
 
-// Fuente sci-fi para títulos / nombres
 const orbitron = Orbitron({
   subsets: ["latin"],
   weight: ["600", "700"],
   display: "swap",
 });
 
+type PreviewItem = {
+  title: string;
+  desc: string;
+  img: string;
+};
+
 export default function PreviewSection() {
-  const items = [
-    {
-      title: "Story Telling",
-      desc:
-        "Discover the fascinating story of Near-Earth Objects and how they shaped our planet's history through an interactive narrative experience.",
-      img: "/preview/storyPreview.jpeg",
-    },
-    {
-      title: "Game",
-      desc:
-        "Defend Earth from incoming asteroids in our interactive space defense game. Test your reflexes and strategic thinking.",
-      img: "/preview/gamePreview.jpeg",
-    },
-    {
-      title: "Simulation",
-      desc:
-        "Explore our 2D simulation of the solar system, NEOs, and PHAs. Manipulate time and discover orbital mechanics.",
-      img: "/preview/simulationPreview.jpeg",
-    },
-  ];
+  const { t } = useTranslation("preview");
+
+  // 🔥 Traemos todo desde el JSON
+  const sectionTitle = t("sectionTitle");
+  const sectionSubtitle = t("sectionSubtitle");
+  const items = (t("items", { returnObjects: true }) as PreviewItem[]) || [];
 
   return (
     <section
@@ -45,13 +37,7 @@ export default function PreviewSection() {
       }}
     >
       {/* Header */}
-      <div
-        style={{
-          maxWidth: 1100,
-          margin: "0 auto 32px",
-          textAlign: "center",
-        }}
-      >
+      <div style={{ maxWidth: 1100, margin: "0 auto 32px", textAlign: "center" }}>
         <h2
           style={{
             margin: 0,
@@ -60,18 +46,14 @@ export default function PreviewSection() {
             fontWeight: 900,
             letterSpacing: "0.05em",
             lineHeight: 1.1,
-            color: "#b1d6f3ff", // 👈 color sólido diferente (violeta espacial)
-            textShadow: "0 0 24px rgba(32, 191, 231, 0.4)", // glow en tono violeta
-          }}
-        >Content Preview</h2>
-        <p
-          style={{
-            marginTop: 8,
-            fontSize: "clamp(13px,2vw,15px)",
-            opacity: 0.8,
+            color: "#b1d6f3ff",
+            textShadow: "0 0 24px rgba(32, 191, 231, 0.4)",
           }}
         >
-          Explore data, defense, and learn — all in one platform.
+          {sectionTitle}
+        </h2>
+        <p style={{ marginTop: 8, fontSize: "clamp(13px,2vw,15px)", opacity: 0.8 }}>
+          {sectionSubtitle}
         </p>
       </div>
 
@@ -89,17 +71,13 @@ export default function PreviewSection() {
           const textOrder = i % 2 === 0 ? 1 : 2;
           const imageOrder = i % 2 === 0 ? 2 : 1;
 
-          const motionProps = {
-            initial: { opacity: 0, y: 22 },
-            whileInView: { opacity: 1, y: 0 },
-            transition: { duration: 0.5, delay: i * 0.12 },
-            viewport: { once: true, amount: 0.2 },
-          };
-
           return (
             <motion.div
-              key={i}
-              {...motionProps}
+              key={`${item.title}-${i}`}
+              initial={{ opacity: 0, y: 22 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: i * 0.12 }}
+              viewport={{ once: true, amount: 0.2 }}
               style={{
                 borderRadius: 14,
                 overflow: "hidden",
@@ -142,7 +120,8 @@ export default function PreviewSection() {
                     margin: 0,
                     fontSize: 14,
                     opacity: 0.85,
-                    lineHeight: 1.4, textAlign: "justify"
+                    lineHeight: 1.4,
+                    textAlign: "justify",
                   }}
                 >
                   {item.desc}
@@ -162,7 +141,6 @@ export default function PreviewSection() {
                   position: "relative",
                 }}
               >
-                {/* Watermark */}
                 <Image
                   src={item.img}
                   alt={`${item.title} photo`}
@@ -171,7 +149,7 @@ export default function PreviewSection() {
                     width: "100%",
                     height: "100%",
                     objectFit: "cover",
-                    borderRadius: "22px",   // 👈 aquí le das el redondeado
+                    borderRadius: "22px",
                     display: "block",
                     filter: "saturate(0.9) contrast(1.05)",
                   }}
@@ -214,8 +192,10 @@ export default function PreviewSection() {
           font-size: clamp(28px, 5vw, 56px);
         }
       `}</style>
-      <div style={{ marginTop: "70px" }}><MottosEndSection /></div>
 
+      <div style={{ marginTop: "70px" }}>
+        <MottosEndSection />
+      </div>
     </section>
   );
 }

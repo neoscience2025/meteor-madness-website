@@ -1,3 +1,4 @@
+
 {
     "members": [
         {
@@ -35,5 +36,10 @@
             "photo": "/team/JoseBG.png",
             "linkedin": "https://www.linkedin.com/in/jose-miguel-navas/"
         }
-    ]
+    ],    
+"uiMember": {
+  "ourTeamTitle": "Nuestro Equipo",
+  "ourTeamSubtitle": "Personas detrás de Neoscience"
+}
+   
 }

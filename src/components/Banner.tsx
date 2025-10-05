@@ -36,7 +36,7 @@ export default function Banner() {
         src="/earth.html"
         title="Earth 3D"
         style={{
-          width: "80%",
+          width: "50%",
           height: "100%",
           border: 0,
           zIndex: 1,

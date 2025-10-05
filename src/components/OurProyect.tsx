@@ -1,22 +1,21 @@
-// src/components/AboutProject.tsx
 "use client";
 
-import {
-  Trophy,
-  Rocket,
-  Cpu,
-  Database,
-} from "lucide-react";
+import { Trophy, Rocket, Cpu, Database } from "lucide-react";
 import { Orbitron } from "next/font/google";
+import { useTranslation } from "react-i18next";
 
-// Fuente sci-fi para TODO el bloque
 const orbitron = Orbitron({
   subsets: ["latin"],
   weight: ["600", "700"],
   display: "swap",
 });
 
-export default function AboutProject() {
+type LinkItem = { label: string; href: string };
+type Items = string[] | LinkItem[];
+
+export default function OurProyect() {
+  const { t } = useTranslation("aboutProject");
+
   return (
     <section
       id="aboutus"
@@ -26,10 +25,10 @@ export default function AboutProject() {
         padding: "64px 16px 72px",
         background:
           "radial-gradient(circle at 50% -40%, #03071aff 0%, #000 55%, #000 100%)",
-        fontFamily: orbitron.style.fontFamily, // 👈 misma fuente para todo
+        fontFamily: orbitron.style.fontFamily,
       }}
     >
-      {/* Título centrado */}
+      {/* ======= Título principal ======= */}
       <h2
         style={{
           margin: "0 auto 24px",
@@ -43,157 +42,140 @@ export default function AboutProject() {
           maxWidth: "min(68rem,92vw)",
         }}
       >
-        ABOUT THE PROJECT
+        {t("sectionTitle")}
       </h2>
 
-      {/* Contenedor centrado */}
+      {/* ======= Contenedor central ======= */}
       <div className="mx-auto w-[min(68rem,92vw)]">
-        {/* Header */}
+        {/* ---- Header ---- */}
         <div className="mb-10 flex items-start justify-between gap-6">
-          <div>
-           
-            <p
-  className="mt-3 max-w-2xl text-white/80 md:text-justify text-left leading-relaxed break-normal"
-  style={{
-    textJustify: "inter-word", // reparte espacios entre palabras
-    hyphens: "none",           // sin guiones
-  }}
->
-  Our team&#39;s objective is to transform open spatial data into actionable decisions
-  through interactive visualizations, adjustable simulations, and micro-lessons
-  that translate theory into practice.
-</p>
-          </div>
+          <p className="mt-3 max-w-2xl text-white/80 md:text-justify text-left leading-relaxed break-normal">
+            {t("objective")}
+          </p>
 
-            <div className="hidden md:block rounded-xl border border-white/10 bg-white/5 px-4 py-3 backdrop-blur">
+          <div className="hidden md:block rounded-xl border border-white/10 bg-white/5 px-4 py-3 backdrop-blur">
             <div className="flex items-center gap-2 text-sm text-white/80">
-                <Trophy className="h-4 w-4 text-yellow-300" />
-               <span className="text-yellow-300">2025 NASA Space Apps Challenge </span>
+              <Trophy className="h-4 w-4 text-yellow-300" />
+              <span className="text-yellow-300">{t("badge")}</span>
             </div>
           </div>
         </div>
 
-        {/* Reto + Fuentes + Stack */}
+        {/* ======= Grid principal ======= */}
         <div className="grid gap-6 md:grid-cols-3">
-         <div className="rounded-2xl border-2 border-cyan-400/40 bg-white/5 p-5 backdrop-blur">
- <div className="mb-3 flex items-center gap-2">
-  <Rocket className="h-5 w-5" />
-  <h4 className="font-semibold">
-    The Challenge
-  </h4>
-</div>
+          {/* Challenge */}
+          <Card>
+            <Header icon={<Rocket className="h-5 w-5" />} title={t("challenge.title")} />
+            <h4 className="font-semibold text-yellow-200">{t("challenge.subtitle")}</h4>
+            <P>{t("challenge.description")}</P>
+          </Card>
 
+          {/* Data Sources */}
+          <Card>
+            <Header icon={<Database className="h-5 w-5" />} title={t("dataSources.title")} />
+            <UL items={t("dataSources.items", { returnObjects: true }) as Items} />
+          </Card>
 
+          {/* Stack */}
+          <Card>
+            <Header icon={<Cpu className="h-5 w-5" />} title={t("stack.title")} />
+            <UL items={t("stack.items", { returnObjects: true }) as Items} />
+          </Card>
 
-             <div className="mb-3 flex items-center gap-2">
-              
-              <h4 className="font-semibold text-yellow-200">Meteor Madness</h4>
-            </div>
-            <p
-  className="text-white/80 text-sm leading-relaxed md:text-justify text-left break-normal"
-  style={{ textJustify: "inter-word", hyphens: "none" }}
->
-  To build an application that converts open data on meteors and NEOs (Near-Earth Objects) into actionable decisions.
-  This involves visualizing trajectories and events, estimating energy/impact, and simulating &#39;what-if&#39; scenarios.
-  The application must communicate risk clearly and educationally, featuring near real-time interaction.
-</p>
-          </div>
+          {/* UI/UX */}
+          <Card>
+            <Header emoji="🎨" title={t("uiux.title")} />
+            <UL items={t("uiux.items", { returnObjects: true }) as Items} />
+          </Card>
 
-        <div className="rounded-2xl border-2 border-cyan-400/40 bg-white/5 p-5 backdrop-blur">
-            <div className="mb-3 flex items-center gap-2">
-              <Database className="h-5 w-5" />
-              <h4 className="font-semibold">Data Sources</h4>
-            </div>
-           <ul className="space-y-2 text-sm text-white/80">
-  <li>• <a href="https://www.nasa.gov/news-release/feed/" target="_blank" className="hover:text-cyan-300">NASA News Feed (News Release)</a></li>
-  <li>• <a href="https://www.nasa.gov/feed/" target="_blank" className="hover:text-cyan-300">NASA News Feed</a></li>
-  <li>• <a href="https://www.jpl.nasa.gov/rss/news" target="_blank" className="hover:text-cyan-300">JPL News Feed</a></li>
-  <li>• <a href="https://api.nasa.gov/" target="_blank" className="hover:text-cyan-300">NASA Open APIs Hub</a></li>
-</ul>
+          {/* Methodology */}
+          <Card>
+            <Header emoji="📋" title={t("methodology.title")} />
+            <UL items={t("methodology.items", { returnObjects: true }) as Items} />
+          </Card>
 
-          </div>
-
-          <div className="rounded-2xl border-2 border-cyan-400/40 bg-white/5 p-5 backdrop-blur">
-            <div className="mb-3 flex items-center gap-2">
-              <Cpu className="h-5 w-5" />
-              <h4 className="font-semibold">Stack</h4>
-            </div>
-            <ul className="space-y-2 text-sm text-white/80">
-   <li>• React</li>
-<li>• Next.js</li>
-<li>• TailwindCSS</li>
-<li>• Framer Motion</li>
-<li>• Machine Learning</li>
-<li>• AI Chatbot</li>
-
-  </ul>
-          </div>
-
-          <div className="rounded-2xl border-2 border-cyan-400/40 bg-white/5 p-5 backdrop-blur">
-            <div className="mb-3 flex items-center gap-2">
-    <span className="text-cyan-300">🎨</span>
-    <h4 className="font-semibold">UI / UX</h4>
-  </div>
-  <ul className="space-y-2 text-sm text-white/80">
-    <li>• Figma (prototyping & wireframes)</li>
-    <li>• User-centered design</li>
-    <li>• Responsive interfaces</li>
-    <li>• Iterative testing</li>
-  </ul>
-</div>
-          <div className="rounded-2xl border-2 border-cyan-400/40 bg-white/5 p-5 backdrop-blur">
-            <div className="mb-3 flex items-center gap-2">
-             <span className="text-cyan-300">📋</span>
-    <h4 className="font-semibold">Methodology</h4>
-            </div>
-              <ul className="space-y-2 text-sm text-white/80">
-    <li>• Agile / Scrum</li>
-    <li>• Sprint Planning</li>
-    <li>• Trello (task management)</li>
-    <li>• Team collaboration & reviews</li>
-  </ul>
-          </div>
-           
- <div className="rounded-2xl border-2 border-cyan-400/40 bg-white/5 p-5 backdrop-blur">
-            <div className="mb-3 flex items-center gap-2">
-    <span className="text-cyan-300">🌍</span>
-    <h4 className="font-semibold">Impact / Purpose</h4>
-  </div>
-  <ul className="space-y-2 text-sm text-white/80">
-    <li>• Raise awareness about Near-Earth Objects (NEOs) and planetary defense</li>
-    <li>• Inspire the next generation through science and technology</li>
-    <li>• Transform NASA data into clear, actionable insights for everyone</li>
-  </ul>
-</div>
-
-
+          {/* Impact */}
+          <Card>
+            <Header emoji="🌍" title={t("impact.title")} />
+            <UL items={t("impact.items", { returnObjects: true }) as Items} />
+          </Card>
         </div>
 
-        
-
-        {/* CTA final */}
+        {/* ======= CTA final ======= */}
         <div className="mt-12 rounded-2xl border border-white/10 bg-gradient-to-r from-blue-500/15 to-purple-600/15 p-6">
           <div className="flex flex-col items-start justify-between gap-4 md:flex-row md:items-center">
             <div>
-              <h5 className="text-lg font-semibold">Comments or Ideas?</h5>
-              <p className="text-white/80 text-sm">
-               Write to us and tell us what you&apos;d like to explore. Science is built as a team effort.
-              </p>
+              <h5 className="text-lg font-semibold">{t("comments.title")}</h5>
+              <p className="text-white/80 text-sm">{t("comments.description")}</p>
             </div>
             <a
-              href="mailto:marian.paredes@gmail.com"
+              href={t("comments.mailto")}
               className="rounded-full bg-white/15 px-4 py-2 text-sm backdrop-blur hover:bg-white/25 transition"
             >
-              Contact Us
+              {t("comments.button")}
             </a>
           </div>
         </div>
       </div>
 
-      {/* Fuerza herencia por si algo trae otra fuente */}
+      {/* ======= Fuente global ======= */}
       <style jsx>{`
-        #aboutus * { font-family: inherit !important; }
+        #aboutus * {
+          font-family: inherit !important;
+        }
       `}</style>
     </section>
   );
+}
+
+/* ===== Subcomponentes UI ===== */
+function Card({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="rounded-2xl border-2 border-cyan-400/40 bg-white/5 p-5 backdrop-blur">
+      {children}
+    </div>
+  );
+}
+
+function Header({
+  icon,
+  emoji,
+  title,
+}: {
+  icon?: React.ReactNode;
+  emoji?: string;
+  title: string;
+}) {
+  return (
+    <div className="mb-3 flex items-center gap-2">
+      {icon ?? <span className="text-cyan-300">{emoji}</span>}
+      <h4 className="font-semibold">{title}</h4>
+    </div>
+  );
+}
+
+function UL({ items }: { items?: Items }) {
+  if (!items || !Array.isArray(items) || items.length === 0) return null;
+
+  const isLinkArray = typeof (items as any)[0] === "object";
+
+  return (
+    <ul className="space-y-2 text-sm text-white/80">
+      {isLinkArray
+        ? (items as LinkItem[]).map((it) => (
+            <li key={it.label}>
+              •{" "}
+              <a href={it.href} target="_blank" rel="noreferrer" className="hover:text-cyan-300">
+                {it.label}
+              </a>
+            </li>
+          ))
+        : (items as string[]).map((it) => <li key={it}>• {it}</li>)}
+    </ul>
+  );
+}
+
+function P({ children }: { children?: React.ReactNode }) {
+  if (!children) return null;
+  return <p className="text-white/80 text-sm leading-relaxed md:text-justify">{children}</p>;
 }

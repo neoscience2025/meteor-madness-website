@@ -25,6 +25,12 @@ export type Member = {
   linkedin: string;
 };
 
+type UIBlock = {
+  ourTeamTitle: string;
+  ourTeamSubtitle: string;
+
+};
+
 // =====================
 // Animaciones
 // =====================
@@ -200,6 +206,9 @@ export default function OurTeam({
 
   const { t } = useTranslation();
   const team = (t("team:members", { returnObjects: true }) as Member[]) ?? [];
+   const uiMember =
+    (t("team:uiMember", { returnObjects: true }) as UIBlock) ??
+    ({ ourTeamTitle: "Our Team", ourTeamSubtitle: "People behind Neoscience" } as UIBlock);
 
   const count = team.length;
   const hasTailPair = count % 3 === 2;
@@ -231,10 +240,10 @@ export default function OurTeam({
             textShadow: "0 0 24px rgba(3, 57, 70, 0.28)",
           }}
         >
-          {title}
+             {uiMember.ourTeamTitle}
         </h2>
         <p style={{ marginTop: 8, opacity: 0.85, fontSize: "clamp(14px, 2.2vw, 16px)" }}>
-          {subtitle}
+         {uiMember.ourTeamSubtitle}
         </p>
       </div>
 

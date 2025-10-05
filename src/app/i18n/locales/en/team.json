@@ -35,5 +35,9 @@
             "photo": "/team/JoseBG.png",
             "linkedin": "https://www.linkedin.com/in/jose-miguel-navas/"
         }
-    ]
+    ],
+     "uiMember": {
+     "ourTeamTitle": "Our Team",
+  "ourTeamSubtitle": "People behind Neoscience"
+  }
 }

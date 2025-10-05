@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { AnimatePresence, motion, type Variants } from "framer-motion";
 import { Orbitron } from "next/font/google";
+import { useTranslation } from "react-i18next";
 
 // Fuente
 const orbitron = Orbitron({
@@ -11,29 +12,18 @@ const orbitron = Orbitron({
   display: "swap",
 });
 
-// Frases
-const PHRASES = [
-  "Every asteroid tells a story",
-  "Knowledge is our best defense",
-  "Prediction saves civilizations",
-  "Together we protect our world",
-];
-
-// Timings
+// Timings (puedes moverlos al JSON si querés)
 const STAGGER = 1.0;  // 1s entre línea y línea
 const IN_DUR = 1.0;   // cada línea tarda 1s en aparecer
 const HOLD = 2.5;     // bloque completo se queda 2.5s
 const OUT_DUR = 1.0;  // salida suave de 1s
 
-// Variants (tipados)
+// Variants
 const blockVariants: Variants = {
   hidden: { opacity: 0 },
   show: {
     opacity: 1,
-    transition: {
-      when: "beforeChildren",
-      staggerChildren: STAGGER,
-    },
+    transition: { when: "beforeChildren", staggerChildren: STAGGER },
   },
   exit: {
     opacity: 0,
@@ -42,7 +32,7 @@ const blockVariants: Variants = {
   },
 };
 
-// Nota: si TS se queja por "filter", deja el `as any` en esa propiedad.
+// Nota: si TS se queja por "filter", deja el `as any`.
 const lineVariants: Variants = {
   hidden: { opacity: 0, y: 16, filter: "blur(6px)" as any },
   show: {
@@ -54,18 +44,30 @@ const lineVariants: Variants = {
 };
 
 export default function MottosStaggerLoop() {
+  const { t } = useTranslation("preview");
+
+  // 🔥 Traemos frases desde el JSON
+  const phrases = (t("phrases", { returnObjects: true }) as string[]) ?? [];
+  const ariaLabel = t("ariaLabel", { defaultValue: "Intro stagger loop" });
+
+  // Evita crash si no hay frases
+  const safePhrases = useMemo(
+    () => (Array.isArray(phrases) && phrases.length ? phrases : ["…"]),
+    [phrases]
+  );
+
   const [cycle, setCycle] = useState(0);
 
   useEffect(() => {
-    const total =
-      (PHRASES.length - 1) * STAGGER + IN_DUR + HOLD + OUT_DUR + 0.2;
-    const t = setTimeout(() => setCycle((c) => c + 1), total * 1000);
-    return () => clearTimeout(t);
-  }, [cycle]);
+    // tiempo total de un ciclo
+    const total = (safePhrases.length - 1) * STAGGER + IN_DUR + HOLD + OUT_DUR + 0.2;
+    const tmr = setTimeout(() => setCycle((c) => c + 1), total * 1000);
+    return () => clearTimeout(tmr);
+  }, [cycle, safePhrases.length]);
 
   return (
     <section
-      aria-label="Intro stagger loop"
+      aria-label={ariaLabel}
       style={{
         width: "100%",
         minHeight: "28vh",
@@ -93,15 +95,15 @@ export default function MottosStaggerLoop() {
         <AnimatePresence mode="wait">
           <motion.div
             key={cycle}
-            variants={blockVariants}   // 👈 ya no da error
+            variants={blockVariants}
             initial="hidden"
             animate="show"
             exit="exit"
             style={{ display: "flex", flexDirection: "column", gap: 8 }}
           >
-            {PHRASES.map((t) => (
+            {safePhrases.map((line) => (
               <motion.p
-                key={t}
+                key={`${cycle}-${line}`}
                 variants={lineVariants}
                 style={{
                   margin: 0,
@@ -113,7 +115,7 @@ export default function MottosStaggerLoop() {
                   whiteSpace: "pre-wrap",
                 }}
               >
-                {t}
+                {line}
               </motion.p>
             ))}
           </motion.div>
