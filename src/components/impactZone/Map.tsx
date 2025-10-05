@@ -446,10 +446,16 @@ export function Map({
     setImpactData(result);
     setImpactState(ImpactState.LAUNCHING);
 
-    // Start animation sequence
+    // Scroll to top of page before starting animation
+    window.scrollTo({ 
+      top: 0, 
+      behavior: 'smooth' 
+    });
+
+    // Start animation sequence after scroll
     setTimeout(() => {
       setImpactState(ImpactState.ANIMATING);
-    }, 100);
+    }, 500); // Delay to allow for scroll
   };
 
   // Handle animation completion
