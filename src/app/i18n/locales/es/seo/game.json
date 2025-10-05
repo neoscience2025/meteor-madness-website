@@ -1,24 +1,26 @@
 {
-  "title": "Juego de Defensa de Asteroides - Simulador Interactivo de Protección NEO",
-  "description": "¡Juega nuestro juego interactivo de defensa de asteroides! Protege la Tierra de Objetos Cercanos a la Tierra y Asteroides Potencialmente Peligrosos mientras aprendes sobre estrategias de defensa planetaria.",
-  "keywords": "juego asteroides, juego defensa espacial, juego NEO, simulador defensa planetaria, protección asteroides, juego espacial interactivo, juego educativo, prevención impacto asteroides",
-  "openGraph": {
-    "title": "Juego de Defensa de Asteroides - Protege la Tierra de NEOs",
-    "description": "Experimenta la defensa planetaria en acción con nuestro juego interactivo de defensa de asteroides. ¡Aprende mientras juegas!",
-    "type": "website",
-    "images": [
-      {
-        "url": "/preview/gamePreview.jpeg",
-        "width": 1200,
-        "height": 630,
-        "alt": "Vista Previa del Juego de Defensa de Asteroides"
-      }
-    ]
-  },
-  "twitter": {
-    "card": "summary_large_image",
-    "title": "Juego de Defensa de Asteroides - Protege la Tierra de NEOs",
-    "description": "Juega nuestro juego interactivo de defensa de asteroides y aprende sobre estrategias de protección planetaria.",
-    "images": ["/preview/gamePreview.jpeg"]
+  "metadata": {
+    "title": "Juego de Defensa de Asteroides - Simulador Interactivo de Protección NEO",
+    "description": "¡Juega nuestro juego interactivo de defensa de asteroides! Protege la Tierra de Objetos Cercanos a la Tierra y Asteroides Potencialmente Peligrosos mientras aprendes sobre estrategias de defensa planetaria.",
+    "keywords": "juego asteroides, juego defensa espacial, juego NEO, simulador defensa planetaria, protección asteroides, juego espacial interactivo, juego educativo, prevención impacto asteroides",
+    "openGraph": {
+      "title": "Juego de Defensa de Asteroides - Protege la Tierra de NEOs",
+      "description": "Experimenta la defensa planetaria en acción con nuestro juego interactivo de defensa de asteroides. ¡Aprende mientras juegas!",
+      "type": "website",
+      "images": [
+        {
+          "url": "/preview/gamePreview.jpeg",
+          "width": 1200,
+          "height": 630,
+          "alt": "Vista Previa del Juego de Defensa de Asteroides"
+        }
+      ]
+    },
+    "twitter": {
+      "card": "summary_large_image",
+      "title": "Juego de Defensa de Asteroides - Protege la Tierra de NEOs",
+      "description": "Juega nuestro juego interactivo de defensa de asteroides y aprende sobre estrategias de protección planetaria.",
+      "images": ["/preview/gamePreview.jpeg"]
+    }
   }
 }

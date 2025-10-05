@@ -4,11 +4,16 @@ import Banner from "@/components/Banner";
 import MottosSection from "@/components/MottosSection";
 import OurTeam from "@/components/OurTeam";
 import PreviewSection from "@/components/PreviewSection";
-
+import { getMetadata } from "@/lib/seo";
 
 const NAMESPACES_REQUIRED = [
-  "team","preview","seo"
+  "team","preview","seo/home"
 ];
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  return await getMetadata(locale, "seo/home");
+}
 
 export default async function Home({ params }) {
   const { locale } = await params;

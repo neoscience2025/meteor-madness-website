@@ -1,10 +1,16 @@
 import { Map } from "@/components/impactZone/Map";
 import TranslationsProvider from "../../../components/translation-provider";
 import initTranslations from "../../i18n/index";
+import { getMetadata } from "@/lib/seo";
 
 const NAMESPACES_REQUIRED = [
-  "impactZone","seo"
+  "impactZone","seo/impact-zone"
 ];
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  return await getMetadata(locale, "seo/impact-zone");
+}
 
 export default async function ImpactZone({ params }) {
   const { locale } = await params;

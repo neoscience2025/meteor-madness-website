@@ -1,24 +1,26 @@
 {
-  "title": "Meteor Madness Quiz - Test Your NEO Knowledge",
-  "description": "Challenge your knowledge about Near-Earth Objects and planetary defense with our interactive Meteor Madness quiz. Learn while testing your space science expertise!",
-  "keywords": "space quiz, asteroid quiz, NEO quiz, planetary defense quiz, space science test, meteor quiz, educational quiz, astronomy quiz, space knowledge test",
-  "openGraph": {
-    "title": "Meteor Madness Quiz - Test Your Space Knowledge",
-    "description": "Put your Near-Earth Objects and planetary defense knowledge to the test with our engaging quiz!",
-    "type": "website",
-    "images": [
-      {
-        "url": "/asteroideVolcan.png",
-        "width": 1200,
-        "height": 630,
-        "alt": "Meteor Madness Quiz Interface"
-      }
-    ]
-  },
-  "twitter": {
-    "card": "summary_large_image",
-    "title": "Meteor Madness Quiz - Test Your Space Knowledge",
-    "description": "Challenge yourself with our interactive quiz about Near-Earth Objects and planetary defense!",
-    "images": ["/asteroideVolcan.png"]
+  "metadata": {
+    "title": "Meteor Madness Quiz - Test Your NEO Knowledge",
+    "description": "Challenge your knowledge about Near-Earth Objects and planetary defense with our interactive Meteor Madness quiz. Learn while testing your space science expertise!",
+    "keywords": "space quiz, asteroid quiz, NEO quiz, planetary defense quiz, space science test, meteor quiz, educational quiz, astronomy quiz, space knowledge test",
+    "openGraph": {
+      "title": "Meteor Madness Quiz - Test Your Space Knowledge",
+      "description": "Put your Near-Earth Objects and planetary defense knowledge to the test with our engaging quiz!",
+      "type": "website",
+      "images": [
+        {
+          "url": "/asteroideVolcan.png",
+          "width": 1200,
+          "height": 630,
+          "alt": "Meteor Madness Quiz Interface"
+        }
+      ]
+    },
+    "twitter": {
+      "card": "summary_large_image",
+      "title": "Meteor Madness Quiz - Test Your Space Knowledge",
+      "description": "Challenge yourself with our interactive quiz about Near-Earth Objects and planetary defense!",
+      "images": ["/asteroideVolcan.png"]
+    }
   }
 }

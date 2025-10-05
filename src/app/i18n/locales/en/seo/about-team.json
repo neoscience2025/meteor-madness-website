@@ -1,24 +1,26 @@
 {
-  "title": "About NeoScience Team - Near-Earth Objects Researchers",
-  "description": "Meet the NeoScience team dedicated to creating interactive platforms for Near-Earth Objects research and planetary defense. Learn about our mission and join our group.",
-  "keywords": "NeoScience team, Near-Earth Objects research, planetary defense team, asteroid researchers, space science team, NEO scientists, PHA researchers",
-  "openGraph": {
-    "title": "About NeoScience Team - NEO Research Experts",
-    "description": "Discover the passionate team behind NeoScience's interactive Near-Earth Objects platform and planetary defense solutions.",
-    "type": "website",
-    "images": [
-      {
-        "url": "/team/OscarBG.png",
-        "width": 1200,
-        "height": 630,
-        "alt": "NeoScience Research Team"
-      }
-    ]
-  },
-  "twitter": {
-    "card": "summary_large_image",
-    "title": "About NeoScience Team - NEO Research Experts",
-    "description": "Meet the researchers developing interactive tools for Near-Earth Objects analysis and planetary defense.",
-    "images": ["/team/OscarBG.png"]
+  "metadata": {
+    "title": "About NeoScience Team - Near-Earth Objects Researchers",
+    "description": "Meet the NeoScience team dedicated to creating interactive platforms for Near-Earth Objects research and planetary defense. Learn about our mission and join our group.",
+    "keywords": "NeoScience team, Near-Earth Objects research, planetary defense team, asteroid researchers, space science team, NEO scientists, PHA researchers",
+    "openGraph": {
+      "title": "About NeoScience Team - NEO Research Experts",
+      "description": "Discover the passionate team behind NeoScience's interactive Near-Earth Objects platform and planetary defense solutions.",
+      "type": "website",
+      "images": [
+        {
+          "url": "/team/OscarBG.png",
+          "width": 1200,
+          "height": 630,
+          "alt": "NeoScience Research Team"
+        }
+      ]
+    },
+    "twitter": {
+      "card": "summary_large_image",
+      "title": "About NeoScience Team - NEO Research Experts",
+      "description": "Meet the researchers developing interactive tools for Near-Earth Objects analysis and planetary defense.",
+      "images": ["/team/OscarBG.png"]
+    }
   }
 }

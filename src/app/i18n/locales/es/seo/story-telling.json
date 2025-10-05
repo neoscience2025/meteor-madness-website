@@ -1,0 +1,26 @@
+{
+  "metadata": {
+    "title": "Historias Espaciales Interactivas - Aventuras de Objetos Cercanos a la Tierra",
+    "description": "Explora historias interactivas atractivas sobre Objetos Cercanos a la Tierra, encuentros con asteroides y escenarios de defensa planetaria. La narración educativa se encuentra con la aventura de ciencia espacial.",
+    "keywords": "historias espaciales, historias asteroides, narración interactiva, aventura espacial, historias educativas, historias NEO, historias defensa planetaria, ciencia ficción espacial",
+    "openGraph": {
+      "title": "Historias Espaciales Interactivas - Aventuras NEO",
+      "description": "Sumérgete en historias interactivas cautivadoras sobre Objetos Cercanos a la Tierra y aventuras espaciales mientras aprendes sobre defensa planetaria.",
+      "type": "website",
+      "images": [
+        {
+          "url": "/preview/storyPreview.jpeg",
+          "width": 1200,
+          "height": 630,
+          "alt": "Interfaz de Historias Espaciales Interactivas"
+        }
+      ]
+    },
+    "twitter": {
+      "card": "summary_large_image",
+      "title": "Historias Espaciales Interactivas - Aventuras NEO",
+      "description": "Experimenta historias espaciales atractivas mientras aprendes sobre Objetos Cercanos a la Tierra y defensa planetaria.",
+      "images": ["/preview/storyPreview.jpeg"]
+    }
+  }
+}

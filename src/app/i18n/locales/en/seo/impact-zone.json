@@ -1,24 +1,26 @@
 {
-  "title": "Asteroid Impact Zone Mapping - NEO Impact Visualization",
-  "description": "Explore potential asteroid impact zones with our interactive mapping tool. Visualize and analyze where Near-Earth Objects might impact Earth and assess consequences.",
-  "keywords": "asteroid impact zone, impact mapping, NEO impact visualization, asteroid impact analysis, planetary impact assessment, crater mapping, impact consequences",
-  "openGraph": {
-    "title": "Impact Zone Mapping - Asteroid Impact Visualization",
-    "description": "Discover potential asteroid impact zones and analyze consequences with our interactive mapping platform.",
-    "type": "website",
-    "images": [
-      {
-        "url": "/crater.png",
-        "width": 1200,
-        "height": 630,
-        "alt": "Asteroid Impact Zone Mapping Interface"
-      }
-    ]
-  },
-  "twitter": {
-    "card": "summary_large_image",
-    "title": "Impact Zone Mapping - Asteroid Impact Visualization",
-    "description": "Explore and analyze potential asteroid impact zones with our interactive mapping tool.",
-    "images": ["/crater.png"]
+  "metadata": {
+    "title": "Asteroid Impact Zone Mapping - NEO Impact Visualization",
+    "description": "Explore potential asteroid impact zones with our interactive mapping tool. Visualize and analyze where Near-Earth Objects might impact Earth and assess consequences.",
+    "keywords": "asteroid impact zone, impact mapping, NEO impact visualization, asteroid impact analysis, planetary impact assessment, crater mapping, impact consequences",
+    "openGraph": {
+      "title": "Impact Zone Mapping - Asteroid Impact Visualization",
+      "description": "Discover potential asteroid impact zones and analyze consequences with our interactive mapping platform.",
+      "type": "website",
+      "images": [
+        {
+          "url": "/crater.png",
+          "width": 1200,
+          "height": 630,
+          "alt": "Asteroid Impact Zone Mapping Interface"
+        }
+      ]
+    },
+    "twitter": {
+      "card": "summary_large_image",
+      "title": "Impact Zone Mapping - Asteroid Impact Visualization",
+      "description": "Explore and analyze potential asteroid impact zones with our interactive mapping tool.",
+      "images": ["/crater.png"]
+    }
   }
 }

@@ -1,49 +1,26 @@
 {
-  "title": "Near-Earth Objects & Potentially Hazardous Asteroids Database",
-  "description": "Comprehensive database and analysis of Near-Earth Objects (NEO) and Potentially Hazardous Asteroids (PHA). Real-time tracking and risk assessment using NASA and USGS data.",
-  "keywords": "Near-Earth Objects database, PHA database, Potentially Hazardous Asteroids, NEO tracking, asteroid catalog, space object monitoring, NASA NEO data, USGS asteroid data",
-  "openGraph": {
-    "title": "NEO & PHA Database - Comprehensive Asteroid Tracking",
-    "description": "Access comprehensive data on Near-Earth Objects and Potentially Hazardous Asteroids with real-time tracking and analysis.",
-    "type": "website",
-    "images": [
-      {
-        "url": "/asteroideMetalico.png",
-        "width": 1200,
-        "height": 630,
-        "alt": "Near-Earth Objects Database Interface"
-      }
-    ]
-  },
-  "twitter": {
-    "card": "summary_large_image",
-    "title": "NEO & PHA Database - Comprehensive Asteroid Tracking",
-    "description": "Explore our comprehensive database of Near-Earth Objects and Potentially Hazardous Asteroids.",
-    "images": ["/asteroideMetalico.png"]
-  }
-}
-EOF && cat > /Users/oscarchiriboga/Desktop/Documents/neoscience-website/src/app/i18n/locales/es/seo/neo-pha.json << 'EOF'
-{
-  "title": "Base de Datos de Objetos Cercanos a la Tierra y Asteroides Potencialmente Peligrosos",
-  "description": "Base de datos y análisis integral de Objetos Cercanos a la Tierra (NEO) y Asteroides Potencialmente Peligrosos (PHA). Seguimiento en tiempo real y evaluación de riesgos usando datos de NASA y USGS.",
-  "keywords": "base datos Objetos Cercanos Tierra, base datos PHA, Asteroides Potencialmente Peligrosos, seguimiento NEO, catálogo asteroides, monitoreo objetos espaciales, datos NEO NASA, datos asteroides USGS",
-  "openGraph": {
-    "title": "Base de Datos NEO & PHA - Seguimiento Integral de Asteroides",
-    "description": "Accede a datos integrales sobre Objetos Cercanos a la Tierra y Asteroides Potencialmente Peligrosos con seguimiento y análisis en tiempo real.",
-    "type": "website",
-    "images": [
-      {
-        "url": "/asteroideMetalico.png",
-        "width": 1200,
-        "height": 630,
-        "alt": "Interfaz de Base de Datos de Objetos Cercanos a la Tierra"
-      }
-    ]
-  },
-  "twitter": {
-    "card": "summary_large_image",
-    "title": "Base de Datos NEO & PHA - Seguimiento Integral de Asteroides",
-    "description": "Explora nuestra base de datos integral de Objetos Cercanos a la Tierra y Asteroides Potencialmente Peligrosos.",
-    "images": ["/asteroideMetalico.png"]
+  "metadata": {
+    "title": "Near-Earth Objects & Potentially Hazardous Asteroids Database",
+    "description": "Comprehensive database and analysis of Near-Earth Objects (NEO) and Potentially Hazardous Asteroids (PHA). Real-time tracking and risk assessment using NASA and USGS data.",
+    "keywords": "Near-Earth Objects database, PHA database, Potentially Hazardous Asteroids, NEO tracking, asteroid catalog, space object monitoring, NASA NEO data, USGS asteroid data",
+    "openGraph": {
+      "title": "NEO & PHA Database - Comprehensive Asteroid Tracking",
+      "description": "Access comprehensive data on Near-Earth Objects and Potentially Hazardous Asteroids with real-time tracking and analysis.",
+      "type": "website",
+      "images": [
+        {
+          "url": "/asteroideMetalico.png",
+          "width": 1200,
+          "height": 630,
+          "alt": "Near-Earth Objects Database Interface"
+        }
+      ]
+    },
+    "twitter": {
+      "card": "summary_large_image",
+      "title": "NEO & PHA Database - Comprehensive Asteroid Tracking",
+      "description": "Explore our comprehensive database of Near-Earth Objects and Potentially Hazardous Asteroids.",
+      "images": ["/asteroideMetalico.png"]
+    }
   }
 }

@@ -1,24 +1,26 @@
 {
-  "title": "NeoScience - Interactive Near-Earth Objects Platform",
-  "description": "Explore Near-Earth Objects (NEO) and Potentially Hazardous Asteroids (PHA) with our interactive platform. Simulate asteroid impacts, develop mitigation strategies, and join our mission to protect Earth.",
-  "keywords": "Near-Earth Objects, NEO, PHA, Potentially Hazardous Asteroids, asteroid simulation, planetary defense, space science, interactive platform, NASA data, USGS datasets",
-  "openGraph": {
-    "title": "NeoScience - Interactive NEO & PHA Platform",
-    "description": "Join NeoScience in creating interactive simulations of Near-Earth Objects and developing solutions to prevent potential asteroid disasters.",
-    "type": "website",
-    "images": [
-      {
-        "url": "/preview/logo.png",
-        "width": 1200,
-        "height": 630,
-        "alt": "NeoScience Logo - Interactive NEO Platform"
-      }
-    ]
-  },
-  "twitter": {
-    "card": "summary_large_image",
-    "title": "NeoScience - Interactive NEO & PHA Platform",
-    "description": "Explore Near-Earth Objects and develop planetary defense strategies with our interactive platform.",
-    "images": ["/preview/logo.png"]
+  "metadata": {
+    "title": "NeoScience - Interactive Near-Earth Objects Platform",
+    "description": "Explore Near-Earth Objects (NEO) and Potentially Hazardous Asteroids (PHA) with our interactive platform. Simulate asteroid impacts, develop mitigation strategies, and join our mission to protect Earth.",
+    "keywords": "Near-Earth Objects, NEO, PHA, Potentially Hazardous Asteroids, asteroid simulation, planetary defense, space science, interactive platform, NASA data, USGS datasets",
+    "openGraph": {
+      "title": "NeoScience - Interactive NEO & PHA Platform",
+      "description": "Join NeoScience in creating interactive simulations of Near-Earth Objects and developing solutions to prevent potential asteroid disasters.",
+      "type": "website",
+      "images": [
+        {
+          "url": "/preview/logo.png",
+          "width": 1200,
+          "height": 630,
+          "alt": "NeoScience Logo - Interactive NEO Platform"
+        }
+      ]
+    },
+    "twitter": {
+      "card": "summary_large_image",
+      "title": "NeoScience - Interactive NEO & PHA Platform",
+      "description": "Explore Near-Earth Objects and develop planetary defense strategies with our interactive platform.",
+      "images": ["/preview/logo.png"]
+    }
   }
 }
