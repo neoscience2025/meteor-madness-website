@@ -4,7 +4,7 @@ import OurTeam from "@/components/OurTeam";
 import AboutProject from "@/components/OurProyect";
 
 const NAMESPACES_REQUIRED = [
-  "team","aboutProject"
+  "team","aboutProject","seo"
 ];
 
 export default async function Home({ params }) {

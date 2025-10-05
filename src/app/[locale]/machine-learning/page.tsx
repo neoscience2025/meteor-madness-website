@@ -3,7 +3,8 @@ import initTranslations from "../../i18n/index";
 
 const NAMESPACES_REQUIRED = [
   'menu',
-  'footer'
+  'footer',
+  'seo'
 ];
 
 export default async function MachineLearning({ params }) {

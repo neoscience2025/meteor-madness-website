@@ -1,0 +1,24 @@
+{
+  "title": "Sobre el Equipo NeoScience - Investigadores de Objetos Cercanos a la Tierra",
+  "description": "Conoce al equipo NeoScience dedicado a crear plataformas interactivas para la investigación de Objetos Cercanos a la Tierra y defensa planetaria. Aprende sobre nuestra misión y únete a nuestro grupo.",
+  "keywords": "equipo NeoScience, investigación Objetos Cercanos a la Tierra, equipo defensa planetaria, investigadores asteroides, equipo ciencia espacial, científicos NEO, investigadores PHA",
+  "openGraph": {
+    "title": "Sobre el Equipo NeoScience - Expertos en Investigación NEO",
+    "description": "Descubre el equipo apasionado detrás de la plataforma interactiva de Objetos Cercanos a la Tierra de NeoScience y las soluciones de defensa planetaria.",
+    "type": "website",
+    "images": [
+      {
+        "url": "/team/OscarBG.png",
+        "width": 1200,
+        "height": 630,
+        "alt": "Equipo de Investigación NeoScience"
+      }
+    ]
+  },
+  "twitter": {
+    "card": "summary_large_image",
+    "title": "Sobre el Equipo NeoScience - Expertos en Investigación NEO",
+    "description": "Conoce a los investigadores que desarrollan herramientas interactivas para el análisis de Objetos Cercanos a la Tierra y defensa planetaria.",
+    "images": ["/team/OscarBG.png"]
+  }
+}

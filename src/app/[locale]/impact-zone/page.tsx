@@ -3,7 +3,7 @@ import TranslationsProvider from "../../../components/translation-provider";
 import initTranslations from "../../i18n/index";
 
 const NAMESPACES_REQUIRED = [
-  "impactZone"
+  "impactZone","seo"
 ];
 
 export default async function ImpactZone({ params }) {

@@ -1,0 +1,49 @@
+{
+  "title": "Interactive Space Stories - Near-Earth Objects Adventures",
+  "description": "Explore engaging interactive stories about Near-Earth Objects, asteroid encounters, and planetary defense scenarios. Educational storytelling meets space science adventure.",
+  "keywords": "space stories, asteroid stories, interactive storytelling, space adventure, educational stories, NEO stories, planetary defense stories, space science fiction",
+  "openGraph": {
+    "title": "Interactive Space Stories - NEO Adventures",
+    "description": "Dive into captivating interactive stories about Near-Earth Objects and space adventures while learning about planetary defense.",
+    "type": "website",
+    "images": [
+      {
+        "url": "/preview/storyPreview.jpeg",
+        "width": 1200,
+        "height": 630,
+        "alt": "Interactive Space Stories Interface"
+      }
+    ]
+  },
+  "twitter": {
+    "card": "summary_large_image",
+    "title": "Interactive Space Stories - NEO Adventures",
+    "description": "Experience engaging space stories while learning about Near-Earth Objects and planetary defense.",
+    "images": ["/preview/storyPreview.jpeg"]
+  }
+}
+EOF && cat > /Users/oscarchiriboga/Desktop/Documents/neoscience-website/src/app/i18n/locales/es/seo/story-telling.json << 'EOF'
+{
+  "title": "Historias Espaciales Interactivas - Aventuras de Objetos Cercanos a la Tierra",
+  "description": "Explora historias interactivas atractivas sobre Objetos Cercanos a la Tierra, encuentros con asteroides y escenarios de defensa planetaria. La narración educativa se encuentra con la aventura de ciencia espacial.",
+  "keywords": "historias espaciales, historias asteroides, narración interactiva, aventura espacial, historias educativas, historias NEO, historias defensa planetaria, ciencia ficción espacial",
+  "openGraph": {
+    "title": "Historias Espaciales Interactivas - Aventuras NEO",
+    "description": "Sumérgete en historias interactivas cautivadoras sobre Objetos Cercanos a la Tierra y aventuras espaciales mientras aprendes sobre defensa planetaria.",
+    "type": "website",
+    "images": [
+      {
+        "url": "/preview/storyPreview.jpeg",
+        "width": 1200,
+        "height": 630,
+        "alt": "Interfaz de Historias Espaciales Interactivas"
+      }
+    ]
+  },
+  "twitter": {
+    "card": "summary_large_image",
+    "title": "Historias Espaciales Interactivas - Aventuras NEO",
+    "description": "Experimenta historias espaciales atractivas mientras aprendes sobre Objetos Cercanos a la Tierra y defensa planetaria.",
+    "images": ["/preview/storyPreview.jpeg"]
+  }
+}

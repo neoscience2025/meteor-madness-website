@@ -1,0 +1,24 @@
+{
+  "title": "Asteroid Impact Simulation - Interactive NEO Impact Modeling",
+  "description": "Experience realistic asteroid impact simulations using NASA and USGS datasets. Model impact scenarios, predict consequences, and evaluate mitigation strategies for planetary defense.",
+  "keywords": "asteroid simulation, impact simulation, NEO modeling, planetary defense simulation, asteroid impact modeling, space simulation, disaster prevention simulation, NASA simulation",
+  "openGraph": {
+    "title": "Asteroid Impact Simulation - Interactive NEO Modeling",
+    "description": "Run realistic asteroid impact simulations and explore planetary defense strategies with our advanced modeling platform.",
+    "type": "website",
+    "images": [
+      {
+        "url": "/preview/simulationPreview.jpeg",
+        "width": 1200,
+        "height": 630,
+        "alt": "Asteroid Impact Simulation Interface"
+      }
+    ]
+  },
+  "twitter": {
+    "card": "summary_large_image",
+    "title": "Asteroid Impact Simulation - Interactive NEO Modeling",
+    "description": "Experience realistic asteroid impact scenarios and develop planetary defense strategies.",
+    "images": ["/preview/simulationPreview.jpeg"]
+  }
+}

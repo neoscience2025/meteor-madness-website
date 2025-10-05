@@ -1,0 +1,49 @@
+{
+  "title": "Latest Space News - Near-Earth Objects Updates & Discoveries",
+  "description": "Stay updated with the latest news about Near-Earth Objects, asteroid discoveries, planetary defense developments, and space science breakthroughs.",
+  "keywords": "space news, asteroid news, NEO discoveries, planetary defense news, space science updates, asteroid research news, NASA updates, space technology news",
+  "openGraph": {
+    "title": "Space News - Latest NEO & Asteroid Updates",
+    "description": "Get the latest updates on Near-Earth Objects, asteroid discoveries, and planetary defense developments.",
+    "type": "website",
+    "images": [
+      {
+        "url": "/preview/logo.png",
+        "width": 1200,
+        "height": 630,
+        "alt": "Space News and Updates"
+      }
+    ]
+  },
+  "twitter": {
+    "card": "summary_large_image",
+    "title": "Space News - Latest NEO & Asteroid Updates",
+    "description": "Stay informed about the latest Near-Earth Objects discoveries and space science developments.",
+    "images": ["/preview/logo.png"]
+  }
+}
+EOF && cat > /Users/oscarchiriboga/Desktop/Documents/neoscience-website/src/app/i18n/locales/es/seo/news.json << 'EOF'
+{
+  "title": "Últimas Noticias Espaciales - Actualizaciones y Descubrimientos de Objetos Cercanos a la Tierra",
+  "description": "Mantente actualizado con las últimas noticias sobre Objetos Cercanos a la Tierra, descubrimientos de asteroides, desarrollos de defensa planetaria y avances en ciencia espacial.",
+  "keywords": "noticias espaciales, noticias asteroides, descubrimientos NEO, noticias defensa planetaria, actualizaciones ciencia espacial, noticias investigación asteroides, actualizaciones NASA, noticias tecnología espacial",
+  "openGraph": {
+    "title": "Noticias Espaciales - Últimas Actualizaciones NEO y Asteroides",
+    "description": "Obtén las últimas actualizaciones sobre Objetos Cercanos a la Tierra, descubrimientos de asteroides y desarrollos de defensa planetaria.",
+    "type": "website",
+    "images": [
+      {
+        "url": "/preview/logo.png",
+        "width": 1200,
+        "height": 630,
+        "alt": "Noticias y Actualizaciones Espaciales"
+      }
+    ]
+  },
+  "twitter": {
+    "card": "summary_large_image",
+    "title": "Noticias Espaciales - Últimas Actualizaciones NEO y Asteroides",
+    "description": "Mantente informado sobre los últimos descubrimientos de Objetos Cercanos a la Tierra y desarrollos de ciencia espacial.",
+    "images": ["/preview/logo.png"]
+  }
+}
