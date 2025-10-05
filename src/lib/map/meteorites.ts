@@ -1,4 +1,4 @@
-const METEORITE_OPTIONS = {
+export const METEORITE_OPTIONS = {
     gold: {
         name: "gold",
         density: 19320,

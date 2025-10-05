@@ -135,7 +135,8 @@ export const ImpactForm = forwardRef<ImpactFormRef, {
     defaultValues: {
       diameter: 100,
       speed: 17,
-      impactAngle: 45
+      impactAngle: 45,
+      meteoriteType: 'stone' as const
     }
   });
 
@@ -161,7 +162,8 @@ export const ImpactForm = forwardRef<ImpactFormRef, {
       longitude,
       diameter: data.diameter,
       speed: convertKmsToMs(data.speed),
-      impactAngle: data.impactAngle
+      impactAngle: data.impactAngle,
+      meteoriteType: data.meteoriteType
     };
 
     try {
@@ -180,8 +182,23 @@ export const ImpactForm = forwardRef<ImpactFormRef, {
   return (
     <div className="p-6">
       <form onSubmit={handleSubmit(onSubmit)} className="md:grid md:grid-cols-2 md:gap-6 md:h-full">
+        {/* Left column: Meteorite selector only */}
         <div className="space-y-6">
-          <MeteoriteSelector />
+          <Controller
+            name="meteoriteType"
+            control={control}
+            render={({ field }) => (
+              <MeteoriteSelector
+                value={field.value}
+                onChange={field.onChange}
+                disabled={inputsDisabled}
+              />
+            )}
+          />
+        </div>
+
+        {/* Right column: Other inputs and button */}
+        <div className="space-y-6">
           <Controller
             name="diameter"
             control={control}
@@ -235,15 +252,15 @@ export const ImpactForm = forwardRef<ImpactFormRef, {
               />
             )}
           />
-        </div>
 
-        <div className="pt-6 md:pt-0 md:flex md:items-end md:justify-end">
-          <LaunchAsteroidButton
-            onClick={handleSubmit(onSubmit)}
-            isLoading={isLoading}
-            text={buttonText}
-            disabled={disabled}
-          />
+          <div className="pt-6 md:pt-0 md:flex md:items-end md:justify-end">
+            <LaunchAsteroidButton
+              onClick={handleSubmit(onSubmit)}
+              isLoading={isLoading}
+              text={buttonText}
+              disabled={disabled}
+            />
+          </div>
         </div>
       </form>
     </div>
