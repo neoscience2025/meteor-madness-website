@@ -82,6 +82,7 @@ const ImpactAnimation = ({ position, onComplete }) => {
   const [isVisible, setIsVisible] = useState(true);
   const [mapEvents, setMapEvents] = useState(null);
   const [screenPosition, setScreenPosition] = useState(null);
+  const mapRef = useRef(null);
 
   useEffect(() => {
     import('react-leaflet').then((mod) => {
@@ -94,15 +95,45 @@ const ImpactAnimation = ({ position, onComplete }) => {
 
     const map = mapEvents({});
     
+    // Store map reference
     useEffect(() => {
-      if (map && position) {
-        const point = map.latLngToContainerPoint(position);
-        setScreenPosition({ x: point.x, y: point.y });
+      if (map) {
+        mapRef.current = map;
       }
-    }, [map, position]);
+    }, [map]);
 
     return null;
   };
+
+  // Separate effect to calculate screen position
+  useEffect(() => {
+    if (mapRef.current && position && position.length === 2) {
+      try {
+        const point = mapRef.current.latLngToContainerPoint(position);
+        setScreenPosition({ x: point.x, y: point.y });
+      } catch (error) {
+        console.error('Error calculating screen position:', error);
+        // Fallback to center of map container
+        setScreenPosition({ x: 200, y: 200 });
+      }
+    }
+  }, [position[0], position[1]]);
+
+  // Initial position calculation when map becomes available
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (mapRef.current && position && !screenPosition) {
+        try {
+          const point = mapRef.current.latLngToContainerPoint(position);
+          setScreenPosition({ x: point.x, y: point.y });
+        } catch (error) {
+          setScreenPosition({ x: 200, y: 200 });
+        }
+      }
+    }, 100);
+    
+    return () => clearTimeout(timer);
+  }, [mapRef.current, screenPosition]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -113,7 +144,9 @@ const ImpactAnimation = ({ position, onComplete }) => {
     return () => clearTimeout(timer);
   }, [onComplete]);
 
-  if (!isVisible || !screenPosition) return <MapEventsComponent />;
+  if (!isVisible) return null;
+  
+  if (!screenPosition) return <MapEventsComponent />;
 
   return (
     <>
