@@ -141,7 +141,7 @@ const InteractiveBook: React.FC<InteractiveBookProps> = ({ bookData }) => {
           maxWidth={1200}
           maxHeight={1500}
           size="stretch"
-          showCover={false}
+          showCover={true}
           flippingTime={1000}
           usePortrait={isMobile}
           startZIndex={0}
@@ -162,9 +162,11 @@ const InteractiveBook: React.FC<InteractiveBookProps> = ({ bookData }) => {
           onInit={() => {}}
           onUpdate={() => {}}
         >
-          <div className="page">
+          {/* Cover page - will be displayed as single page */}
+          <div className="page cover-page">
             {renderPageContent({ imgUrl: bookData.coverUrl, alt: 'Book Cover' }, -1)}
           </div>
+          {/* Content pages */}
           {bookData.pages.map((page, index) => (
             <div key={index} className="page">
               {renderPageContent(page, index)}
@@ -175,7 +177,7 @@ const InteractiveBook: React.FC<InteractiveBookProps> = ({ bookData }) => {
       
       <div className="w-full text-center">
         <p className="text-xs sm:text-sm text-gray-300 bg-blue-900/30 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full inline-block mb-3 sm:mb-4">
-          Page {isMobile ? currentPage + 1 : Math.floor(currentPage / 2) + 1} of {isMobile ? bookData.pages.length + 1 : Math.ceil((bookData.pages.length + 1) / 2)}
+          Page {currentPage + 1} of {bookData.pages.length + 1}
         </p>
         <div className="flex gap-2 justify-center flex-wrap">
           <button
@@ -188,7 +190,7 @@ const InteractiveBook: React.FC<InteractiveBookProps> = ({ bookData }) => {
           </button>
           <button
             onClick={() => flipBookRef.current?.pageFlip().flipNext()}
-            disabled={isMobile ? currentPage >= bookData.pages.length : currentPage >= bookData.pages.length}
+            disabled={currentPage >= bookData.pages.length}
             className="px-4 py-2 sm:px-6 sm:py-3 bg-blue-900 text-white rounded-lg disabled:opacity-50 disabled:bg-gray-500 hover:bg-blue-950 transition-colors text-sm sm:text-base font-medium min-w-[100px] sm:min-w-[120px]"
             aria-label="Next page"
           >
@@ -199,6 +201,13 @@ const InteractiveBook: React.FC<InteractiveBookProps> = ({ bookData }) => {
 
       <style jsx>{`
         .page {
+          background: white;
+          border: 1px solid #e2e8f0;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+          overflow: hidden;
+        }
+        
+        .cover-page {
           background: white;
           border: 1px solid #e2e8f0;
           box-shadow: 0 4px 12px rgba(0,0,0,0.15);
