@@ -2,20 +2,32 @@
 
 import { useForm, Controller } from "react-hook-form";
 import { useState, forwardRef, useImperativeHandle } from "react";
-import {
-  TbRuler2,
-  TbGauge,
-  TbAngle
-} from "react-icons/tb";
-import { formatDistance, convertKmsToMs, convertMsToKms } from "../../lib/map/utils";
-import { CalculationData, ImpactFormData } from "@/interfaces/impactForm";
-import { retrieveImpactData } from "@/lib/map/retrieveImpactData";
-import { MeteoriteSelector } from "./MeteoriteSelector";
+import { TbRuler2, TbGauge, TbAngle } from "react-icons/tb";
 import { useTranslation } from "react-i18next";
 
-const LaunchAsteroidButton = ({ onClick, isLoading = false, text = "Launch Asteroid", disabled = false }) => {
+// 👇 Ajusta estas rutas si tu alias @ no apunta a src/
+import { formatDistance, convertKmsToMs } from "@/lib/map/utils";
+import { runImpactFromUI } from "@/lib/map/retrieveImpactData";
+
+// Si quieres tipar estricto, puedes importar MaterialType de tu lib:
+// import { MaterialType } from "@/lib/impactForm";
+
+import { MeteoriteSelector } from "./MeteoriteSelector";
+import { MeteoriteName } from "@/interfaces/meteorites";
+
+const LaunchAsteroidButton = ({
+  onClick,
+  isLoading = false,
+  text = "Launch Asteroid",
+  disabled = false,
+}: {
+  onClick: () => void;
+  isLoading?: boolean;
+  text?: string;
+  disabled?: boolean;
+}) => {
   const { t } = useTranslation();
-  
+
   return (
     <button
       onClick={onClick}
@@ -23,12 +35,12 @@ const LaunchAsteroidButton = ({ onClick, isLoading = false, text = "Launch Aster
       className="group/button relative inline-flex h-[calc(48px+8px)] items-center justify-center rounded-full bg-blue-950 py-1 pl-6 pr-14 font-medium text-neutral-50 disabled:opacity-50 disabled:cursor-not-allowed"
     >
       <span className="z-10 pr-2">
-        {isLoading ? t('impactZone:form.launching') : text}
+        {isLoading ? t("impactZone:form.launching") : text}
       </span>
       <div className="absolute right-1 inline-flex h-12 w-12 items-center justify-end rounded-full bg-blue-900 transition-[width] group-hover/button:w-[calc(100%-8px)] group-disabled/button:hover:w-12">
         <div className="mr-3.5 flex items-center justify-center">
           {isLoading ? (
-            <div className="animate-spin h-5 w-5 border-2 border-neutral-50 border-t-transparent rounded-full"></div>
+            <div className="animate-spin h-5 w-5 border-2 border-neutral-50 border-t-transparent rounded-full" />
           ) : (
             <svg
               width="15"
@@ -61,7 +73,17 @@ const SliderField = ({
   max,
   step = 1,
   formatValue,
-  disabled = false
+  disabled = false,
+}: {
+  icon: any;
+  label: string;
+  value: number;
+  onChange: (v: number) => void;
+  min: number;
+  max: number;
+  step?: number;
+  formatValue?: (v: number) => string;
+  disabled?: boolean;
 }) => {
   return (
     <div className="space-y-3">
@@ -83,8 +105,9 @@ const SliderField = ({
           value={value}
           onChange={(e) => onChange(parseFloat(e.target.value))}
           disabled={disabled}
-          className={`w-full h-2 bg-neutral-700 rounded-lg appearance-none slider ${disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'
-            }`}
+          className={`w-full h-2 bg-neutral-700 rounded-lg appearance-none slider ${
+            disabled ? "cursor-not-allowed opacity-50" : "cursor-pointer"
+          }`}
         />
         <style jsx>{`
           .slider::-webkit-slider-thumb {
@@ -115,160 +138,191 @@ export interface ImpactFormRef {
   reset: () => void;
 }
 
-export const ImpactForm = forwardRef<ImpactFormRef, {
-  latitude: number;
-  longitude: number;
-  onImpactResult?: (result: any) => void;
-  onNewLaunch?: () => void;
-  buttonText?: string;
-  isReadyForNew?: boolean;
-  disabled?: boolean;
-  inputsDisabled?: boolean;
-}>(({
-  latitude,
-  longitude,
-  onImpactResult,
-  onNewLaunch,
-  buttonText,
-  isReadyForNew = false,
-  disabled = false,
-  inputsDisabled = false
-}, ref) => {
-  const { t } = useTranslation();
-  const { control, handleSubmit, watch, reset } = useForm({
-    defaultValues: {
-      diameter: 100,
-      speed: 17,
-      impactAngle: 45,
-      meteoriteType: 'stone' as const
-    }
-  });
+type FormValues = {
+  diameter: number;      // m
+  speed: number;         // km/s (slider UI)
+  impactAngle: number;   // degrees (slider UI)
+  meteoriteType: string; // UI codes: 'stone' | 'iron' | 'stony-iron' | 'gold' | 'comet' | 'carbon'
+};
 
-  const [isLoading, setIsLoading] = useState(false);
+// Mapeo UI -> MaterialType del motor
+function uiMeteoriteToMaterial(ui: string): string {
+  const k = ui.toLowerCase();
+  if (k === "stone" || k === "stony") return "stony";
+  if (k === "iron") return "iron";
+  if (k === "stony-iron" || k === "stonyiron") return "stony-iron";
+  if (k === "gold") return "gold";
+  if (k === "comet" || k === "cometary") return "cometary";
+  if (k === "carbon" || k === "carbonaceous") return "carbonaceous";
+  // default razonable
+  return "stony";
+}
 
-  // Expose reset function to parent
-  useImperativeHandle(ref, () => ({
-    reset: () => {
-      reset();
-      setIsLoading(false);
-    }
-  }));
-
-  const onSubmit = async (data: CalculationData) => {
-    if (isReadyForNew && onNewLaunch) {
-      onNewLaunch();
-      return;
-    }
-    setIsLoading(true);
-
-    const impactData: ImpactFormData = {
+export const ImpactForm = forwardRef<
+  ImpactFormRef,
+  {
+    latitude: number;
+    longitude: number;
+    onImpactResult?: (result: any) => void;
+    onNewLaunch?: () => void;
+    buttonText?: string;
+    isReadyForNew?: boolean;
+    disabled?: boolean;
+    inputsDisabled?: boolean;
+  }
+>(
+  (
+    {
       latitude,
       longitude,
-      diameter: data.diameter,
-      speed: convertKmsToMs(data.speed),
-      impactAngle: data.impactAngle,
-      meteoriteType: data.meteoriteType
+      onImpactResult,
+      onNewLaunch,
+      buttonText,
+      isReadyForNew = false,
+      disabled = false,
+      inputsDisabled = false,
+    },
+    ref
+  ) => {
+    const { t } = useTranslation();
+    const { control, handleSubmit, reset } = useForm<FormValues>({
+      defaultValues: {
+        diameter: 100,    // m
+        speed: 17,        // km/s
+        impactAngle: 45,  // deg
+        meteoriteType: "stone",
+      },
+    });
+
+    const [isLoading, setIsLoading] = useState(false);
+
+    useImperativeHandle(ref, () => ({
+      reset: () => {
+        reset();
+        setIsLoading(false);
+      },
+    }));
+
+    const onSubmit = async (data: FormValues) => {
+      if (isReadyForNew && onNewLaunch) {
+        onNewLaunch();
+        return;
+      }
+      setIsLoading(true);
+
+      try {
+        const result = await runImpactFromUI({
+          lat: latitude,
+          lng: longitude,
+          material: uiMeteoriteToMaterial(data.meteoriteType) as any,
+          diameter: data.diameter,
+          speed: convertKmsToMs(data.speed), // km/s -> m/s
+          angleDeg: data.impactAngle,        // la UI entrega grados; el helper espera grados
+        });
+
+        // Log en JSON para depurar
+        // eslint-disable-next-line no-console
+        console.log("result json:\n" + JSON.stringify(result, null, 2));
+
+        if (onImpactResult) onImpactResult(result);
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.error("Impact calculation failed:", error);
+      } finally {
+        setIsLoading(false);
+      }
     };
 
-    try {
-      const result = await retrieveImpactData(impactData);
-      console.log("the result is:", result)
-      if (onImpactResult) {
-        onImpactResult(result);
-      }
-    } catch (error) {
-      console.error('Impact calculation failed:', error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  return (
-    <div className="p-6">
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-8 md:space-y-0 md:grid md:grid-cols-2 md:gap-6 md:h-full">
-        {/* Left column: Meteorite selector only */}
-        <div className="space-y-6">
-          <Controller
-            name="meteoriteType"
-            control={control}
-            render={({ field }) => (
-              <MeteoriteSelector
-                value={field.value}
-                onChange={field.onChange}
-                disabled={inputsDisabled}
-              />
-            )}
-          />
-        </div>
-
-        {/* Right column: Other inputs and button */}
-        <div className="space-y-6">
-          <Controller
-            name="diameter"
-            control={control}
-            render={({ field }) => (
-              <SliderField
-                icon={TbRuler2}
-                label={t('impactZone:form.diameter')}
-                value={field.value}
-                onChange={field.onChange}
-                min={1}
-                max={1500}
-                step={1}
-                formatValue={formatDistance}
-                disabled={inputsDisabled}
-              />
-            )}
-          />
-
-          <Controller
-            name="speed"
-            control={control}
-            render={({ field }) => (
-              <SliderField
-                icon={TbGauge}
-                label={t('impactZone:form.speed')}
-                value={field.value}
-                onChange={field.onChange}
-                min={1}
-                max={100}
-                step={0.1}
-                formatValue={(value) => `${value} km/s`}
-                disabled={inputsDisabled}
-              />
-            )}
-          />
-
-          <Controller
-            name="impactAngle"
-            control={control}
-            render={({ field }) => (
-              <SliderField
-                icon={TbAngle}
-                label={t('impactZone:form.impactAngle')}
-                value={field.value}
-                onChange={field.onChange}
-                min={5}
-                max={90}
-                step={1}
-                formatValue={(value) => `${value}°`}
-                disabled={inputsDisabled}
-              />
-            )}
-          />
-
-          <div className="pt-6 md:pt-0 flex justify-center md:justify-end md:items-end">
-            <LaunchAsteroidButton
-              onClick={handleSubmit(onSubmit)}
-              isLoading={isLoading}
-              text={buttonText ? t(`impactZone:${buttonText}`) : t('impactZone:form.launchAsteroid')}
-              disabled={disabled}
+    return (
+      <div className="p-6">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="space-y-8 md:space-y-0 md:grid md:grid-cols-2 md:gap-6 md:h-full"
+        >
+          {/* Left column: Meteorite selector */}
+          <div className="space-y-6">
+            <Controller
+              name="meteoriteType"
+              control={control}
+              render={({ field }) => (
+                <MeteoriteSelector
+                  value={field.value as MeteoriteName}
+                  onChange={field.onChange}
+                  disabled={inputsDisabled}
+                />
+              )}
             />
           </div>
-        </div>
-      </form>
-    </div>
-  );
-});
 
-ImpactForm.displayName = 'ImpactForm';
+          {/* Right column: sliders + button */}
+          <div className="space-y-6">
+            <Controller
+              name="diameter"
+              control={control}
+              render={({ field }) => (
+                <SliderField
+                  icon={TbRuler2}
+                  label={t("impactZone:form.diameter")}
+                  value={field.value}
+                  onChange={field.onChange}
+                  min={1}
+                  max={1500}
+                  step={1}
+                  formatValue={formatDistance}
+                  disabled={inputsDisabled}
+                />
+              )}
+            />
+
+            <Controller
+              name="speed"
+              control={control}
+              render={({ field }) => (
+                <SliderField
+                  icon={TbGauge}
+                  label={t("impactZone:form.speed")}
+                  value={field.value}
+                  onChange={field.onChange}
+                  min={1}
+                  max={100}
+                  step={0.1}
+                  formatValue={(value) => `${value} km/s`}
+                  disabled={inputsDisabled}
+                />
+              )}
+            />
+
+            <Controller
+              name="impactAngle"
+              control={control}
+              render={({ field }) => (
+                <SliderField
+                  icon={TbAngle}
+                  label={t("impactZone:form.impactAngle")}
+                  value={field.value}
+                  onChange={field.onChange}
+                  min={5}
+                  max={90}
+                  step={1}
+                  formatValue={(value) => `${value}°`}
+                  disabled={inputsDisabled}
+                />
+              )}
+            />
+
+            <div className="pt-6 md:pt-0 flex justify-center md:justify-end md:items-end">
+              <LaunchAsteroidButton
+                onClick={handleSubmit(onSubmit)}
+                isLoading={isLoading}
+                text={buttonText ? t(`impactZone:${buttonText}`) : t("impactZone:form.launchAsteroid")}
+                disabled={disabled}
+              />
+            </div>
+          </div>
+        </form>
+      </div>
+    );
+  }
+);
+
+ImpactForm.displayName = "ImpactForm";

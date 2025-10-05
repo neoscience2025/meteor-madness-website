@@ -1,7 +1,6 @@
 // retrieveImpactData.ts
-// Modo Web: sin CLI, sin console prints. Devuelve objeto JSON listo para UI.
-// Mantiene la API/estructura de salida y la matemática del modelo.
-// isWater SIEMPRE se resuelve desde la API (fetchIsWater).
+// Modo Web + CLI opcional (solo imprime JSON). No toca la lógica de cálculo.
+// isWater SIEMPRE se resuelve desde la API.
 
 import axios from "axios"; // seguimos usando axios para Lobster (SSR/Browser)
 import {
@@ -327,4 +326,52 @@ export async function runImpactFromUI(params: UIImpactParams) {
   };
 
   return await retrieveImpactData(form);
+}
+
+/* =========================================================
+   CLI opcional (solo imprime JSON del resultado)
+   ========================================================= */
+// Uso:
+//   ts-node retrieveImpactData.ts --lat -1.670846 --lng -78.651653 --material gold --diameter 500 --speed 17000 --angleDeg 45
+// o con node (compilado a JS):
+//   node dist/retrieveImpactData.js --lat ... --lng ... --material ... --diameter ... --speed ... --angleDeg ...
+
+declare const require: any | undefined;
+declare const module: any | undefined;
+declare const process: any | undefined;
+
+if (typeof require !== "undefined" && typeof module !== "undefined" && require.main === module) {
+  (async () => {
+    try {
+      const args = (typeof process !== "undefined" ? process.argv.slice(2) : []) as string[];
+
+      const getArg = (name: string, def?: string) => {
+        const i = args.findIndex((a) => a === `--${name}`);
+        if (i >= 0 && i + 1 < args.length) return args[i + 1];
+        return def;
+      };
+
+      const lat = Number(getArg("lat"));
+      const lng = Number(getArg("lng"));
+      const material = (getArg("material", "stony") as MaterialType) || "stony";
+      const diameter = Number(getArg("diameter", "500"));
+      const speed = Number(getArg("speed", "17000"));
+      const angleDeg = Number(getArg("angleDeg", "45"));
+
+      if (![lat, lng, diameter, speed, angleDeg].every((n) => Number.isFinite(n))) {
+        throw new Error("Parámetros inválidos. Ejemplo: --lat -1.670846 --lng -78.651653 --material gold --diameter 500 --speed 17000 --angleDeg 45");
+      }
+
+      const result = await runImpactFromUI({ lat, lng, material, diameter, speed, angleDeg });
+
+      // Imprimir SOLO JSON “bonito” para debug
+      // (no afecta al modo web ni SSR)
+      // eslint-disable-next-line no-console
+      console.log(JSON.stringify(result, null, 2));
+    } catch (err: any) {
+      // eslint-disable-next-line no-console
+      console.error("CLI error:", err?.message || err);
+      if (typeof process !== "undefined") process.exitCode = 1;
+    }
+  })();
 }
