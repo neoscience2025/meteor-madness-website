@@ -25,9 +25,9 @@ export interface ImpactData {
 }
 
 export const BUTTON_TEXT_MAP = {
-  [ImpactState.IDLE]: 'Launch Asteroid',
-  [ImpactState.LAUNCHING]: 'Launching...',
-  [ImpactState.ANIMATING]: 'Launching...',
-  [ImpactState.SHOWING_IMPACT]: 'Launching...',
-  [ImpactState.READY_FOR_NEW]: 'New Launch'
+  [ImpactState.IDLE]: 'form.launchAsteroid',
+  [ImpactState.LAUNCHING]: 'form.launching',
+  [ImpactState.ANIMATING]: 'form.launching',
+  [ImpactState.SHOWING_IMPACT]: 'form.launching',
+  [ImpactState.READY_FOR_NEW]: 'form.newLaunch'
 } as const;

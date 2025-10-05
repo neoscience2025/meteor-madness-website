@@ -13,6 +13,7 @@
     "impactAngle": "Impact angle",
     "launchAsteroid": "Launch Asteroid",
     "launching": "Launching...",
+    "newLaunch": "New Launch",
     "density": "Density: {{density}} kg/m³",
     "materials": {
       "gold": "Gold",

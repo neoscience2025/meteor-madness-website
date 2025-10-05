@@ -261,7 +261,7 @@ export const ImpactForm = forwardRef<ImpactFormRef, {
             <LaunchAsteroidButton
               onClick={handleSubmit(onSubmit)}
               isLoading={isLoading}
-              text={buttonText || t('impactZone:form.launchAsteroid')}
+              text={buttonText ? t(`impactZone:${buttonText}`) : t('impactZone:form.launchAsteroid')}
               disabled={disabled}
             />
           </div>
