@@ -97,14 +97,11 @@ export const MeteoriteSelector = ({
                     onClick={goToPrevious}
                     disabled={disabled}
                     className={cn(
-                        "flex items-center justify-center w-12 h-12 rounded-full transition-all duration-200",
-                        "bg-neutral-100 dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-600",
-                        "hover:bg-neutral-200 dark:hover:bg-neutral-700 hover:scale-105",
-                        "disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100",
-                        "shadow-lg hover:shadow-xl"
+                        "p-2 transition-all duration-200",
+                        "disabled:opacity-50 disabled:cursor-not-allowed"
                     )}
                 >
-                    <TbChevronLeft className="w-6 h-6 text-neutral-600 dark:text-neutral-400" />
+                    <TbChevronLeft className="w-6 h-6 text-white hover:text-blue-900 active:text-blue-900 transition-colors duration-200" />
                 </button>
 
                 {/* Meteorite Info - Centered between controls */}
@@ -122,14 +119,11 @@ export const MeteoriteSelector = ({
                     onClick={goToNext}
                     disabled={disabled}
                     className={cn(
-                        "flex items-center justify-center w-12 h-12 rounded-full transition-all duration-200",
-                        "bg-neutral-100 dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-600",
-                        "hover:bg-neutral-200 dark:hover:bg-neutral-700 hover:scale-105",
-                        "disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100",
-                        "shadow-lg hover:shadow-xl"
+                        "p-2 transition-all duration-200",
+                        "disabled:opacity-50 disabled:cursor-not-allowed"
                     )}
                 >
-                    <TbChevronRight className="w-6 h-6 text-neutral-600 dark:text-neutral-400" />
+                    <TbChevronRight className="w-6 h-6 text-white hover:text-blue-900 active:text-blue-900 transition-colors duration-200" />
                 </button>
             </div>
         </div>
