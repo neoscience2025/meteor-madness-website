@@ -342,7 +342,6 @@ export function Map({
           onImpactResult={handleImpactLaunch}
           onNewLaunch={handleNewLaunch}
           buttonText={getButtonText()}
-          isReadyForNew={impactState === 'ready-for-new'}
           disabled={impactState === 'launching' || impactState === 'animating'}
           inputsDisabled={impactState !== 'idle'}
         />
@@ -392,7 +391,7 @@ export function Map({
           )}
           
           {/* Affected Area Circle */}
-          {(impactState === 'showing-impact' || impactState === 'ready-for-new') && impactData && (
+          {(impactState === 'showing-impact' || impactState === 'ready-for-new') && !!impactData && (
             <AffectedAreaCircle
               affectedArea={impactData.affectedArea}
             />

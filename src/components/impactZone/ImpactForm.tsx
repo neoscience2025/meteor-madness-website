@@ -253,7 +253,7 @@ export const ImpactForm = forwardRef<ImpactFormRef, {
             )}
           />
 
-          <div className="pt-6 md:pt-0 md:flex md:items-end md:justify-end">
+          <div className="pt-6 md:pt-0 flex justify-center md:justify-end md:items-end">
             <LaunchAsteroidButton
               onClick={handleSubmit(onSubmit)}
               isLoading={isLoading}
