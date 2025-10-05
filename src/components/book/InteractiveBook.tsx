@@ -90,21 +90,23 @@ const InteractiveBook: React.FC<InteractiveBookProps> = ({ bookData }) => {
     }
   };
 
-  const [dimensions, setDimensions] = useState({ width: 400, height: 550 });
+  const [dimensions, setDimensions] = useState({ width: 800, height: 1000 });
 
   useEffect(() => {
     const updateDimensions = () => {
       const windowWidth = window.innerWidth;
       const windowHeight = window.innerHeight;
       
-      if (windowWidth < 480) {
-        setDimensions({ width: Math.min(280, windowWidth - 40), height: 380 });
-      } else if (windowWidth < 768) {
-        setDimensions({ width: Math.min(350, windowWidth - 60), height: 450 });
+      // Maintain a 4:5 aspect ratio (width:height) to better accommodate tall images
+      if (windowWidth < 768) {
+        const width = Math.min(600, windowWidth - 40);
+        setDimensions({ width, height: Math.floor(width * 1.25) });
       } else if (windowWidth < 1024) {
-        setDimensions({ width: 400, height: 550 });
+        setDimensions({ width: 700, height: 875 });
+      } else if (windowWidth < 1400) {
+        setDimensions({ width: 800, height: 1000 });
       } else {
-        setDimensions({ width: 500, height: 650 });
+        setDimensions({ width: 1000, height: 1250 });
       }
     };
 
@@ -114,20 +116,20 @@ const InteractiveBook: React.FC<InteractiveBookProps> = ({ bookData }) => {
   }, []);
 
   return (
-    <div className="flex flex-col justify-center items-center min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-4">
+    <div className="flex flex-col justify-center items-center min-h-screen p-4">
       <div className="relative" role="application" aria-label="Interactive Book">
         <HTMLFlipBook
           ref={flipBookRef}
           width={dimensions.width}
           height={dimensions.height}
-          minWidth={250}
-          minHeight={300}
-          maxWidth={600}
-          maxHeight={800}
+          minWidth={600}
+          minHeight={750}
+          maxWidth={1200}
+          maxHeight={1500}
           size="stretch"
-          showCover={true}
+          showCover={false}
           flippingTime={1000}
-          usePortrait={true}
+          usePortrait={false}
           startZIndex={0}
           autoSize={false}
           maxShadowOpacity={0.5}
@@ -157,14 +159,14 @@ const InteractiveBook: React.FC<InteractiveBookProps> = ({ bookData }) => {
         </HTMLFlipBook>
         
         <div className="mt-6 text-center">
-          <p className="text-sm text-white/80 bg-black/20 backdrop-blur-sm px-4 py-2 rounded-full">
-            Page {currentPage + 1} of {bookData.pages.length + 1}
+          <p className="text-sm text-gray-600 bg-gray-100 px-4 py-2 rounded-full">
+            Page {Math.floor(currentPage / 2) + 1} of {Math.ceil((bookData.pages.length + 1) / 2)}
           </p>
           <div className="mt-4 flex gap-2 justify-center">
             <button
               onClick={() => flipBookRef.current?.pageFlip().flipPrev()}
               disabled={currentPage === 0}
-              className="px-4 py-2 bg-white/10 backdrop-blur-sm text-white rounded-lg disabled:opacity-50 hover:bg-white/20 transition-colors"
+              className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg disabled:opacity-50 hover:bg-gray-300 transition-colors"
               aria-label="Previous page"
             >
               ← Previous
@@ -172,7 +174,7 @@ const InteractiveBook: React.FC<InteractiveBookProps> = ({ bookData }) => {
             <button
               onClick={() => flipBookRef.current?.pageFlip().flipNext()}
               disabled={currentPage >= bookData.pages.length}
-              className="px-4 py-2 bg-white/10 backdrop-blur-sm text-white rounded-lg disabled:opacity-50 hover:bg-white/20 transition-colors"
+              className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg disabled:opacity-50 hover:bg-gray-300 transition-colors"
               aria-label="Next page"
             >
               Next →
@@ -186,12 +188,11 @@ const InteractiveBook: React.FC<InteractiveBookProps> = ({ bookData }) => {
           background: white;
           border: 1px solid #e2e8f0;
           box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-          border-radius: 4px;
           overflow: hidden;
         }
         
         .flip-book {
-          filter: drop-shadow(0 10px 25px rgba(0,0,0,0.3));
+          filter: drop-shadow(0 10px 25px rgba(0,0,0,0.2));
         }
       `}</style>
     </div>
