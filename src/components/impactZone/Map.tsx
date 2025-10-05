@@ -292,7 +292,20 @@ const DraggableMarker = ({ position, setPosition, customIcon = "/marker.svg", on
 
       marker.setIcon(customMarkerIcon);
     }
-  }, [L, customIcon, markerRef.current]);
+  }, [L, customIcon]);
+
+  // Additional effect to ensure icon is set when marker becomes visible
+  useEffect(() => {
+    if (isVisible && markerRef.current && L) {
+      const marker = markerRef.current;
+      const customMarkerIcon = new L.Icon({
+        iconUrl: customIcon,
+        iconSize: [30, 52],
+        popupAnchor: [0, -52]
+      });
+      marker.setIcon(customMarkerIcon);
+    }
+  }, [isVisible, L, customIcon]);
 
   const eventHandlers = {
     dragend(e) {
