@@ -402,6 +402,7 @@ const EffectRings = ({ center, result }: { center: [number, number]; result: any
     desc: string;
     casualties?: { label: string; value: number }[];
   }>(null);
+  const [selected, setSelected] = useState<string | null>(null);
 
   if (!result) return null;
 
@@ -538,32 +539,41 @@ const EffectRings = ({ center, result }: { center: [number, number]; result: any
     <>
       <Pane name="effect-rings" style={{ zIndex: 650 }} />
       <HoverPanel hovered={hovered} />
-      {valid.map((r) => (
-        <Circle
-          key={r.key}
-          center={center}
-          radius={r.radius!}
-          pane="effect-rings"
-          pathOptions={{
-            color: r.color,
-            weight: 2.5,
-            opacity: 0.95,
-            dashArray: r.dashArray,
-            fillColor: r.fillColor ?? r.color,
-            fillOpacity: r.fillOpacity ?? 0.08,
-          }}
-          eventHandlers={{
-            mouseover: () =>
-              setHovered({
-                key: r.key,
-                label: r.label,
-                radius: r.radius!,
-                desc: r.desc,
-                casualties: victimsFor(r.key),
-              }),
-            mouseout: () => setHovered(null),
-          }}
-        >
+      {valid.map((r) => {
+        const isHovered = hovered?.key === r.key;
+        const isSelected = selected === r.key;
+        const isActive = isHovered || isSelected;
+        
+        return (
+          <Circle
+            key={r.key}
+            center={center}
+            radius={r.radius!}
+            pane="effect-rings"
+            pathOptions={{
+              color: r.color,
+              weight: isActive ? 3.5 : 2.5,
+              opacity: isActive ? 1 : 0.95,
+              dashArray: r.dashArray,
+              fillColor: r.fillColor ?? r.color,
+              fillOpacity: isActive ? (r.fillOpacity ?? 0.08) * 1.8 : (r.fillOpacity ?? 0.08),
+              interactive: true,
+              bubblingMouseEvents: false,
+            }}
+            className="[&_path]:!outline-none [&_path]:focus:!outline-none [&_path]:focus-visible:!outline-none [&_path]:focus:ring-0 [&_path]:cursor-pointer"
+            eventHandlers={{
+              mouseover: () =>
+                setHovered({
+                  key: r.key,
+                  label: r.label,
+                  radius: r.radius!,
+                  desc: r.desc,
+                  casualties: victimsFor(r.key),
+                }),
+              mouseout: () => setHovered(null),
+              click: () => setSelected(selected === r.key ? null : r.key),
+            }}
+          >
           {/* Tooltip liviano en el borde, NO permanente */}
           <Tooltip direction="top" sticky>
             <div style={{ fontWeight: 600, fontSize: 12 }}>
@@ -571,7 +581,8 @@ const EffectRings = ({ center, result }: { center: [number, number]; result: any
             </div>
           </Tooltip>
         </Circle>
-      ))}
+        );
+      })}
     </>
   );
 };
@@ -682,7 +693,7 @@ export function Map({ lat = -1.65899, lon = -78.67901 }) {
           zoom={11}
           style={{ height: "100%", width: "100%" }}
           zoomControl={true}
-          className="rounded-[15px] [&_.leaflet-control-zoom]:!bg-blue-950 [&_.leaflet-control-zoom]:!border-none [&_.leaflet-control-zoom_.leaflet-control-zoom-in]:!bg-blue-950 [&_.leaflet-control-zoom_.leaflet-control-zoom-in]:!border-none [&_.leaflet-control-zoom_.leaflet-control-zoom-in]:!text-white [&_.leaflet-control-zoom_.leaflet-control-zoom-out]:!bg-blue-950 [&_.leaflet-control-zoom_.leaflet-control-zoom-out]:!border-none [&_.leaflet-control-zoom_.leaflet-control-zoom-out]:!text-white [&_.leaflet-control-zoom_.leaflet-control-zoom-in]:!border-b-0 [&_.leaflet-control-zoom_.leaflet-control-zoom-out]:!border-t-0"
+          className="rounded-[15px] [&_.leaflet-control-zoom]:!bg-blue-950 [&_.leaflet-control-zoom]:!border-none [&_.leaflet-control-zoom_.leaflet-control-zoom-in]:!bg-blue-950 [&_.leaflet-control-zoom_.leaflet-control-zoom-in]:!border-none [&_.leaflet-control-zoom_.leaflet-control-zoom-in]:!text-white [&_.leaflet-control-zoom_.leaflet-control-zoom-out]:!bg-blue-950 [&_.leaflet-control-zoom_.leaflet-control-zoom-out]:!border-none [&_.leaflet-control-zoom_.leaflet-control-zoom-out]:!text-white [&_.leaflet-control-zoom_.leaflet-control-zoom-in]:!border-b-0 [&_.leaflet-control-zoom_.leaflet-control-zoom-out]:!border-t-0 [&_svg_path]:!outline-none [&_svg_path]:focus:!outline-none [&_.leaflet-interactive]:!outline-none [&_.leaflet-interactive]:focus:!outline-none"
           attributionControl={false}
         >
           <TileLayer url={`${maps[mapType]}?key=${process.env.NEXT_PUBLIC_MAP_TILER_KEY}`} />
@@ -743,6 +754,22 @@ export function Map({ lat = -1.65899, lon = -78.67901 }) {
             </div>
           </div>
         </MapContainer>
+        
+        {/* Global styles to remove focus outlines from Leaflet elements */}
+        <style jsx global>{`
+          .leaflet-interactive:focus {
+            outline: none !important;
+          }
+          .leaflet-container svg path:focus {
+            outline: none !important;
+          }
+          .leaflet-container svg path {
+            outline: none !important;
+          }
+          .leaflet-interactive {
+            outline: none !important;
+          }
+        `}</style>
       </div>
     </MainMenusGradientCard>
 
