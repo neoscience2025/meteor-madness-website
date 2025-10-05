@@ -72,64 +72,65 @@ function normalizePopulationsSize(pops: number[], targetLen: number): number[] {
    Curiosidades energéticas / periodicidad (visuales)
    ========================================================= */
 
-function energyCuriosity(energyMT: number) {
+function energyCuriosity(energyMT: number, t?: (key: string) => string) {
+  // Fallback to Spanish if no translation function provided (CLI context)
   if (energyMT >= 5e6) {
     return {
-      headline: "Mayor que el evento de Chicxulub (~100 millones de MT)",
-      detail: "Energía comparable o superior a los grandes impactos de extinción masiva.",
+      headline: t ? t("impactSummary:energyComparisons.chicxulubHeadline") : "Mayor que el evento de Chicxulub (~100 millones de MT)",
+      detail: t ? t("impactSummary:energyComparisons.chicxulubDetail") : "Energía comparable o superior a los grandes impactos de extinción masiva.",
     };
   }
   if (energyMT >= 1e6) {
     return {
-      headline: "Mayor que todas las pruebas nucleares combinadas",
-      detail: "Escala global con potencial de efectos climáticos significativos.",
+      headline: t ? t("impactSummary:energyComparisons.nuclearTestsHeadline") : "Mayor que todas las pruebas nucleares combinadas",
+      detail: t ? t("impactSummary:energyComparisons.nuclearTestsDetail") : "Escala global con potencial de efectos climáticos significativos.",
     };
   }
   if (energyMT >= 1e5) {
     return {
-      headline: "Mayor que el supervolcán Yellowstone en una erupción récord",
-      detail: "Devastación continental; efectos globales notables.",
+      headline: t ? t("impactSummary:energyComparisons.yellowstoneHeadline") : "Mayor que el supervolcán Yellowstone en una erupción récord",
+      detail: t ? t("impactSummary:energyComparisons.yellowstoneDetail") : "Devastación continental; efectos globales notables.",
     };
   }
   if (energyMT >= 1e4) {
     return {
-      headline: "Mayor que la erupción del Krakatoa (1883)",
-      detail: "Efectos regionales muy severos; cambios atmosféricos transitorios.",
+      headline: t ? t("impactSummary:energyComparisons.krakatoaHeadline") : "Mayor que la erupción del Krakatoa (1883)",
+      detail: t ? t("impactSummary:energyComparisons.krakatoaDetail") : "Efectos regionales muy severos; cambios atmosféricos transitorios.",
     };
   }
   if (energyMT >= 5e2) {
     return {
-      headline: "Mayor que la bomba de Tsar (~50 MT)",
-      detail: "Efectos devastadores a escala regional.",
+      headline: t ? t("impactSummary:energyComparisons.tsarBombaHeadline") : "Mayor que la bomba de Tsar (~50 MT)",
+      detail: t ? t("impactSummary:energyComparisons.tsarBombaDetail") : "Efectos devastadores a escala regional.",
     };
   }
   if (energyMT >= 15) {
     return {
-      headline: "Mayor que la bomba de Hiroshima (~15 kt) por órdenes de magnitud",
-      detail: "Daño urbano extremo en decenas a cientos de km.",
+      headline: t ? t("impactSummary:energyComparisons.hiroshimaHeadline") : "Mayor que la bomba de Hiroshima (~15 kt) por órdenes de magnitud",
+      detail: t ? t("impactSummary:energyComparisons.hiroshimaDetail") : "Daño urbano extremo en decenas a cientos de km.",
     };
   }
   return {
-    headline: "Energía significativa pero sub-nuclear",
-    detail: "Daños localizados; el peligro depende de densidad poblacional y ángulo.",
+    headline: t ? t("impactSummary:energyComparisons.subNuclearHeadline") : "Energía significativa pero sub-nuclear",
+    detail: t ? t("impactSummary:energyComparisons.subNuclearDetail") : "Daños localizados; el peligro depende de densidad poblacional y ángulo.",
   };
 }
 
-function eventPeriodicityHint(diameter_m: number, material?: MaterialType) {
+function eventPeriodicityHint(diameter_m: number, material?: MaterialType, t?: (key: string) => string) {
   const d = diameter_m;
-  if (d >= 1000) return "Eventos del orden de decenas a cientos de miles de años.";
-  if (d >= 300) return "Eventos del orden de varios miles a decenas de miles de años.";
-  if (d >= 100) return "Eventos del orden de siglos a milenios.";
-  if (d >= 50) return "Eventos del orden de décadas a siglos.";
-  if (material === "iron" || material === "stony-iron") return "Eventos poco frecuentes (décadas).";
-  return "Eventos poco frecuentes (cientos de días a pocos años).";
+  if (d >= 1000) return t ? t("impactSummary:periodicityHints.veryLarge") : "Eventos del orden de decenas a cientos de miles de años.";
+  if (d >= 300) return t ? t("impactSummary:periodicityHints.large") : "Eventos del orden de varios miles a decenas de miles de años.";
+  if (d >= 100) return t ? t("impactSummary:periodicityHints.medium") : "Eventos del orden de siglos a milenios.";
+  if (d >= 50) return t ? t("impactSummary:periodicityHints.small") : "Eventos del orden de décadas a siglos.";
+  if (material === "iron" || material === "stony-iron") return t ? t("impactSummary:periodicityHints.ironRare") : "Eventos poco frecuentes (décadas).";
+  return t ? t("impactSummary:periodicityHints.default") : "Eventos poco frecuentes (cientos de días a pocos años).";
 }
 
 /* =========================================================
    Motor principal (idéntico en salida; isWater siempre por API)
    ========================================================= */
 
-export async function retrieveImpactData(form: ImpactFormData) {
+export async function retrieveImpactData(form: ImpactFormData, t?: (key: string) => string) {
   const {
     latitude,
     longitude,
@@ -210,8 +211,8 @@ export async function retrieveImpactData(form: ImpactFormData) {
   const affectedArea = Math.PI * affectedRadius * affectedRadius;
 
   const velocityKmh = out.velocitySurface * 3.6;
-  const curios = energyCuriosity(out.energyMT);
-  const periodicity = eventPeriodicityHint(diameter, material);
+  const curios = energyCuriosity(out.energyMT, t);
+  const periodicity = eventPeriodicityHint(diameter, material, t);
 
   // 8) Salida JSON para UI
   const base = {
@@ -301,7 +302,7 @@ export async function retrieveImpactData(form: ImpactFormData) {
  * - Mode: "auto"; Geometry: "irregular".
  * - isWater SIEMPRE vendrá de la API (no de UI).
  */
-export async function runImpactFromUI(params: UIImpactParams) {
+export async function runImpactFromUI(params: UIImpactParams, t?: (key: string) => string) {
   const { lat, lng, material, diameter, speed, angleDeg } = params;
 
   // saneo básico (sin romper UX)
@@ -325,7 +326,7 @@ export async function runImpactFromUI(params: UIImpactParams) {
     bodyStrength: 1e7,
   };
 
-  return await retrieveImpactData(form);
+  return await retrieveImpactData(form, t);
 }
 
 /* =========================================================

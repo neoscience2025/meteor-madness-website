@@ -4,7 +4,9 @@ import initTranslations from "../../i18n/index";
 import { getMetadata } from "@/lib/seo";
 
 const NAMESPACES_REQUIRED = [
-  "impactZone","seo/impact-zone"
+  "impactZone",
+  "seo/impact-zone",
+  "impactSummary"
 ];
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {

@@ -218,7 +218,7 @@ export const ImpactForm = forwardRef<
           diameter: data.diameter,
           speed: convertKmsToMs(data.speed), // km/s -> m/s
           angleDeg: data.impactAngle,        // la UI entrega grados; el helper espera grados
-        });
+        }, t);
 
         // Log en JSON para depurar
         console.log("result json:\n" + JSON.stringify(result, null, 2));
