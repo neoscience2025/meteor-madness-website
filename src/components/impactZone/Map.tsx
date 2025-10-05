@@ -80,6 +80,29 @@ const MapClickHandler = ({ setPosition, onPositionChange, disabled = false }) =>
 // Impact animation component
 const ImpactAnimation = ({ position, onComplete }) => {
   const [isVisible, setIsVisible] = useState(true);
+  const [mapEvents, setMapEvents] = useState(null);
+  const [screenPosition, setScreenPosition] = useState(null);
+
+  useEffect(() => {
+    import('react-leaflet').then((mod) => {
+      setMapEvents(() => mod.useMapEvents);
+    });
+  }, []);
+
+  const MapEventsComponent = () => {
+    if (!mapEvents) return null;
+
+    const map = mapEvents({});
+    
+    useEffect(() => {
+      if (map && position) {
+        const point = map.latLngToContainerPoint(position);
+        setScreenPosition({ x: point.x, y: point.y });
+      }
+    }, [map, position]);
+
+    return null;
+  };
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -90,130 +113,131 @@ const ImpactAnimation = ({ position, onComplete }) => {
     return () => clearTimeout(timer);
   }, [onComplete]);
 
-  if (!isVisible) return null;
+  if (!isVisible || !screenPosition) return <MapEventsComponent />;
 
   return (
-    <div
-      className="absolute z-[2000] pointer-events-none"
-      style={{
-        left: '50%',
-        top: '50%',
-        transform: 'translate(-50%, -50%)',
-        width: '100vw',
-        height: '100vh'
-      }}
-    >
-      {/* Bright flash of light */}
+    <>
+      <MapEventsComponent />
       <div
-        className="absolute"
+        className="absolute z-[2000] pointer-events-none"
         style={{
-          left: '50%',
-          top: '50%',
-          transform: 'translate(-50%, -50%)',
-          animation: 'impactFlash 0.4s ease-out forwards'
+          left: `${screenPosition.x}px`,
+          top: `${screenPosition.y}px`,
+          transform: 'translate(-50%, -50%)'
         }}
       >
+        {/* Bright flash of light */}
         <div
-          className="rounded-full"
+          className="absolute"
           style={{
-            width: '40px',
-            height: '40px',
-            background: 'radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(255,255,0,0.9) 30%, rgba(255,200,0,0.6) 60%, transparent 100%)',
-            filter: 'blur(2px)',
-            boxShadow: '0 0 60px 30px rgba(255,255,255,0.8), 0 0 120px 60px rgba(255,255,0,0.6)'
+            left: '50%',
+            top: '50%',
+            transform: 'translate(-50%, -50%)',
+            animation: 'impactFlash 0.4s ease-out forwards'
           }}
-        />
-      </div>
+        >
+          <div
+            className="rounded-full"
+            style={{
+              width: '40px',
+              height: '40px',
+              background: 'radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(255,255,0,0.9) 30%, rgba(255,200,0,0.6) 60%, transparent 100%)',
+              filter: 'blur(2px)',
+              boxShadow: '0 0 60px 30px rgba(255,255,255,0.8), 0 0 120px 60px rgba(255,255,0,0.6)'
+            }}
+          />
+        </div>
 
-      {/* Expanding shockwave */}
-      <div
-        className="absolute"
-        style={{
-          left: '50%',
-          top: '50%',
-          transform: 'translate(-50%, -50%)',
-          animation: 'shockwaveExpand 2.1s ease-out 0.4s forwards'
-        }}
-      >
+        {/* Expanding shockwave */}
         <div
-          className="rounded-full"
+          className="absolute"
           style={{
-            width: '20px',
-            height: '20px',
-            background: 'radial-gradient(circle, transparent 80%, rgba(255,255,255,0.8) 85%, rgba(255,255,0,0.6) 90%, rgba(255,200,0,0.4) 95%, transparent 100%)',
-            filter: 'blur(1px)',
-            boxShadow: '0 0 40px rgba(255,255,255,0.5), inset 0 0 20px rgba(255,255,0,0.3)'
+            left: '50%',
+            top: '50%',
+            transform: 'translate(-50%, -50%)',
+            animation: 'shockwaveExpand 2.1s ease-out 0.4s forwards'
           }}
-        />
-      </div>
+        >
+          <div
+            className="rounded-full"
+            style={{
+              width: '20px',
+              height: '20px',
+              background: 'radial-gradient(circle, transparent 80%, rgba(255,255,255,0.8) 85%, rgba(255,255,0,0.6) 90%, rgba(255,200,0,0.4) 95%, transparent 100%)',
+              filter: 'blur(1px)',
+              boxShadow: '0 0 40px rgba(255,255,255,0.5), inset 0 0 20px rgba(255,255,0,0.3)'
+            }}
+          />
+        </div>
 
-      {/* Secondary glow effect */}
-      <div
-        className="absolute"
-        style={{
-          left: '50%',
-          top: '50%',
-          transform: 'translate(-50%, -50%)',
-          animation: 'glowPulse 2.5s ease-out forwards'
-        }}
-      >
+        {/* Secondary glow effect */}
         <div
-          className="rounded-full"
+          className="absolute"
           style={{
-            width: '80px',
-            height: '80px',
-            background: 'radial-gradient(circle, rgba(255,255,255,0.3) 0%, rgba(255,255,0,0.2) 50%, transparent 100%)',
-            filter: 'blur(8px)'
+            left: '50%',
+            top: '50%',
+            transform: 'translate(-50%, -50%)',
+            animation: 'glowPulse 2.5s ease-out forwards'
           }}
-        />
+        >
+          <div
+            className="rounded-full"
+            style={{
+              width: '80px',
+              height: '80px',
+              background: 'radial-gradient(circle, rgba(255,255,255,0.3) 0%, rgba(255,255,0,0.2) 50%, transparent 100%)',
+              filter: 'blur(8px)'
+            }}
+          />
+        </div>
+
+        <style jsx>{`
+          @keyframes impactFlash {
+            0% {
+              transform: translate(-50%, -50%) scale(0);
+              opacity: 1;
+            }
+            30% {
+              transform: translate(-50%, -50%) scale(2);
+              opacity: 1;
+            }
+            100% {
+              transform: translate(-50%, -50%) scale(4);
+              opacity: 0;
+            }
+          }
+
+          @keyframes shockwaveExpand {
+            0% {
+              transform: translate(-50%, -50%) scale(1);
+              opacity: 0.9;
+            }
+            20% {
+              opacity: 1;
+            }
+            100% {
+              transform: translate(-50%, -50%) scale(40);
+              opacity: 0;
+            }
+          }
+
+          @keyframes glowPulse {
+            0% {
+              transform: translate(-50%, -50%) scale(0);
+              opacity: 0.8;
+            }
+            50% {
+              transform: translate(-50%, -50%) scale(3);
+              opacity: 0.4;
+            }
+            100% {
+              transform: translate(-50%, -50%) scale(8);
+              opacity: 0;
+            }
+          }
+        `}</style>
       </div>
-
-      <style jsx>{`
-        @keyframes impactFlash {
-          0% {
-            transform: translate(-50%, -50%) scale(0);
-            opacity: 1;
-          }
-          30% {
-            transform: translate(-50%, -50%) scale(2);
-            opacity: 1;
-          }
-          100% {
-            transform: translate(-50%, -50%) scale(4);
-            opacity: 0;
-          }
-        }
-
-        @keyframes shockwaveExpand {
-          0% {
-            transform: translate(-50%, -50%) scale(1);
-            opacity: 0.9;
-          }
-          20% {
-            opacity: 1;
-          }
-          100% {
-            transform: translate(-50%, -50%) scale(40);
-            opacity: 0;
-          }
-        }
-
-        @keyframes glowPulse {
-          0% {
-            transform: translate(-50%, -50%) scale(0);
-            opacity: 0.8;
-          }
-          50% {
-            transform: translate(-50%, -50%) scale(3);
-            opacity: 0.4;
-          }
-          100% {
-            transform: translate(-50%, -50%) scale(8);
-            opacity: 0;
-          }
-        }
-      `}</style>
-    </div>
+    </>
   );
 };
 
