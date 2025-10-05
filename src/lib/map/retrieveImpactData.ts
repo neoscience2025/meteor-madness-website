@@ -337,10 +337,10 @@ export async function runImpactFromUI(params: UIImpactParams) {
 //   node dist/retrieveImpactData.js --lat ... --lng ... --material ... --diameter ... --speed ... --angleDeg ...
 
 declare const require: any | undefined;
-declare const module: any | undefined;
+declare const moduleRef: any | undefined;
 declare const process: any | undefined;
 
-if (typeof require !== "undefined" && typeof module !== "undefined" && require.main === module) {
+if (typeof require !== "undefined" && typeof moduleRef !== "undefined" && require.main === moduleRef) {
   (async () => {
     try {
       const args = (typeof process !== "undefined" ? process.argv.slice(2) : []) as string[];
@@ -364,12 +364,10 @@ if (typeof require !== "undefined" && typeof module !== "undefined" && require.m
 
       const result = await runImpactFromUI({ lat, lng, material, diameter, speed, angleDeg });
 
-      // Imprimir SOLO JSON “bonito” para debug
+      // Imprimir SOLO JSON "bonito" para debug
       // (no afecta al modo web ni SSR)
-      // eslint-disable-next-line no-console
       console.log(JSON.stringify(result, null, 2));
     } catch (err: any) {
-      // eslint-disable-next-line no-console
       console.error("CLI error:", err?.message || err);
       if (typeof process !== "undefined") process.exitCode = 1;
     }

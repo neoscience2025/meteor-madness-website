@@ -221,12 +221,10 @@ export const ImpactForm = forwardRef<
         });
 
         // Log en JSON para depurar
-        // eslint-disable-next-line no-console
         console.log("result json:\n" + JSON.stringify(result, null, 2));
 
         if (onImpactResult) onImpactResult(result);
       } catch (error) {
-        // eslint-disable-next-line no-console
         console.error("Impact calculation failed:", error);
       } finally {
         setIsLoading(false);

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { MainMenusGradientCard } from "../eldoraui/animatedcard";
 import { ImpactForm } from "./ImpactForm";
 import dynamic from "next/dynamic";
@@ -394,6 +394,14 @@ function HoverPanel({
 // ──────────────────────────────────────────────────────────────
 // Efectos físicos como anillos (ordenados: grande → pequeño)
 const EffectRings = ({ center, result }: { center: [number, number]; result: any }) => {
+  const [hovered, setHovered] = useState<null | {
+    key: string;
+    label: string;
+    radius: number;
+    desc: string;
+    casualties?: { label: string; value: number }[];
+  }>(null);
+
   if (!result) return null;
 
   const totals = result?.casualties?.totals || {};
@@ -519,14 +527,6 @@ const EffectRings = ({ center, result }: { center: [number, number]; result: any
     .filter((r) => typeof r.radius === "number" && (r.radius as number) > 0)
     .sort((a, b) => (b.radius as number) - (a.radius as number));
 
-  const [hovered, setHovered] = useState<null | {
-    key: string;
-    label: string;
-    radius: number;
-    desc: string;
-    casualties?: { label: string; value: number }[];
-  }>(null);
-
   const fmt = (m?: number) => {
     if (!m || !isFinite(m)) return "";
     if (m >= 1000) return `${(m / 1000).toFixed(1)} km`;
@@ -589,7 +589,7 @@ export function Map({ lat = -1.65899, lon = -78.67901 }) {
   const [impactData, setImpactData] = useState<ImpactData | any>(null);
   const formRef = useRef<any>(null);
 
-  const handlePositionChange = async (newPosition: number[]) => {
+  const handlePositionChange = useCallback(async (newPosition: number[]) => {
     const [lat, lon] = newPosition;
     setIsLoadingPlace(true);
     setPlaceError(null);
@@ -607,11 +607,13 @@ export function Map({ lat = -1.65899, lon = -78.67901 }) {
     } finally {
       setIsLoadingPlace(false);
     }
-  };
+  }, [i18n.language, t]);
 
+  const currentLanguage = i18n.language || "en";
+  
   useEffect(() => {
     handlePositionChange(markerPosition);
-  }, [i18n.language || "en"]);
+  }, [handlePositionChange, markerPosition, currentLanguage]);
 
   const handleImpactLaunch = (result: ImpactData | any) => {
     setImpactData(result);
