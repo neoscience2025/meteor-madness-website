@@ -1,23 +1,6 @@
-import TranslationsProvider from "@/components/translation-provider";
-import initTranslations from "@/app/i18n";
-import Banner from "@/components/Banner";
-import MottosSection from "@/components/MottosSection";
-import OurTeam from "@/components/OurTeam";
-import PreviewSection from "@/components/PreviewSection";
+import { redirect } from "next/navigation";
 
-const NAMESPACES_REQUIRED = [
-    "team"
-];
-
-export default async function Neopage({ params }) {
-    const { locale } = await params;
-    const { t, resources, } = await initTranslations(locale, NAMESPACES_REQUIRED);
-
-    return <TranslationsProvider
-        namespaces={NAMESPACES_REQUIRED}
-        locale={locale}
-        resources={resources}
-    >
-        aqui va el neo
-    </TranslationsProvider>
+export default function Neopage() {
+    // Redirect any visit to the internal NEO/PHA route to the external simulation
+    redirect("https://nolaskote.github.io/simulatio_next");
 }
