@@ -189,6 +189,7 @@ const InteractiveBook: React.FC<InteractiveBookProps> = ({ bookData }) => {
           useMouseEvents={true}
           swipeDistance={30}
           clickEventForward={true}
+          mobileScrollSupport={true}
           onFlip={onFlip}
           onChangeOrientation={() => {}}
           onChangeState={() => {}}
