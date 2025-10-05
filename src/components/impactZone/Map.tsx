@@ -91,9 +91,7 @@ const ImpactAnimation = ({ position, onComplete }) => {
   }, []);
 
   const MapEventsComponent = () => {
-    if (!mapEvents) return null;
-
-    const map = mapEvents({});
+    const map = mapEvents ? mapEvents({}) : null;
     
     // Store map reference
     useEffect(() => {
