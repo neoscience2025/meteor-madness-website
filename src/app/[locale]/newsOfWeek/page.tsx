@@ -4,7 +4,7 @@ import News from "@/components/News";
 
 
 const NAMESPACES_REQUIRED = [
-  "news"
+  "news","seo"
 ];
 
 export default async function NewsOfWeek({ params }) {

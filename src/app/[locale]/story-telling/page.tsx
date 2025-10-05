@@ -6,7 +6,7 @@ import OurTeam from "@/components/OurTeam";
 import PreviewSection from "@/components/PreviewSection";
 
 const NAMESPACES_REQUIRED = [
-    "team"
+    "team","seo"
 ];
 
 export default async function StoryTelling({ params }) {

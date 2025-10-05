@@ -1,0 +1,24 @@
+{
+  "title": "NeoScience AI Assistant - Intelligent NEO Analysis Chatbot",
+  "description": "Interact with our AI-powered chatbot specialized in Near-Earth Objects analysis, asteroid impact scenarios, and planetary defense strategies. Get expert insights instantly.",
+  "keywords": "AI chatbot, asteroid analysis, NEO chatbot, artificial intelligence, space science AI, planetary defense AI, asteroid impact analysis, interactive assistant",
+  "openGraph": {
+    "title": "NeoScience AI Assistant - Smart NEO Analysis",
+    "description": "Chat with our specialized AI assistant for Near-Earth Objects analysis and planetary defense insights.",
+    "type": "website",
+    "images": [
+      {
+        "url": "/preview/logo.png",
+        "width": 1200,
+        "height": 630,
+        "alt": "NeoScience AI Assistant Interface"
+      }
+    ]
+  },
+  "twitter": {
+    "card": "summary_large_image",
+    "title": "NeoScience AI Assistant - Smart NEO Analysis",
+    "description": "Get instant insights on Near-Earth Objects and planetary defense with our specialized AI chatbot.",
+    "images": ["/preview/logo.png"]
+  }
+}

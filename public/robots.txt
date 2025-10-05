@@ -1,0 +1,16 @@
+User-agent: *
+Allow: /
+
+# Allow crawling of all content
+Allow: /en/
+Allow: /es/
+
+# Sitemap location
+Sitemap: https://neoscience.vercel.app/sitemap.xml
+
+# Block any potentially sensitive areas (none for this project)
+# Disallow: /admin/
+# Disallow: /api/
+
+# Crawl delay (optional - removes load on server)
+Crawl-delay: 1

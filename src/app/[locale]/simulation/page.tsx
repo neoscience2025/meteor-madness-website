@@ -3,7 +3,8 @@ import initTranslations from "@/app/i18n";
 
 const NAMESPACES_REQUIRED = [
   'menu',
-  'footer'
+  'footer',
+  'seo'
 ];
 
 export default async function Simulation({ params }) {
