@@ -15,7 +15,7 @@ export default async function ImpactZone({ params }) {
     locale={locale}
     resources={resources}
   >
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-8 pt-20 " >
       <h1 className="text-3xl font-bold mb-4">💥 Impact Zone</h1>
       <Map />
     </div>

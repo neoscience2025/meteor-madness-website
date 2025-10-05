@@ -2,16 +2,15 @@
 
 import React, { useEffect, useMemo, useState } from "react";
 import dynamic from "next/dynamic";
+import { useTranslation } from "react-i18next";
 import { RiLinkedinFill } from "react-icons/ri";
 import { FiChevronRight, FiRefreshCw, FiCheck, FiX } from "react-icons/fi";
 
 const Confetti = dynamic(() => import("react-confetti"), { ssr: false });
 
-/* ======== Estilos base (oscuro elegante) ======== */
 const CARD_BG =
   "bg-gradient-to-br from-slate-950/90 via-slate-950/70 to-slate-950/85 backdrop-blur-sm";
 
-/* ======== Tipos y datos ======== */
 type Q = {
   id: string;
   question: string;
@@ -19,25 +18,15 @@ type Q = {
   answerIdx: number;
 };
 
-const QUESTIONS: Q[] = [
-  { id: "q1", question: "¿Qué significa NEO en astronomía?", options: ["Near Earth Orbit", "Near Earth Object", "New Earth Observation"], answerIdx: 1 },
-  { id: "q2", question: "Objetivo principal del reto Meteor Madness:", options: ["Construir cohetes", "Convertir datos abiertos de NEOs en decisiones y educación", "Crear NFTs"], answerIdx: 1 },
-  { id: "q3", question: "API de NASA para consultar NEOs por fecha:", options: ["EPIC", "NEO Feed", "EONET"], answerIdx: 1 },
-  { id: "q4", question: "Magnitud usada para estimar tamaño/energía:", options: ["Índice UV", "Magnitud absoluta H", "Paralaje anual"], answerIdx: 1 },
-  { id: "q5", question: "¿Qué busca el reto con simulaciones de impacto?", options: ["Gráficas artísticas", "Modelar escenarios 'what-if'", "Aumentar visitas"], answerIdx: 1 },
-  { id: "q6", question: "Misión que probó desviar un asteroide:", options: ["OSIRIS-REx", "DART", "JUNO", "Voyager"], answerIdx: 1 },
-  { id: "q7", question: "Requisito de la app según el reto:", options: ["Excel", "Visualizar trayectorias en tiempo real", "3D obligatorio"], answerIdx: 1 },
-  { id: "q8", question: "Rol del componente educativo:", options: ["Hacer astronautas", "Comunicar riesgos de forma clara", "Cumplir copyright"], answerIdx: 1 },
-  { id: "q9", question: "¿Cuál NO es estrategia de defensa planetaria?", options: ["Desviación gravitacional", "Impacto cinético", "Explosión nuclear"], answerIdx: 1 },
-  { id: "q10", question: "¿Por qué importa desarrollar soluciones sobre NEOs?", options: ["Vender telescopios", "Videojuegos", "Prevenir desinformación y preparar a la sociedad"], answerIdx: 2 },
-];
-
 const PASS_SCORE = 70;
 const POINTS_PER_Q = 10;
 
-/* ======== Utils ======== */
-function calcScore(answers: Record<string, number | null>) {
-  const correct = QUESTIONS.reduce((acc, q) => acc + (answers[q.id] === q.answerIdx ? 1 : 0), 0);
+/** Utilidades */
+function calcScore(answers: Record<string, number | null>, questions: Q[]) {
+  const correct = questions.reduce(
+    (acc, q) => acc + (answers[q.id] === q.answerIdx ? 1 : 0),
+    0
+  );
   return correct * POINTS_PER_Q;
 }
 function addUtm(url: string) {
@@ -51,17 +40,7 @@ function addUtm(url: string) {
     return url;
   }
 }
-const shareLinksFor = (score: number, link: string) => {
-  const url = addUtm(link);
-  const enc = encodeURIComponent;
-  const isPassed = score >= PASS_SCORE;
-  const fullMessage = isPassed
-    ? `¡Desafío Superado! 🚀 Acabo de completar el Quiz Meteor Madness de NeoScience y logré ${score}/100. ¡Aceptá el reto! #NeoScience #NasaSpaceAppChallenge`
-    : `Completé el Quiz Meteor Madness de NeoScience con ${score}/100 💫. ¡Aprendé sobre defensa planetaria! #NeoScience #NasaSpaceAppChallenge`;
-  return { linkedin: `https://www.linkedin.com/share?text=${enc(fullMessage)}${enc(url ? "\n\n": "")}` };
-};
 
-/* ======== Subcomponentes ======== */
 const Letter = ({ i }: { i: number }) => {
   const letters = ["A", "B", "C", "D", "E", "F"];
   return (
@@ -88,11 +67,14 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
   onSelect,
   showFeedback,
 }) => {
+  const { t } = useTranslation("quiz");
   const correct = question.answerIdx;
 
   return (
     <div className="relative p-[1.5px] rounded-2xl bg-gradient-to-br from-cyan-500/20 via-indigo-500/20 to-fuchsia-500/20 shadow-[0_10px_30px_rgba(0,0,0,.35)]">
-      <article className={`rounded-2xl p-6 ${CARD_BG} border border-white/8 min-h-[300px]`}>
+      <article
+        className={`rounded-2xl p-6 ${CARD_BG} border border-white/8 min-h-[300px]`}
+      >
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-white font-extrabold text-xl">
             {qIndex + 1}/{totalQuestions}. {question.question}
@@ -115,7 +97,9 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
                 className={[
                   "group w-full text-left px-4 py-3 rounded-xl border transition duration-200 flex items-center justify-between gap-3",
                   "focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400",
-                  !isSelected && !showFeedback && "border-white/10 hover:border-white/20 hover:bg-white/5",
+                  !isSelected &&
+                    !showFeedback &&
+                    "border-white/10 hover:border-white/20 hover:bg-white/5",
                   isSelected && !showFeedback && "border-cyan-400/60 bg-cyan-400/10",
                   isCorrect && "border-emerald-400 bg-emerald-400/10",
                   isWrong && "border-rose-400 bg-rose-400/10",
@@ -132,7 +116,9 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
                 {showFeedback && isCorrect && (
                   <FiCheck className="text-emerald-300 shrink-0" size={18} />
                 )}
-                {showFeedback && isWrong && <FiX className="text-rose-300 shrink-0" size={18} />}
+                {showFeedback && isWrong && (
+                  <FiX className="text-rose-300 shrink-0" size={18} />
+                )}
               </button>
             );
           })}
@@ -148,8 +134,8 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
             ].join(" ")}
           >
             {chosenAnswer === correct
-              ? "¡Correcto! 🚀"
-              : "Respuesta incorrecta. La opción correcta está marcada en verde."}
+              ? t("feedback.correct")
+              : t("feedback.incorrect")}
           </p>
         )}
       </article>
@@ -157,10 +143,27 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
   );
 };
 
-/* ======== Componente principal ======== */
+/** ========= Componente principal ========= */
 export default function QuizMeteorMadness() {
+  const { t } = useTranslation("quiz");
+
+  /** Preguntas traducidas desde JSON */
+  const QUESTIONS: Q[] = useMemo(() => {
+    // 10 preguntas con opciones desde el JSON
+    return Array.from({ length: 10 }).map((_, i) => {
+      const id = `q${i + 1}`;
+      const opts = t(`questions.${id}.options`, { returnObjects: true }) as string[];
+      return {
+        id,
+        question: t(`questions.${id}.question`),
+        options: opts,
+        answerIdx: t(`questions.${id}.answerIdx`) as unknown as number, // viene del JSON
+      };
+    });
+  }, [t]);
+
   const [answers, setAnswers] = useState<Record<string, number | null>>(
-    Object.fromEntries(QUESTIONS.map((q) => [q.id, null])),
+    Object.fromEntries(QUESTIONS.map((q) => [q.id, null]))
   );
   const [currentQIndex, setCurrentQIndex] = useState(0);
   const [score, setScore] = useState<number>(0);
@@ -169,11 +172,22 @@ export default function QuizMeteorMadness() {
   const [windowSize, setWindowSize] = useState({ w: 0, h: 0 });
 
   useEffect(() => {
-    const upd = () => setWindowSize({ w: window.innerWidth, h: window.innerHeight });
+    // actualizar tamaño para confetti
+    const upd = () =>
+      setWindowSize({ w: window.innerWidth, h: window.innerHeight });
     upd();
     window.addEventListener("resize", upd);
     return () => window.removeEventListener("resize", upd);
   }, []);
+
+  // Reinicializa answers si cambian las preguntas por cambio de idioma
+  useEffect(() => {
+    setAnswers(Object.fromEntries(QUESTIONS.map((q) => [q.id, null])));
+    setCurrentQIndex(0);
+    setSubmitted(false);
+    setScore(0);
+    setShowConfetti(false);
+  }, [QUESTIONS]);
 
   const onSelect = (qid: string, idx: number) => {
     if (answers[qid] === null) setAnswers((a) => ({ ...a, [qid]: idx }));
@@ -188,7 +202,7 @@ export default function QuizMeteorMadness() {
   };
 
   const submit = () => {
-    const finalScore = calcScore(answers);
+    const finalScore = calcScore(answers, QUESTIONS);
     setScore(finalScore);
     setSubmitted(true);
     if (finalScore >= PASS_SCORE) {
@@ -206,7 +220,10 @@ export default function QuizMeteorMadness() {
   };
 
   const currentShareUrl = useMemo(() => {
-    let base = (typeof window !== "undefined" ? window.location.href : "https://neoscience.app/quiz") || "";
+    let base =
+      (typeof window !== "undefined"
+        ? window.location.href
+        : "https://neoscience.app/quiz") || "";
     try {
       const u = new URL(base);
       u.searchParams.set("quiz_score", String(score));
@@ -215,47 +232,72 @@ export default function QuizMeteorMadness() {
     return base;
   }, [score]);
 
-  const share = async () => {
+  const shareLinksFor = (score: number, link: string) => {
+    const url = addUtm(link);
+    const enc = encodeURIComponent;
+    const isPassed = score >= PASS_SCORE;
+    const msg = isPassed ? t("share.pass", { score }) : t("share.fail", { score });
+    return {
+      linkedin: `https://www.linkedin.com/share?text=${enc(msg)}${enc(
+        url ? "\n\n" : ""
+      )}`,
+    };
+  };
+
+  const share = () => {
     const url = currentShareUrl;
     const links = shareLinksFor(score, url);
-    window.open(links.linkedin, "_blank", "noopener,noreferrer,width=600,height=600");
+    window.open(
+      links.linkedin,
+      "_blank",
+      "noopener,noreferrer,width=600,height=600"
+    );
   };
 
   const currentQuestion = QUESTIONS[currentQIndex];
   const chosenAnswer = answers[currentQuestion.id];
   const isAnswered = chosenAnswer !== null;
 
-  /* ======== Resultado ======== */
+  /** ===== Resultado ===== */
   if (submitted) {
     const message =
       score >= PASS_SCORE
-        ? `🎉 ¡Victoria! Lograste ${score}/100 en NeoScience.`
-        : `💪 Buen esfuerzo, lograste ${score}/100. ¡Volvé a intentarlo!`;
+        ? t("result.win", { score })
+        : t("result.tryAgain", { score });
 
     return (
       <section className="max-w-xl mx-auto px-4 py-10 text-center min-h-screen flex flex-col justify-center">
-        {showConfetti && <Confetti width={windowSize.w} height={windowSize.h} numberOfPieces={260} recycle={false} />}
+        {showConfetti && (
+          <Confetti
+            width={windowSize.w}
+            height={windowSize.h}
+            numberOfPieces={260}
+            recycle={false}
+          />
+        )}
 
         <div className="relative p-[1.5px] rounded-2xl bg-gradient-to-br from-cyan-500/20 via-indigo-500/20 to-fuchsia-500/20 shadow-[0_10px_30px_rgba(0,0,0,.35)]">
           <div className={`rounded-2xl p-8 ${CARD_BG} border border-white/8`}>
-            <h2 className="text-4xl font-extrabold text-white mb-2">Resultado Final</h2>
+            <h2 className="text-4xl font-extrabold text-white mb-2">
+              {t("result.title")}
+            </h2>
             <p className="text-white/80 text-lg mb-6">{message}</p>
 
             <div className="flex flex-col gap-4">
               <button
                 onClick={share}
                 className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-[#0A66C2] text-white font-semibold hover:brightness-110 transition"
-                title="Compartir en LinkedIn"
+                title={t("buttons.shareOnLinkedin")}
               >
                 <RiLinkedinFill size={20} />
-                Compartir mi puntaje ({score}/100)
+                {t("buttons.shareMyScore", { score })}
               </button>
               <button
                 onClick={reset}
                 className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-white/10 text-white hover:bg-white/15 border border-white/10 transition"
               >
                 <FiRefreshCw size={18} />
-                Reintentar Quiz
+                {t("buttons.retry")}
               </button>
             </div>
           </div>
@@ -264,17 +306,21 @@ export default function QuizMeteorMadness() {
     );
   }
 
-  /* ======== Quiz ======== */
+  /** ===== Quiz ===== */
   const progress = Math.round(((currentQIndex + 1) / QUESTIONS.length) * 100);
 
   return (
     <section className="max-w-xl mx-auto px-4 py-10 min-h-screen flex flex-col justify-center">
       <header className="mb-6">
-     
-        <h2 className="text-3xl sm:text-4xl font-extrabold text-white mt-3"> NEO Quiz</h2>
+        <h2 className="text-3xl sm:text-4xl font-extrabold text-white mt-3">
+          {t("title")}
+        </h2>
         <p className="text-white/70 mt-1">
-          Pregunta <span className="font-semibold text-cyan-300">{currentQIndex + 1}</span> de {QUESTIONS.length}.{" "}
-          Puntaje: {calcScore(answers)}/100
+          {t("progress", {
+            current: currentQIndex + 1,
+            total: QUESTIONS.length,
+          })}{" "}
+          {t("score", { score: calcScore(answers, QUESTIONS) })}
         </p>
 
         {/* barra progreso */}
@@ -305,7 +351,9 @@ export default function QuizMeteorMadness() {
           disabled={!isAnswered}
           className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-cyan-600 text-white font-semibold hover:bg-cyan-500 disabled:opacity-50 transition"
         >
-          {currentQIndex === QUESTIONS.length - 1 ? "Finalizar Quiz" : "Siguiente Pregunta"}
+          {currentQIndex === QUESTIONS.length - 1
+            ? t("buttons.finish")
+            : t("buttons.next")}
           <FiChevronRight size={20} />
         </button>
       </div>

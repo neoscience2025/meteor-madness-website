@@ -1,0 +1,77 @@
+{
+  "title": "NEO Tapuy (NEO Quiz)",
+  "progress": "Tapuy {{current}} de {{total}}.",
+  "score": "Marka: {{score}}/100",
+  "feedback": {
+    "correct": "Allin! 🚀",
+    "incorrect": "Mana chayqa. Allin akllasqa q’umirwan (verde) qhawaykusqa."
+  },
+  "buttons": {
+    "next": "Hamuq Tapuy",
+    "finish": "Quiz Tukuy",
+    "retry": "Wakmanta Qallariy",
+    "shareOnLinkedin": "LinkedInpi Qurakuy",
+    "shareMyScore": "Markayta qurakuy ({{score}}/100)"
+  },
+  "result": {
+    "title": "Tukuy Riqsiy",
+    "win": "🎉 Atisqa! {{score}}/100 churanki NeoSciencepi.",
+    "tryAgain": "💪 Allin llank'ay! {{score}}/100. Wakmanta yachanaypaq hamuy."
+  },
+  "share": {
+    "pass": "Ch’askiy tukukun! 🚀 NeoScience NEO Quiz nisqata rurayta tukurini, {{score}}/100 nisqawan. Ama llakikuychu — qamqa ch’askiyta apay! #NeoScience #NasaSpaceAppChallenge",
+    "fail": "NeoScience NEO Quiz tukurini {{score}}/100 💫. Planetawan waqaychaymanta yachaykusun! #NeoScience #NasaSpaceAppChallenge"
+  },
+  "questions": {
+    "q1": {
+      "question": "¿Imata NEO nisqawan astronomíapi ninqa?",
+      "options": ["Near Earth Object", "Near Earth Orbit", "New Earth Observation"],
+      "answerIdx": 0
+    },
+    "q2": {
+      "question": "Meteor Madness ch’askiypa hatun taripaynin:",
+      "options": ["Ruq’anakunata ruway", "NEO willakuykuna kichasqa hina llapan runakunapaq ruranakuyta y yachayta paqarichiy", "NFT ruway"],
+      "answerIdx": 1
+    },
+    "q3": {
+      "question": "NEOkunata p’unchawpaq maskanaypaq NASA API:",
+      "options": ["EPIC", "EONET", "NEO Feed"],
+      "answerIdx": 2
+    },
+    "q4": {
+      "question": "Tawqay/energía k’atisqanata qawapaypaq imayna magnitud nisqa:",
+      "options": ["Índice UV", "Magnitud absoluta H", "Paralaje anual"],
+      "answerIdx": 1
+    },
+    "q5": {
+      "question": "Impacto simulasiyónkunawan imata maskanku ch’askiypi?",
+      "options": ["‘What-if’ (imapas) suyupikuna modelay", "Siqik’acha ñawinchakuna (gráficas artísticas)", "Visitaskunata mirachiy"],
+      "answerIdx": 0
+    },
+    "q6": {
+      "question": "¿Ima misiónmi asteroideqa rikch’ayta t’aqachisqata qhawan?",
+      "options": ["OSIRIS-REx", "DART", "JUNO", "Voyager"],
+      "answerIdx": 1
+    },
+    "q7": {
+      "question": "Aplicaciónpaq ch’askiypa mañakuy:",
+      "options": ["Excel", "Kawsaypim trajektoriakunata qhawachiy", "3D nisqa ch’usaqlla (obligatorio)"],
+      "answerIdx": 1
+    },
+    "q8": {
+      "question": "Yachachiypa ch’iqnin imapaqmi:",
+      "options": ["Riesgokunata ch’akillawan willay", "Astronautakunata ruray", "Copyright willakuyta qhapaqchay"],
+      "answerIdx": 0
+    },
+    "q9": {
+      "question": "¿Imayna mana planetawan waqaychay ñan kanchu?",
+      "options": ["Tractor gravitatorio (Desviación gravitacional)", "Impacto cinético", "Explosión nuclear"],
+      "answerIdx": 1
+    },
+    "q10": {
+      "question": "¿Imaraykutaq NEOpa ruwanakuykunata ruwanchikqa hatunmi?",
+      "options": ["Telescopekunata rantiy", "Videojuegos", "Ama willakuy pantaychu ch’usay — llaqtataq ñawpaqta waqaychay"],
+      "answerIdx": 2
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "sectionTitle": "Rikch’ay ñawpaq willakuy (Vista previa de contenido)",
+  "sectionSubtitle": "Willakuy, waqaychay chay yachayta maskay — huk plataforma sapanpi (Explora datos, defensa y aprendizaje — todo en una sola plataforma).",
+  "items": [
+    {
+      "title": "Willakuy Rimay (Narrativa)",
+      "desc": "Riqsiy asteroidekuna chay Tierra qhepapi puriqkunamanta willakuyta, chayqa imayna ñuqanchikpa pachamanta wiñay kamachisqa tukurqan rikch’akuypi rimaywan yachachiyta apachin (Descubre la historia fascinante de los Objetos Cercanos a la Tierra y cómo moldearon la historia de nuestro planeta a través de una experiencia narrativa interactiva).",
+      "img": "/preview/storyPreview.jpeg"
+    },
+    {
+      "title": "Pukllay (Juego)",
+      "desc": "Asteroidekunamanta Pachamanta waqaychay kay pukllaypi ch’askiywan. Rikch’ay tusuykunata y allin yuyayta hamut’ay (Defiende la Tierra de asteroides entrantes en nuestro juego interactivo de defensa espacial. Pon a prueba tus reflejos y tu estrategia).",
+      "img": "/preview/gamePreview.jpeg"
+    },
+    {
+      "title": "Rikch’akuymi (Simulación)",
+      "desc": "Rikch’ay 2D simulasqayku chay inti llipinpi sistema solarwan, NEOs chay PHAkuna. Pachata muyuchiywan hamut’ay chay apaykuna (Explora nuestra simulación 2D del sistema solar, NEOs y PHAs. Manipula el tiempo y descubre la mecánica orbital).",
+      "img": "/preview/simulationPreview.jpeg"
+    }
+  ],
+  "ariaLabel": "Rikch’ay muyuq kachkan (Bucle de presentación)",
+  "phrases": [
+    "Sapa asteroideqa huk willakuyta riman (Cada asteroide cuenta una historia)",
+    "Yachayqa ñuqanchikpa alli waqaychayninmi (El conocimiento es nuestra mejor defensa)",
+    "Ñawpaqta hamut’ayqa llaqta waqaychachin (La predicción salva civilizaciones)",
+    "Ñuqanchikmi llapan pachata waqaychanchik (Juntos protegemos nuestro mundo)"
+  ],
+  "ariaLabelEnd": "Rikch’ay tukuykuchkan (Bucle final de presentación)",
+  "phrasesEnd": [
+    "Waqaychay, qhispiy, kusiy (Defiende, salva y celebra)",
+    "Pachamanta waqaychaykiq warmi maqta makiykiman kachkan, ama qunqaychu... (Salvar la Tierra está en tus manos, y no lo olvides...)",
+    "Ñuqanchikmi llapan pachata waqaychanchik (Juntos protegemos nuestro mundo)"
+  ],
+  "logo": {
+    "src": "/preview/logo.png",
+    "alt": "NeoScience qillqay sutinpa rikch’ay (Logotipo de NeoScience)"
+  }
+}

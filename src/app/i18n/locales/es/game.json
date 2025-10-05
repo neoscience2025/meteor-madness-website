@@ -1,0 +1,47 @@
+{
+  "appGame": {
+    "title": "MISIÓN DART",
+    "tagline": "¡Protege la Tierra!"
+  },
+  "hudGame": {
+    "points": "Puntos",
+    "best": "Mejor Puntuación",
+    "lives": "Vidas",
+    "level": "Nivel"
+  },
+  "ui": {
+    "restart": "Reiniciar",
+    "howToPlay": "¿Cómo jugar?",
+    "exit": "Salir",
+    "shoot": "DISPARAR",
+    "play": "¡Jugar!"
+  },
+  "introGame": {
+    "title": "¿Qué fue la misión DART?",
+    "summaryTitle": "Resumen",
+    "summary": "La misión DART fue el primer experimento de la NASA en defensa planetaria que demostró que una nave podía desviar un asteroide chocando contra él. Usó la técnica del impactador cinético, que consiste en lanzar un objeto a gran velocidad para cambiar la trayectoria de otro cuerpo sin destruirlo, como si empujaras una bola de billar en el espacio. En este minijuego, tú tomas el papel de esa nave: cada disparo representa un impacto preciso que modifica el rumbo de los meteoros antes de que alcancen la Tierra. Este concepto puede salvar nuestro planeta, porque un pequeño cambio en la dirección de un asteroide, si se hace con tiempo, puede evitar una catástrofe global. En el juego repites el mismo principio que podría proteger a la humanidad.",
+    "move": "mover",
+    "shoot": "disparar",
+    "restart": "reiniciar",
+    "pause": "pausar",
+    "exit": "salir",
+    "tipsTitle": "Consejos para jugar",
+    "skip": "No mostrar esta intro la próxima vez",
+    "tip": "Tip: tienes 5 vidas."
+  },
+  "tips": {
+    "anticipate": { "title": "Anticípate:", "body": "dispara cuando el asteroide está alto." },
+    "position": { "title": "Colócate debajo:", "body": "muévete lo justo bajo su trayectoria." },
+    "rate": { "title": "Ritmo de disparo:", "body": "hay enfriamiento; apunta bien." },
+    "priority": { "title": "Prioriza el peligro:", "body": "si va centrado, va primero." },
+    "relax": { "title": "Relájate y disfruta:", "body": "si fallás, reiniciás y a la otra sale mejor." }
+  },
+  "banner": {
+  "start": "Mueve la nave · Dispara a los asteroides · ¡Protege la Tierra! 🌍",
+  "levelUp": "Nivel {{level}} ↑",
+  "impact": "¡Impacto! 🌋 Un asteroide tocó la Tierra",
+  "gameOver": "Juego terminado · Puntos: {{score}} · Nivel: {{level}}",
+  "newRecord": "🎉 ¡Nuevo récord! {{best}} puntos"
+}
+
+}

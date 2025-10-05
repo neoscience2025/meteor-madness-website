@@ -1,0 +1,43 @@
+{
+  "members": [
+    {
+      "name": "Nolasco Ramírez",
+      "profession": "Fisiku",
+      "role": "Proyektu Kamachiq (Líder del Proyecto)",
+      "photo": "/team/NolascoBG.png",
+      "linkedin": "https://www.linkedin.com/in/nolasco-ramírez-560891280"
+    },
+    {
+      "name": "Alexander Panchi",
+      "profession": "Fisiku",
+      "role": "Yupay Kamachiq chay Matemátiku modelupi chay AIpi (Líder de Modelado Matemático e IA)",
+      "photo": "/team/MarcoBG.png",
+      "linkedin": "www.linkedin.com/in/ira-quimby7991"
+    },
+    {
+      "name": "Marian Paredes",
+      "profession": "Sistemas Kamayuq (Ingeniera en Sistemas)",
+      "role": "AI chay Datos Kamachiq (Líder de Producto de IA y Datos)",
+      "photo": "/team/MaggieBG.png",
+      "linkedin": "https://www.linkedin.com/in/marian-paredes/"
+    },
+    {
+      "name": "Oscar Chiriboga",
+      "profession": "Computación Kamayuq (Ingeniero en Ciencias de la Computación)",
+      "role": "Backend chay Integración Kamachiq (Líder de Backend e Integración)",
+      "photo": "/team/OscarBG.png",
+      "linkedin": "https://www.linkedin.com/in/oscarchiriboga/"
+    },
+    {
+      "name": "José Navas",
+      "profession": "Fisiku",
+      "role": "Fisika chay Simulación Kamachiq (Líder de Física y Simulación)",
+      "photo": "/team/JoseBG.png",
+      "linkedin": "https://www.linkedin.com/in/jose-miguel-navas/"
+    }
+  ],
+  "uiMember": {
+    "ourTeamTitle": "Ñuqanchik Ayllu (Nuestro Equipo)",
+    "ourTeamSubtitle": "Runakunataq Neosciencepaq (Personas detrás de Neoscience)"
+  }
+}

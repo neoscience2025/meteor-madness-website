@@ -1,0 +1,77 @@
+{
+  "title": "NEO Quiz",
+  "progress": "Question {{current}} of {{total}}.",
+  "score": "Score: {{score}}/100",
+  "feedback": {
+    "correct": "Correct! 🚀",
+    "incorrect": "Incorrect answer. The correct option is highlighted in green."
+  },
+  "buttons": {
+    "next": "Next Question",
+    "finish": "Finish Quiz",
+    "retry": "Retry Quiz",
+    "shareOnLinkedin": "Share on LinkedIn",
+    "shareMyScore": "Share my score ({{score}}/100)"
+  },
+  "result": {
+    "title": "Final Result",
+    "win": "🎉 Victory! You scored {{score}}/100 on NeoScience.",
+    "tryAgain": "💪 Good effort, you scored {{score}}/100. Try again!"
+  },
+  "share": {
+    "pass": "Challenge completed! 🚀 I just finished NeoScience’s NEO Quiz and scored {{score}}/100. Take the challenge! #NeoScience #NasaSpaceAppChallenge",
+    "fail": "I completed NeoScience’s NEO Quiz with {{score}}/100 💫. Learn about planetary defense! #NeoScience #NasaSpaceAppChallenge"
+  },
+  "questions": {
+    "q1": {
+      "question": "What does NEO mean in astronomy?",
+      "options": ["Near Earth Object", "Near Earth Orbit", "New Earth Observation"],
+      "answerIdx": 0
+    },
+    "q2": {
+      "question": "Main goal of the Meteor Madness challenge:",
+      "options": ["Build rockets", "Turn open NEO data into decisions and education", "Create NFTs"],
+      "answerIdx": 1
+    },
+    "q3": {
+      "question": "NASA API to query NEOs by date:",
+      "options": ["EPIC", "EONET", "NEO Feed"],
+      "answerIdx": 2
+    },
+    "q4": {
+      "question": "Magnitude used to estimate size/energy:",
+      "options": ["UV Index", "Absolute magnitude H", "Annual parallax"],
+      "answerIdx": 1
+    },
+    "q5": {
+      "question": "What do the impact simulations aim to do?",
+      "options": ["Model 'what-if' scenarios", "Artistic charts", "Increase visits"],
+      "answerIdx": 0
+    },
+    "q6": {
+      "question": "Mission that tested deflecting an asteroid:",
+      "options": ["OSIRIS-REx", "DART", "JUNO", "Voyager"],
+      "answerIdx": 1
+    },
+    "q7": {
+      "question": "App requirement according to the challenge:",
+      "options": ["Excel", "Visualize trajectories in real time", "3D mandatory"],
+      "answerIdx": 1
+    },
+    "q8": {
+      "question": "Role of the educational component:",
+      "options": ["Clearly communicate risks", "Make astronauts", "Comply with copyright"],
+      "answerIdx": 0
+    },
+    "q9": {
+      "question": "Which is NOT a planetary defense strategy?",
+      "options": ["Gravity tractor", "Kinetic impact", "Nuclear explosion"],
+      "answerIdx": 1
+    },
+    "q10": {
+      "question": "Why does developing NEO solutions matter?",
+      "options": ["Sell telescopes", "Video games", "Prevent misinformation and prepare society"],
+      "answerIdx": 2
+    }
+  }
+}
