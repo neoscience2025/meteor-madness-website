@@ -1,9 +1,7 @@
 import TranslationsProvider from "@/components/translation-provider";
 import initTranslations from "@/app/i18n";
-import Banner from "@/components/Banner";
-import MottosSection from "@/components/MottosSection";
-import OurTeam from "@/components/OurTeam";
-import PreviewSection from "@/components/PreviewSection";
+import StoryPlayer from "@/components/StoryPlayer";
+
 import { getMetadata } from "@/lib/seo";
 
 const NAMESPACES_REQUIRED = [
@@ -24,6 +22,10 @@ export default async function StoryTelling({ params }) {
         locale={locale}
         resources={resources}
     >
-        aqui va el libro
+      <div className="container mx-auto px-4 py-8 pt-20 " >
+           
+            <StoryPlayer />
+            </div>
+         
     </TranslationsProvider>
 }
