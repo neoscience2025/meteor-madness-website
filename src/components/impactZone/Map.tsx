@@ -7,27 +7,7 @@ import dynamic from 'next/dynamic';
 import { reverseGeocode } from '../../lib/apis/nominatim';
 import { extractPlaceName } from '../../lib/map/utils';
 import { useTranslation } from "react-i18next";
-
-// Impact sequence states
-type ImpactState = 'idle' | 'launching' | 'animating' | 'showing-impact' | 'ready-for-new';
-
-interface ImpactData {
-  energyJ: number;
-  energyMT: number;
-  craterDiameter: number;
-  pressureAt10km: number;
-  affectedArea: {
-    center: { latitude: number; longitude: number };
-    radiusMeters: number;
-    radiusDegrees: number;
-    bounds: {
-      north: number;
-      south: number;
-      east: number;
-      west: number;
-    };
-  };
-}
+import { ImpactState, ImpactData, BUTTON_TEXT_MAP } from '../../interfaces/map';
 
 
 const maps = Object.freeze({
@@ -254,7 +234,7 @@ export function Map({
   const [mapType, setMapType] = useState('street');
 
   // Impact sequence state management
-  const [impactState, setImpactState] = useState<ImpactState>('idle');
+  const [impactState, setImpactState] = useState<ImpactState>(ImpactState.IDLE);
   const [impactData, setImpactData] = useState<ImpactData | null>(null);
   const formRef = useRef(null);
 
@@ -283,46 +263,33 @@ export function Map({
   // Handle impact launch
   const handleImpactLaunch = (result: ImpactData) => {
     setImpactData(result);
-    setImpactState('launching');
+    setImpactState(ImpactState.LAUNCHING);
 
     // Start animation sequence
     setTimeout(() => {
-      setImpactState('animating');
+      setImpactState(ImpactState.ANIMATING);
     }, 100);
   };
 
   // Handle animation completion
   const handleAnimationComplete = () => {
-    setImpactState('showing-impact');
+    setImpactState(ImpactState.SHOWING_IMPACT);
 
     // After showing impact, change to ready for new launch
     setTimeout(() => {
-      setImpactState('ready-for-new');
+      setImpactState(ImpactState.READY_FOR_NEW);
     }, 1000);
   };
 
   // Handle new launch (reset)
   const handleNewLaunch = () => {
-    setImpactState('idle');
+    setImpactState(ImpactState.IDLE);
     setImpactData(null);
     if (formRef.current?.reset) {
       formRef.current.reset();
     }
   };
 
-  // Determine button text based on state
-  const getButtonText = () => {
-    switch (impactState) {
-      case 'animating':
-      case 'showing-impact':
-      case 'launching':
-        return 'Launching...';
-      case 'ready-for-new':
-        return 'New Launch';
-      default:
-        return 'Launch Asteroid';
-    }
-  };
 
   const getTitle = () => {
     if (isLoadingPlace) return "Impact Zone: Loading...";
@@ -341,10 +308,10 @@ export function Map({
           longitude={markerPosition[1]}
           onImpactResult={handleImpactLaunch}
           onNewLaunch={handleNewLaunch}
-          buttonText={getButtonText()}
-          isReadyForNew={impactState === 'ready-for-new'}
-          disabled={impactState === 'launching' || impactState === 'animating' || impactState === 'showing-impact'}
-          inputsDisabled={impactState !== 'idle'}
+          buttonText={BUTTON_TEXT_MAP[impactState]}
+          isReadyForNew={impactState === ImpactState.READY_FOR_NEW}
+          disabled={impactState === ImpactState.LAUNCHING || impactState === ImpactState.ANIMATING || impactState === ImpactState.SHOWING_IMPACT}
+          inputsDisabled={impactState !== ImpactState.IDLE}
         />
       }
       title={getTitle()}
@@ -374,17 +341,17 @@ export function Map({
           <MapClickHandler
             setPosition={setMarkerPosition}
             onPositionChange={handlePositionChange}
-            disabled={impactState !== 'idle'}
+            disabled={impactState !== ImpactState.IDLE}
           />
           <DraggableMarker
             position={markerPosition}
             setPosition={setMarkerPosition}
             onPositionChange={handlePositionChange}
-            isVisible={impactState === 'idle'}
+            isVisible={impactState === ImpactState.IDLE}
           />
 
           {/* Impact Animation */}
-          {impactState === 'animating' && (
+          {impactState === ImpactState.ANIMATING && (
             <ImpactAnimation
               position={markerPosition}
               onComplete={handleAnimationComplete}
@@ -392,7 +359,7 @@ export function Map({
           )}
 
           {/* Affected Area Circle */}
-          {(impactState === 'showing-impact' || impactState === 'ready-for-new') && !!impactData && (
+          {(impactState === ImpactState.SHOWING_IMPACT || impactState === ImpactState.READY_FOR_NEW) && !!impactData && (
             <AffectedAreaCircle
               affectedArea={impactData.affectedArea}
             />
