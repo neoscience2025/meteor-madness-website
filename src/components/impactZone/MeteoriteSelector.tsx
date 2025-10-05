@@ -67,7 +67,7 @@ export const MeteoriteSelector = ({
     const modelPath = `/models/meteorites/${selectedMeteorite}.glb`;
 
     return (
-        <div className="space-y-6">
+        <div className="space-y-3">
             {/* 3D Model Display - Responsive height */}
             <div
                 className={cn(
@@ -91,7 +91,7 @@ export const MeteoriteSelector = ({
             </div>
 
             {/* Carousel Selector */}
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-center space-x-4">
                 {/* Previous Button */}
                 <button
                     onClick={goToPrevious}
@@ -105,7 +105,7 @@ export const MeteoriteSelector = ({
                 </button>
 
                 {/* Meteorite Info - Centered between controls */}
-                <div className="text-center">
+                <div className="text-center w-40 min-w-40">
                     <h3 className="text-lg font-semibold text-neutral-200 mb-1">
                         {METEORITE_OPTIONS[selectedMeteorite]?.name?.charAt(0).toUpperCase() + METEORITE_OPTIONS[selectedMeteorite]?.name?.slice(1) || selectedMeteorite}
                     </h3>
