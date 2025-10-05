@@ -342,7 +342,8 @@ export function Map({
           onImpactResult={handleImpactLaunch}
           onNewLaunch={handleNewLaunch}
           buttonText={getButtonText()}
-          disabled={impactState === 'launching' || impactState === 'animating'}
+          isReadyForNew={impactState === 'ready-for-new'}
+          disabled={impactState === 'launching' || impactState === 'animating' || impactState === 'showing-impact'}
           inputsDisabled={impactState !== 'idle'}
         />
       }
