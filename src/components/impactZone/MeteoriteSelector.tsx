@@ -94,6 +94,7 @@ export const MeteoriteSelector = ({
             <div className="flex items-center justify-center space-x-4">
                 {/* Previous Button */}
                 <button
+                    type="button"
                     onClick={goToPrevious}
                     disabled={disabled}
                     className={cn(
@@ -116,6 +117,7 @@ export const MeteoriteSelector = ({
 
                 {/* Next Button */}
                 <button
+                    type="button"
                     onClick={goToNext}
                     disabled={disabled}
                     className={cn(
