@@ -6,7 +6,8 @@ import { getMetadata } from "@/lib/seo";
 const NAMESPACES_REQUIRED = [
   "impactZone",
   "seo/impact-zone",
-  "impactSummary"
+  "impactSummary",
+  "menu"
 ];
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
@@ -16,7 +17,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
 export default async function ImpactZone({ params }) {
   const { locale } = await params;
-  const { resources } = await initTranslations(locale, NAMESPACES_REQUIRED);
+  const { t, resources } = await initTranslations(locale, NAMESPACES_REQUIRED);
 
   return <TranslationsProvider
     namespaces={NAMESPACES_REQUIRED}
@@ -24,7 +25,7 @@ export default async function ImpactZone({ params }) {
     resources={resources}
   >
     <div className="container mx-auto px-4 py-8 pt-20 " >
-      <h1 className="text-3xl font-bold mb-4">💥 Impact Zone</h1>
+      <h1 className="text-3xl font-bold mb-4">{t("menu:impact")}</h1>
       <Map />
     </div>
   </TranslationsProvider>

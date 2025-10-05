@@ -7,12 +7,14 @@ import InteractiveBook from "@/components/book/InteractiveBook";
 import bookData from "@/app/i18n/locales/es/book.json";
 
 const NAMESPACES_REQUIRED = [
-    "team","seo/story-telling"
+    "menu",
+    "team",
+    "seo/story-telling"
 ];
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
-  const { locale } = await params;
-  return await getMetadata(locale, "seo/story-telling");
+    const { locale } = await params;
+    return await getMetadata(locale, "seo/story-telling");
 }
 
 export default async function StoryTelling({ params }) {
@@ -24,6 +26,9 @@ export default async function StoryTelling({ params }) {
         locale={locale}
         resources={resources}
     >
-        <InteractiveBook bookData={bookData} />
+        <div className="container mx-auto px-4 py-8 pt-20 ">
+            <h1 className="text-3xl font-bold mb-4">{t("menu:storyTelling")}</h1>
+            <InteractiveBook bookData={bookData} />
+        </div>
     </TranslationsProvider>
 }

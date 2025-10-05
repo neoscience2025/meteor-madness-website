@@ -74,13 +74,25 @@ const InteractiveBook: React.FC<InteractiveBookProps> = ({ bookData }) => {
       );
     } else {
       return (
-        <div className="h-full w-full flex items-center justify-center p-4 relative">
+        <div className="h-full w-full flex items-center justify-center p-4 relative bg-gray-100">
+          {/* Video placeholder background */}
+          <div className="absolute inset-4 bg-gray-200 rounded-lg flex items-center justify-center">
+            <div className="text-gray-500 text-center">
+              <div className="w-16 h-16 mx-auto mb-2 bg-gray-300 rounded-full flex items-center justify-center">
+                <svg className="w-8 h-8 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
+                </svg>
+              </div>
+              <p className="text-sm">Video Loading...</p>
+            </div>
+          </div>
+          
           <iframe
             ref={(el) => {
               if (el) videoRefs.current[pageIndex] = el;
             }}
             src={convertYouTubeToEmbed(page.videoUrl)}
-            className="w-full h-full max-w-full max-h-full"
+            className="w-full h-full max-w-full max-h-full relative z-10 bg-transparent"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
@@ -132,7 +144,7 @@ const InteractiveBook: React.FC<InteractiveBookProps> = ({ bookData }) => {
   }, []);
 
   return (
-    <div className="flex flex-col justify-center items-center min-h-screen p-2 sm:p-4 w-full max-w-full overflow-hidden">
+    <div className="flex flex-col justify-center items-center min-h-[calc(100vh-200px)] p-2 sm:p-4 w-full max-w-full overflow-hidden">
       {/* Preload video iframes (hidden) */}
       <div className="hidden">
         {bookData.pages.map((page, index) => {
