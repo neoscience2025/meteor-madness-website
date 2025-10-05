@@ -38,7 +38,7 @@ export const extractPlaceName = (nominatimResponse) => {
     return parts.slice(0, 2).join(', ');
   }
 
-  return 'Unknown Location';
+  return 'unknownLocation';
 };
 
 export const formatCoordinates = (lat, lon) => {
