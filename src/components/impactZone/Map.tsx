@@ -428,7 +428,13 @@ export function Map({
     try {
       const response = await reverseGeocode(lat, lon, i18n.language);
       const place = extractPlaceName(response);
-      setPlaceName(place);
+      
+      // Check if extractPlaceName returned a special case that needs translation
+      if (place === 'unknownLocation' || place === 'Unknown Location') {
+        setPlaceName(t('impactZone:unknownLocation'));
+      } else {
+        setPlaceName(place);
+      }
     } catch (error) {
       setPlaceError('Failed to load location');
       setPlaceName(t('impactZone:unknownLocation'));
@@ -439,7 +445,7 @@ export function Map({
 
   useEffect(() => {
     handlePositionChange(markerPosition);
-  }, []);
+  }, [i18n.language || 'en']);
 
   // Handle impact launch
   const handleImpactLaunch = (result: ImpactData) => {
