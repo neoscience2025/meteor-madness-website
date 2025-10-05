@@ -49,31 +49,24 @@ export default async function RootLayout({
           locale={locale}
           resources={resources}
         >
-          <body
-            className={`antialiased ${styles.wrap}`}
-            suppressHydrationWarning
-          >
+          <header className={styles.header}>
+            <div className="container">
 
-            <header className={styles.header}>
-              <div className="container">
+              <Header />
+            </div>
+          </header>
 
-                <Header />
-              </div>
-            </header>
+          <main className={styles.main}>
+            <div>
+              {children}
+            </div>
+          </main>
 
-            <main className={styles.main}>
-              <div>
-                {children}
-              </div>
-            </main>
-
-            <footer className={styles.footer}>
-              <div className="container">
-                <Footer t={t} />
-              </div>
-            </footer>
-
-          </body>
+          <footer className={styles.footer}>
+            <div className="container">
+              <Footer t={t} />
+            </div>
+          </footer>
         </TranslationsProvider>
       </body>
     </html>
