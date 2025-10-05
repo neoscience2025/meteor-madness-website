@@ -17,7 +17,7 @@ function MeteoriteModel({ modelPath }: MeteoriteModelProps) {
     return (
         <primitive
             object={scene}
-            scale={[0.8, 0.8, 0.8]}
+            scale={[1.5, 1.5, 1.5]}
             position={[0, 0, 0]}
             rotation={[0, 0, 0]}
         />
