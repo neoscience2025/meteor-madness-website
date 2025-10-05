@@ -1,28 +1,37 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tierra y Meteoritos Interactivos</title>
   <style>
-    html, body {
+    html,
+    body {
       height: 100%;
       margin: 0;
-      overflow: hidden;              /* 🚫 sin scroll */
-      overscroll-behavior: none;     /* 🚫 sin rebote */
-      touch-action: none;            /* 🚫 sin gestos táctiles */
+      overflow: hidden;
+      /* 🚫 sin scroll */
+      overscroll-behavior: none;
+      /* 🚫 sin rebote */
+      touch-action: none;
+      /* 🚫 sin gestos táctiles */
       -webkit-overflow-scrolling: auto;
-      position: fixed;               /* 🚫 clava la pantalla (iOS) */
+      position: fixed;
+      /* 🚫 clava la pantalla (iOS) */
       width: 100%;
       background: radial-gradient(circle at top, #0b0f29 0%, #000 100%);
       font-family: sans-serif;
       color: white;
     }
-    canvas { 
-      display: block; 
+
+    canvas {
+      display: block;
       background: transparent;
-      touch-action: none;            /* 🚫 sin gestos en el canvas */
+      touch-action: none;
+      /* 🚫 sin gestos en el canvas */
     }
+
     .start-text {
       position: absolute;
       top: 50%;
@@ -35,147 +44,150 @@
       transition: opacity 0.5s ease-in-out;
       pointer-events: none;
     }
+
     .start-text.visible {
       opacity: 1;
     }
   </style>
 </head>
 
-  <div id="start-text" class="start-text">START</div>
+<div id="start-text" class="start-text">START</div>
 
-  <script type="module">
-    // 🚫 Bloquear scroll táctil (iOS/Android)
-    const stopTouch = (e) => e.preventDefault();
-    ['touchstart','touchmove','touchend','gesturestart'].forEach(evt => {
-      document.addEventListener(evt, stopTouch, { passive: false });
+<script type="module">
+  // 🚫 Bloquear scroll táctil (iOS/Android)
+  const stopTouch = (e) => e.preventDefault();
+  ['touchstart', 'touchmove', 'touchend', 'gesturestart'].forEach(evt => {
+    document.addEventListener(evt, stopTouch, { passive: false });
+  });
+
+  import * as THREE from 'https://cdn.skypack.dev/three@0.134.0';
+  import { OrbitControls } from 'https://cdn.skypack.dev/three@0.134.0/examples/jsm/controls/OrbitControls.js';
+  import { GLTFLoader } from 'https://cdn.skypack.dev/three@0.134.0/examples/jsm/loaders/GLTFLoader.js';
+
+  // Escena, cámara y renderizador
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+  // Alejamos la cámara para ver mejor las trayectorias
+  camera.position.set(0, 0, 10.5);
+
+  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setClearColor(0x000000, 0);
+  document.body.appendChild(renderer.domElement);
+
+  // Controles
+  const controls = new OrbitControls(camera, renderer.domElement);
+  controls.enableDamping = true;
+  controls.dampingFactor = 0.05;
+  controls.enableZoom = false;
+  controls.enableRotate = false;
+  controls.enablePan = false;
+  if (controls.touches) {
+    controls.touches.ONE = undefined;
+    controls.touches.TWO = undefined;
+  }
+  if (controls.mouseButtons) {
+    controls.mouseButtons.LEFT = null;
+    controls.mouseButtons.MIDDLE = null;
+    controls.mouseButtons.RIGHT = null;
+  }
+
+  // --- Fondo de estrellas ---
+  const starCount = 5000;
+  const starGeometry = new THREE.BufferGeometry();
+  const starVertices = [];
+  const starTexture = new THREE.TextureLoader().load('https://threejs.org/examples/textures/sprites/disc.png');
+  for (let i = 0; i < starCount; i++) {
+    const x = THREE.MathUtils.randFloatSpread(1000);
+    const y = THREE.MathUtils.randFloatSpread(1000);
+    const z = THREE.MathUtils.randFloatSpread(1000);
+    starVertices.push(x, y, z);
+  }
+  starGeometry.setAttribute('position', new THREE.Float32BufferAttribute(starVertices, 3));
+  const starMaterial = new THREE.PointsMaterial({
+    color: 0xffffff,
+    size: 1.5,
+    map: starTexture,
+    transparent: true,
+    blending: THREE.AdditiveBlending,
+    depthWrite: false
+  });
+  const starField = new THREE.Points(starGeometry, starMaterial);
+  scene.add(starField);
+
+  // Luces
+  const sunLight = new THREE.DirectionalLight(0xbbeeff, 1.5);
+  sunLight.position.set(10, 5, 15);
+  scene.add(sunLight);
+  const ambientLight = new THREE.AmbientLight(0x222244, 0.7);
+  scene.add(ambientLight);
+
+  // --- Planetas en el fondo ---
+  const planets = [];
+  const planetTextures = [
+    'https://threejs.org/examples/textures/planets/venus_atmos_4096.jpg',
+    'https://threejs.org/examples/textures/planets/mars_1k_color.jpg',
+    'https://threejs.org/examples/textures/planets/jupiter_atmos_4096.jpg',
+    'https://threejs.org/examples/textures/planets/moon_1024.jpg'
+  ];
+  const textureLoader = new THREE.TextureLoader();
+  function createBackgroundPlanet(size, texturePath, x, y, z, rotationSpeed = 0.0005) {
+    const planetGeo = new THREE.SphereGeometry(size, 32, 32);
+    const planetMat = new THREE.MeshStandardMaterial({
+      map: textureLoader.load(texturePath),
+      roughness: 0.8,
+      metalness: 0.1,
+      emissive: new THREE.Color(0xb0b0b0),
+      emissiveIntensity: 0.3
     });
+    const planet = new THREE.Mesh(planetGeo, planetMat);
+    planet.position.set(x, y, z);
+    planet.userData.rotationSpeed = rotationSpeed;
+    scene.add(planet);
+    planets.push(planet);
+    return planet;
+  }
+  createBackgroundPlanet(1.2, planetTextures[0], -8, 2, -10, 0.0008);
+  createBackgroundPlanet(0.8, planetTextures[1], 7, -3, -12, 0.0006);
+  createBackgroundPlanet(0.6, planetTextures[2], -12, -6, -18, 0.0004);
+  createBackgroundPlanet(0.4, planetTextures[3], 9, 4, -8, 0.001);
 
-    import * as THREE from 'https://cdn.skypack.dev/three@0.134.0';
-    import { OrbitControls } from 'https://cdn.skypack.dev/three@0.134.0/examples/jsm/controls/OrbitControls.js';
+  // --- Tierra ---
+  const earthDayTexture = textureLoader.load('https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/textures/planets/earth_atmos_2048.jpg');
+  const earthBumpTexture = textureLoader.load('https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/textures/planets/earth_bump_2048.jpg');
+  const earthSpecTexture = textureLoader.load('https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/textures/planets/earth_specular_2048.jpg');
 
-    // Escena, cámara y renderizador
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.set(0, 0, 8);
+  const earthGeometry = new THREE.SphereGeometry(3.5, 64, 64);
+  const earthMaterial = new THREE.MeshPhongMaterial({
+    map: earthDayTexture,
+    specularMap: earthSpecTexture,
+    bumpMap: earthBumpTexture,
+    bumpScale: 0.05,
+    shininess: 20,
+  });
+  const earth = new THREE.Mesh(earthGeometry, earthMaterial);
+  earth.position.set(0, 0, 0);
+  scene.add(earth);
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setClearColor(0x000000, 0);
-    document.body.appendChild(renderer.domElement);
+  const cloudsGeometry = new THREE.SphereGeometry(3.52, 64, 64);
+  const cloudsMaterial = new THREE.MeshPhongMaterial({
+    map: textureLoader.load('https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/textures/planets/earth_clouds_1024.png'),
+    transparent: true,
+    opacity: 0.8,
+    blending: THREE.AdditiveBlending,
+  });
+  const clouds = new THREE.Mesh(cloudsGeometry, cloudsMaterial);
+  clouds.position.copy(earth.position);
+  scene.add(clouds);
 
-    // Controles
-    const controls = new OrbitControls(camera, renderer.domElement);
-    controls.enableDamping = true;
-    controls.dampingFactor = 0.05;
-    controls.enableZoom = false;
-    controls.enableRotate = false;
-    controls.enablePan = false;
-    if (controls.touches) {
-      controls.touches.ONE = undefined;
-      controls.touches.TWO = undefined;
-    }
-    if (controls.mouseButtons) {
-      controls.mouseButtons.LEFT = null;
-      controls.mouseButtons.MIDDLE = null;
-      controls.mouseButtons.RIGHT = null;
-    }
-
-    // --- Fondo de estrellas ---
-    const starCount = 5000;
-    const starGeometry = new THREE.BufferGeometry();
-    const starVertices = [];
-    const starTexture = new THREE.TextureLoader().load('https://threejs.org/examples/textures/sprites/disc.png');
-    for (let i = 0; i < starCount; i++) {
-      const x = THREE.MathUtils.randFloatSpread(1000);
-      const y = THREE.MathUtils.randFloatSpread(1000);
-      const z = THREE.MathUtils.randFloatSpread(1000);
-      starVertices.push(x, y, z);
-    }
-    starGeometry.setAttribute('position', new THREE.Float32BufferAttribute(starVertices, 3));
-    const starMaterial = new THREE.PointsMaterial({
-      color: 0xffffff,
-      size: 1.5,
-      map: starTexture,
-      transparent: true,
-      blending: THREE.AdditiveBlending,
-      depthWrite: false
-    });
-    const starField = new THREE.Points(starGeometry, starMaterial);
-    scene.add(starField);
-
-    // Luces
-    const sunLight = new THREE.DirectionalLight(0xbbeeff, 1.5);
-    sunLight.position.set(10, 5, 15);
-    scene.add(sunLight);
-    const ambientLight = new THREE.AmbientLight(0x222244, 0.7);
-    scene.add(ambientLight);
-
-    // --- Planetas en el fondo ---
-    const planets = [];
-    const planetTextures = [
-      'https://threejs.org/examples/textures/planets/venus_atmos_4096.jpg',
-      'https://threejs.org/examples/textures/planets/mars_1k_color.jpg',
-      'https://threejs.org/examples/textures/planets/jupiter_atmos_4096.jpg',
-      'https://threejs.org/examples/textures/planets/moon_1024.jpg'
-    ];
-    const textureLoader = new THREE.TextureLoader();
-    function createBackgroundPlanet(size, texturePath, x, y, z, rotationSpeed = 0.0005) {
-      const planetGeo = new THREE.SphereGeometry(size, 32, 32);
-      const planetMat = new THREE.MeshStandardMaterial({
-        map: textureLoader.load(texturePath),
-        roughness: 0.8,
-        metalness: 0.1,
-        emissive: new THREE.Color(0xb0b0b0),
-        emissiveIntensity: 0.3
-      });
-      const planet = new THREE.Mesh(planetGeo, planetMat);
-      planet.position.set(x, y, z);
-      planet.userData.rotationSpeed = rotationSpeed;
-      scene.add(planet);
-      planets.push(planet);
-      return planet;
-    }
-    createBackgroundPlanet(1.2, planetTextures[0], -8, 2, -10, 0.0008);
-    createBackgroundPlanet(0.8, planetTextures[1], 7, -3, -12, 0.0006);
-    createBackgroundPlanet(0.6, planetTextures[2], -12, -6, -18, 0.0004);
-    createBackgroundPlanet(0.4, planetTextures[3], 9, 4, -8, 0.001);
-
-    // --- Tierra ---
-    const earthDayTexture = textureLoader.load('https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/textures/planets/earth_atmos_2048.jpg');
-    const earthBumpTexture = textureLoader.load('https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/textures/planets/earth_bump_2048.jpg');
-    const earthSpecTexture = textureLoader.load('https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/textures/planets/earth_specular_2048.jpg');
-
-    const earthGeometry = new THREE.SphereGeometry(3.5, 64, 64);
-    const earthMaterial = new THREE.MeshPhongMaterial({
-      map: earthDayTexture,
-      specularMap: earthSpecTexture,
-      bumpMap: earthBumpTexture,
-      bumpScale: 0.05,
-      shininess: 20,
-    });
-    const earth = new THREE.Mesh(earthGeometry, earthMaterial);
-    earth.position.set(0, 0, 0);
-    scene.add(earth);
-
-    const cloudsGeometry = new THREE.SphereGeometry(3.52, 64, 64);
-    const cloudsMaterial = new THREE.MeshPhongMaterial({
-      map: textureLoader.load('https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/textures/planets/earth_clouds_1024.png'),
-      transparent: true,
-      opacity: 0.8,
-      blending: THREE.AdditiveBlending,
-    });
-    const clouds = new THREE.Mesh(cloudsGeometry, cloudsMaterial);
-    clouds.position.copy(earth.position);
-    scene.add(clouds);
-
-    const atmosphereGeometry = new THREE.SphereGeometry(3.15, 64, 64);
-    const atmosphereMaterial = new THREE.ShaderMaterial({
-      uniforms: {
-        c: { value: 0.08 },
-        p: { value: 4.0 },
-        glowColor: { value: new THREE.Color(0x00c8ff) }
-      },
-      vertexShader: `
+  const atmosphereGeometry = new THREE.SphereGeometry(3.15, 64, 64);
+  const atmosphereMaterial = new THREE.ShaderMaterial({
+    uniforms: {
+      c: { value: 0.08 },
+      p: { value: 4.0 },
+      glowColor: { value: new THREE.Color(0x00c8ff) }
+    },
+    vertexShader: `
         uniform float c;
         uniform float p;
         varying vec3 vNormal;
@@ -184,7 +196,7 @@
           gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
         }
       `,
-      fragmentShader: `
+    fragmentShader: `
         uniform vec3 glowColor;
         uniform float c;
         uniform float p;
@@ -195,133 +207,219 @@
           gl_FragColor = vec4( glowColor, intensity );
         }
       `,
-      side: THREE.BackSide,
-      blending: THREE.AdditiveBlending,
-      transparent: true
-    });
-    const atmosphere = new THREE.Mesh(atmosphereGeometry, atmosphereMaterial);
-    atmosphere.position.copy(earth.position);
-    scene.add(atmosphere);
+    side: THREE.BackSide,
+    blending: THREE.AdditiveBlending,
+    transparent: true
+  });
+  const atmosphere = new THREE.Mesh(atmosphereGeometry, atmosphereMaterial);
+  atmosphere.position.copy(earth.position);
+  scene.add(atmosphere);
 
-    // --- Meteoritos ---
-    const meteors = [];
-    class Meteor {
-      constructor() {
-        this.mesh = new THREE.Mesh(
-          new THREE.IcosahedronGeometry(0.1, 1),
-          new THREE.MeshStandardMaterial({
-            color: new THREE.Color(0x8B4513),
-            emissive: new THREE.Color(0xA0522D),
-            emissiveIntensity: 1.0,
-            roughness: 0.5,
-            metalness: 0.2
-          })
-        );
-        const radius = 10 + Math.random() * 8;
-        const angle = Math.random() * Math.PI * 2;
-        this.mesh.position.x = Math.cos(angle) * radius;
-        this.mesh.position.z = Math.sin(angle) * radius;
-        this.mesh.position.y = Math.random() * 12 - 6;
-        this.velocity = new THREE.Vector3()
-          .subVectors(earth.position, this.mesh.position)
-          .normalize()
-          .multiplyScalar(0.02 + Math.random() * 0.01);
+  // --- Meteoritos (realistas con modelos GLB) ---
+  const meteors = [];
+  const gltfLoader = new GLTFLoader();
+  const meteorModelPaths = [
+    './models/meteorites/stone.glb',
+    './models/meteorites/iron.glb',
+    './models/meteorites/carbon.glb',
+    './models/meteorites/comet.glb',
+    './models/meteorites/gold.glb',
+  ];
+  let meteorModels = [];
 
-        const trailGeometry = new THREE.BufferGeometry();
-        const trailPositions = new Float32Array(30 * 3);
-        const trailMaterial = new THREE.PointsMaterial({
-          color: new THREE.Color(0xff8800),
-          size: 0.5,
-          map: textureLoader.load('https://threejs.org/examples/textures/sprites/spark1.png'),
-          blending: THREE.AdditiveBlending,
-          transparent: true,
-          depthWrite: false
-        });
-        this.trail = new THREE.Points(trailGeometry, trailMaterial);
-        this.trail.geometry.setAttribute('position', new THREE.BufferAttribute(trailPositions, 3));
-        this.mesh.add(this.trail);
-        this.trailPositions = trailPositions;
-        this.trailIndex = 0;
-        this.trailMaxAge = 30;
-        scene.add(this.mesh);
+  function deepClone(object3D) {
+    const clone = object3D.clone(true);
+    // ensure materials are unique per instance for emissive tweaks
+    clone.traverse((obj) => {
+      if (obj.isMesh) {
+        obj.material = obj.material.clone();
       }
-      update() {
-        this.mesh.position.add(this.velocity);
-        this.trailPositions[this.trailIndex * 3] = this.mesh.position.x;
-        this.trailPositions[this.trailIndex * 3 + 1] = this.mesh.position.y;
-        this.trailPositions[this.trailIndex * 3 + 2] = this.mesh.position.z;
-        this.trailIndex = (this.trailIndex + 1) % this.trailMaxAge;
-        this.trail.geometry.attributes.position.needsUpdate = true;
-        const distanceToEarth = this.mesh.position.distanceTo(earth.position);
-        this.mesh.material.emissiveIntensity = 1.0 + 2.0 * (1 - distanceToEarth / 15);
-        if (distanceToEarth < 2.1) {
-          scene.remove(this.mesh);
-          return true;
+    });
+    return clone;
+  }
+
+  async function preloadMeteorModels() {
+    const loads = meteorModelPaths.map(
+      (url) => new Promise((resolve, reject) => {
+        gltfLoader.load(url, (gltf) => resolve(gltf.scene), undefined, reject);
+      })
+    );
+    try {
+      meteorModels = await Promise.all(loads);
+    } catch (e) {
+      // fallback: simple icosahedron if loading fails
+      meteorModels = [];
+    }
+  }
+
+  const COLD_COLOR = new THREE.Color(0x6e6e6e); // gris
+  const HOT_COLOR = new THREE.Color(0xff3b00);  // rojo incandescente
+
+  function randomUnitVector() {
+    const z = Math.random() * 2 - 1; // [-1, 1]
+    const t = Math.random() * Math.PI * 2; // [0, 2π)
+    const a = Math.sqrt(1 - z * z);
+    return new THREE.Vector3(a * Math.cos(t), a * Math.sin(t), z);
+  }
+
+  class Meteor {
+    constructor() {
+      // Root group to move/rotate as a whole
+      this.root = new THREE.Group();
+
+      // Pick a random preloaded model or fallback primitive
+      const base = meteorModels.length
+        ? deepClone(meteorModels[(Math.random() * meteorModels.length) | 0])
+        : new THREE.Mesh(
+          new THREE.IcosahedronGeometry(0.25, 1),
+          new THREE.MeshStandardMaterial({ color: 0x635c59 })
+        );
+
+      // Normalize scale and orientation
+      // Más pequeños que antes
+      const scale = 0.05 + Math.random() * 0.05; // 0.05 - 0.10
+      base.scale.setScalar(scale * 2); // factor total ~ 0.10 - 0.20
+      base.traverse((obj) => {
+        if (obj.isMesh) {
+          obj.castShadow = false;
+          obj.receiveShadow = false;
+          if (obj.material && 'emissive' in obj.material) {
+            // Inician fríos (grises) y sin brillo fuerte
+            if ('color' in obj.material) obj.material.color = COLD_COLOR.clone();
+            obj.material.emissive = HOT_COLOR.clone();
+            obj.material.emissiveIntensity = 0.15;
+            obj.material.roughness = 0.75;
+            obj.material.metalness = 0.12;
+          }
         }
-        return false;
-      }
-    }
-    function createMeteorInstance() {
-      if (meteors.length < 5) meteors.push(new Meteor());
-    }
-    setInterval(createMeteorInstance, 6000);
+      });
+      this.body = base;
+      this.root.add(this.body);
 
-    // --- Interacción mouse ---
-    const raycaster = new THREE.Raycaster();
-    const mouse = new THREE.Vector2();
-    let isHoveringEarth = false;
-    const scaleFactor = 1.2;
-    const originalScale = new THREE.Vector3(1,1,1);
-    const targetScale = new THREE.Vector3(scaleFactor,scaleFactor,scaleFactor);
-    let currentScale = new THREE.Vector3(1,1,1);
-    const startTextElement = document.getElementById('start-text');
+      // Eliminamos glow para no mostrar "rayos de luz"
 
-    function onMouseMove(event) {
-      mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-      mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
-      raycaster.setFromCamera(mouse, camera);
-      const intersects = raycaster.intersectObjects([earth]);
-      isHoveringEarth = intersects.length > 0;
-      if (isHoveringEarth) startTextElement.classList.add('visible');
-      else startTextElement.classList.remove('visible');
-    }
-    function onMouseClick() {
-      raycaster.setFromCamera(mouse, camera);
-      const intersects = raycaster.intersectObjects([earth]);
-      if (intersects.length > 0) {
-        window.parent?.postMessage(
-          { source: "earth", type: "GO_STORY", route: "/story-telling" },
-          "*"
-        );
-      }
-    }
-    window.addEventListener('mousemove', onMouseMove, false);
-    window.addEventListener('mousedown', onMouseClick, false);
+      // Spawn en una cáscara esférica alrededor de la Tierra
+      const shellR = 12 + Math.random() * 8; // 12–20
+      const spawnDir = randomUnitVector();
+      this.root.position.copy(spawnDir.clone().multiplyScalar(shellR));
 
-    // --- Animación ---
-    function animate() {
-      requestAnimationFrame(animate);
-      currentScale.lerp(isHoveringEarth ? targetScale : originalScale, 0.05);
-      earth.scale.copy(currentScale);
-      clouds.scale.copy(currentScale);
-      atmosphere.scale.copy(currentScale);
-      starField.rotation.y += 0.00005;
-      earth.rotation.y += 0.001;
-      clouds.rotation.y += 0.0015;
-      atmosphere.rotation.y += 0.001;
-      planets.forEach(p => { p.rotation.y += p.userData.rotationSpeed; });
-      for (let i = meteors.length - 1; i >= 0; i--) {
-        if (meteors[i].update()) meteors.splice(i,1);
-      }
-      controls.update();
-      renderer.render(scene, camera);
+      // Dirección hacia la Tierra con una leve desviación para variedad
+      const toEarth = new THREE.Vector3().subVectors(earth.position, this.root.position).normalize();
+      const deviation = randomUnitVector().multiplyScalar(0.15 + Math.random() * 0.15);
+      const dir = toEarth.add(deviation).normalize();
+      const speed = 0.028 + Math.random() * 0.015;
+      this.velocity = dir.multiplyScalar(speed);
+      this.spin = new THREE.Vector3(
+        (Math.random() - 0.5) * 0.08,
+        (Math.random() - 0.5) * 0.08,
+        (Math.random() - 0.5) * 0.08
+      );
+
+      // Sin estela de partículas para evitar "rayos de luz"
+
+      scene.add(this.root);
     }
-    window.addEventListener('resize', () => {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-    });
-    animate();
-  </script>
+    update() {
+      // Move and spin
+      this.root.position.add(this.velocity);
+      if (this.body) {
+        this.body.rotation.x += this.spin.x;
+        this.body.rotation.y += this.spin.y;
+        this.body.rotation.z += this.spin.z;
+      }
+
+      // Sin actualización de estela
+
+      // Heat effect intensifies near Earth
+      const d = this.root.position.distanceTo(earth.position);
+      const heat = Math.max(0, 1 - d / 14);
+      // Sin glow
+      if (this.body) {
+        const lerped = new THREE.Color();
+        lerped.lerpColors(COLD_COLOR, HOT_COLOR, heat);
+        this.body.traverse((obj) => {
+          if (obj.isMesh && obj.material) {
+            if ('color' in obj.material) obj.material.color.copy(lerped);
+            if ('emissiveIntensity' in obj.material) obj.material.emissiveIntensity = 0.15 + heat * 2.0;
+          }
+        });
+      }
+
+      // Impact removal: just outside Earth radius (3.5)
+      if (d < 3.6) {
+        scene.remove(this.root);
+        return true;
+      }
+      return false;
+    }
+  }
+
+  function createMeteorInstance() {
+    if (!meteorModels.length) return; // wait for preload
+    if (meteors.length < 6) meteors.push(new Meteor());
+  }
+  // Preload models, then start spawning
+  preloadMeteorModels().then(() => {
+    createMeteorInstance();
+    setInterval(createMeteorInstance, 1000); // spawn cada 1.0s
+  });
+
+  // --- Interacción mouse ---
+  const raycaster = new THREE.Raycaster();
+  const mouse = new THREE.Vector2();
+  let isHoveringEarth = false;
+  const scaleFactor = 1.2;
+  const originalScale = new THREE.Vector3(1, 1, 1);
+  const targetScale = new THREE.Vector3(scaleFactor, scaleFactor, scaleFactor);
+  let currentScale = new THREE.Vector3(1, 1, 1);
+  const startTextElement = document.getElementById('start-text');
+
+  function onMouseMove(event) {
+    mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+    mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
+    raycaster.setFromCamera(mouse, camera);
+    const intersects = raycaster.intersectObjects([earth]);
+    isHoveringEarth = intersects.length > 0;
+    if (isHoveringEarth) startTextElement.classList.add('visible');
+    else startTextElement.classList.remove('visible');
+  }
+  function onMouseClick() {
+    raycaster.setFromCamera(mouse, camera);
+    const intersects = raycaster.intersectObjects([earth]);
+    if (intersects.length > 0) {
+      window.parent?.postMessage(
+        { source: "earth", type: "GO_STORY", route: "/story-telling" },
+        "*"
+      );
+    }
+  }
+  window.addEventListener('mousemove', onMouseMove, false);
+  window.addEventListener('mousedown', onMouseClick, false);
+
+  // --- Animación ---
+  function animate() {
+    requestAnimationFrame(animate);
+    currentScale.lerp(isHoveringEarth ? targetScale : originalScale, 0.05);
+    earth.scale.copy(currentScale);
+    clouds.scale.copy(currentScale);
+    atmosphere.scale.copy(currentScale);
+    starField.rotation.y += 0.00005;
+    earth.rotation.y += 0.001;
+    clouds.rotation.y += 0.0015;
+    atmosphere.rotation.y += 0.001;
+    planets.forEach(p => { p.rotation.y += p.userData.rotationSpeed; });
+    for (let i = meteors.length - 1; i >= 0; i--) {
+      if (meteors[i].update()) meteors.splice(i, 1);
+    }
+    controls.update();
+    renderer.render(scene, camera);
+  }
+  window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
+  animate();
+</script>
 
 </html>
