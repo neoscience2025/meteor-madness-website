@@ -2,6 +2,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import HTMLFlipBook from 'react-pageflip';
 import Image from 'next/image';
+import { useTranslation } from 'react-i18next';
 
 interface ImagePage {
   imgUrl: string;
@@ -24,6 +25,7 @@ interface InteractiveBookProps {
 }
 
 const InteractiveBook: React.FC<InteractiveBookProps> = ({ bookData }) => {
+  const { t } = useTranslation('interactive-book');
   const flipBookRef = useRef<any>(null);
   const [currentPage, setCurrentPage] = useState(0);
   const videoRefs = useRef<{ [key: number]: HTMLIFrameElement }>({});
@@ -74,16 +76,16 @@ const InteractiveBook: React.FC<InteractiveBookProps> = ({ bookData }) => {
       );
     } else {
       return (
-        <div className="h-full w-full flex items-center justify-center p-4 relative bg-gray-100">
+        <div className="h-full w-full flex items-center justify-center p-4 relative bg-blue-100">
           {/* Video placeholder background */}
-          <div className="absolute inset-4 bg-gray-200 rounded-lg flex items-center justify-center">
-            <div className="text-gray-500 text-center">
-              <div className="w-16 h-16 mx-auto mb-2 bg-gray-300 rounded-full flex items-center justify-center">
-                <svg className="w-8 h-8 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+          <div className="absolute inset-4 bg-blue-200 rounded-lg flex items-center justify-center">
+            <div className="text-blue-600 text-center">
+              <div className="w-16 h-16 mx-auto mb-2 bg-blue-300 rounded-full flex items-center justify-center">
+                <svg className="w-8 h-8 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
                 </svg>
               </div>
-              <p className="text-sm">Video Loading...</p>
+              <p className="text-sm">{t('videoLoading')}</p>
             </div>
           </div>
           
@@ -96,7 +98,7 @@ const InteractiveBook: React.FC<InteractiveBookProps> = ({ bookData }) => {
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
-            title={`Video page ${pageIndex}`}
+            title={`${t('videoPage')} ${pageIndex}`}
             loading="eager"
           />
         </div>
@@ -195,7 +197,7 @@ const InteractiveBook: React.FC<InteractiveBookProps> = ({ bookData }) => {
         >
           {/* Cover page - will be displayed as single page */}
           <div className="page cover-page">
-            {renderPageContent({ imgUrl: bookData.coverUrl, alt: 'Book Cover' }, -1)}
+            {renderPageContent({ imgUrl: bookData.coverUrl, alt: t('bookCover') }, -1)}
           </div>
           {/* Content pages */}
           {bookData.pages.map((page, index) => (
@@ -208,38 +210,38 @@ const InteractiveBook: React.FC<InteractiveBookProps> = ({ bookData }) => {
       
       <div className="w-full text-center">
         <p className="text-xs sm:text-sm text-gray-300 bg-blue-900/30 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full inline-block mb-3 sm:mb-4">
-          Page {currentPage + 1} of {bookData.pages.length + 1}
+          {t('page')} {currentPage + 1} {t('of')} {bookData.pages.length + 1}
         </p>
         <div className="flex gap-2 justify-center flex-wrap">
           <button
             onClick={() => flipBookRef.current?.pageFlip().flipPrev()}
             disabled={currentPage === 0}
             className="px-4 py-2 sm:px-6 sm:py-3 bg-blue-900 text-white rounded-lg disabled:opacity-50 disabled:bg-gray-500 hover:bg-blue-950 transition-colors text-sm sm:text-base font-medium min-w-[100px] sm:min-w-[120px]"
-            aria-label="Previous page"
+            aria-label={t('previousPage')}
           >
-            ← Previous
+            ← {t('previous')}
           </button>
           <button
             onClick={() => flipBookRef.current?.pageFlip().flipNext()}
             disabled={currentPage >= bookData.pages.length}
             className="px-4 py-2 sm:px-6 sm:py-3 bg-blue-900 text-white rounded-lg disabled:opacity-50 disabled:bg-gray-500 hover:bg-blue-950 transition-colors text-sm sm:text-base font-medium min-w-[100px] sm:min-w-[120px]"
-            aria-label="Next page"
+            aria-label={t('nextPage')}
           >
-            Next →
+            {t('next')} →
           </button>
         </div>
       </div>
 
       <style jsx>{`
         .page {
-          background: white;
+          background: #dbeafe;
           border: 1px solid #e2e8f0;
           box-shadow: 0 4px 12px rgba(0,0,0,0.15);
           overflow: hidden;
         }
         
         .cover-page {
-          background: white;
+          background: #dbeafe;
           border: 1px solid #e2e8f0;
           box-shadow: 0 4px 12px rgba(0,0,0,0.15);
           overflow: hidden;

@@ -8,8 +8,9 @@ import bookData from "@/app/i18n/locales/es/book.json";
 
 const NAMESPACES_REQUIRED = [
     "menu",
-    "team",
-    "seo/story-telling"
+    "team", 
+    "seo/story-telling",
+    "interactive-book"
 ];
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
