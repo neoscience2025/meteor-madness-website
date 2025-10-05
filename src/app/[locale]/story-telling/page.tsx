@@ -3,6 +3,8 @@ import initTranslations from "@/app/i18n";
 import StoryPlayer from "@/components/StoryPlayer";
 
 import { getMetadata } from "@/lib/seo";
+import InteractiveBook from "@/components/book/InteractiveBook";
+import bookData from "@/app/i18n/locales/es/book.json";
 
 const NAMESPACES_REQUIRED = [
     "team","seo/story-telling"
@@ -22,10 +24,6 @@ export default async function StoryTelling({ params }) {
         locale={locale}
         resources={resources}
     >
-      <div className="container mx-auto px-4 py-8 pt-20 " >
-           
-            <StoryPlayer />
-            </div>
-         
+        <InteractiveBook bookData={bookData} />
     </TranslationsProvider>
 }
