@@ -81,8 +81,12 @@ export const MeteoriteSelector = ({
                     camera={{ position: [0, 0, 5], fov: 50 }}
                     className="w-full h-full"
                 >
-                    <ambientLight intensity={0.5} />
-                    <directionalLight position={[10, 10, 5]} intensity={1} />
+                    <ambientLight intensity={8} />
+                    <directionalLight position={[10, 10, 5]} intensity={10} />
+                    <directionalLight position={[-10, -10, -5]} intensity={8} />
+                    <pointLight position={[0, 10, 0]} intensity={5} />
+                    <pointLight position={[5, 0, 5]} intensity={4} />
+                    <pointLight position={[-5, 0, 5]} intensity={4} />
                     <Suspense fallback={null}>
                         <MeteoriteModel modelPath={modelPath} />
                     </Suspense>
