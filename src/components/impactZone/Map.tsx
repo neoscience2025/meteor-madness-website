@@ -85,7 +85,7 @@ const ImpactAnimation = ({ position, onComplete }) => {
     const timer = setTimeout(() => {
       setIsVisible(false);
       if (onComplete) onComplete();
-    }, 2000); // 2 second animation
+    }, 2500); // 2.5 second animation duration
 
     return () => clearTimeout(timer);
   }, [onComplete]);
@@ -99,29 +99,116 @@ const ImpactAnimation = ({ position, onComplete }) => {
         left: '50%',
         top: '50%',
         transform: 'translate(-50%, -50%)',
-        animation: 'impactBurst 2s ease-out forwards'
+        width: '100vw',
+        height: '100vh'
       }}
     >
-      <div className="relative">
-        {/* Outer explosion ring */}
-        <div className="absolute w-20 h-20 bg-orange-500 rounded-full opacity-80 animate-ping" />
-        {/* Inner explosion */}
-        <div className="absolute w-12 h-12 bg-red-500 rounded-full top-4 left-4 animate-pulse" />
-        {/* Core impact */}
-        <div className="absolute w-6 h-6 bg-yellow-300 rounded-full top-7 left-7 animate-bounce" />
+      {/* Bright flash of light */}
+      <div
+        className="absolute"
+        style={{
+          left: '50%',
+          top: '50%',
+          transform: 'translate(-50%, -50%)',
+          animation: 'impactFlash 0.4s ease-out forwards'
+        }}
+      >
+        <div
+          className="rounded-full"
+          style={{
+            width: '40px',
+            height: '40px',
+            background: 'radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(255,255,0,0.9) 30%, rgba(255,200,0,0.6) 60%, transparent 100%)',
+            filter: 'blur(2px)',
+            boxShadow: '0 0 60px 30px rgba(255,255,255,0.8), 0 0 120px 60px rgba(255,255,0,0.6)'
+          }}
+        />
       </div>
+
+      {/* Expanding shockwave */}
+      <div
+        className="absolute"
+        style={{
+          left: '50%',
+          top: '50%',
+          transform: 'translate(-50%, -50%)',
+          animation: 'shockwaveExpand 2.1s ease-out 0.4s forwards'
+        }}
+      >
+        <div
+          className="rounded-full"
+          style={{
+            width: '20px',
+            height: '20px',
+            background: 'radial-gradient(circle, transparent 80%, rgba(255,255,255,0.8) 85%, rgba(255,255,0,0.6) 90%, rgba(255,200,0,0.4) 95%, transparent 100%)',
+            filter: 'blur(1px)',
+            boxShadow: '0 0 40px rgba(255,255,255,0.5), inset 0 0 20px rgba(255,255,0,0.3)'
+          }}
+        />
+      </div>
+
+      {/* Secondary glow effect */}
+      <div
+        className="absolute"
+        style={{
+          left: '50%',
+          top: '50%',
+          transform: 'translate(-50%, -50%)',
+          animation: 'glowPulse 2.5s ease-out forwards'
+        }}
+      >
+        <div
+          className="rounded-full"
+          style={{
+            width: '80px',
+            height: '80px',
+            background: 'radial-gradient(circle, rgba(255,255,255,0.3) 0%, rgba(255,255,0,0.2) 50%, transparent 100%)',
+            filter: 'blur(8px)'
+          }}
+        />
+      </div>
+
       <style jsx>{`
-        @keyframes impactBurst {
+        @keyframes impactFlash {
           0% {
             transform: translate(-50%, -50%) scale(0);
             opacity: 1;
           }
-          50% {
-            transform: translate(-50%, -50%) scale(1.5);
-            opacity: 0.8;
+          30% {
+            transform: translate(-50%, -50%) scale(2);
+            opacity: 1;
           }
           100% {
+            transform: translate(-50%, -50%) scale(4);
+            opacity: 0;
+          }
+        }
+
+        @keyframes shockwaveExpand {
+          0% {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 0.9;
+          }
+          20% {
+            opacity: 1;
+          }
+          100% {
+            transform: translate(-50%, -50%) scale(40);
+            opacity: 0;
+          }
+        }
+
+        @keyframes glowPulse {
+          0% {
+            transform: translate(-50%, -50%) scale(0);
+            opacity: 0.8;
+          }
+          50% {
             transform: translate(-50%, -50%) scale(3);
+            opacity: 0.4;
+          }
+          100% {
+            transform: translate(-50%, -50%) scale(8);
             opacity: 0;
           }
         }
