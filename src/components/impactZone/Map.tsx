@@ -394,6 +394,7 @@ function HoverPanel({
 // ──────────────────────────────────────────────────────────────
 // Efectos físicos como anillos (ordenados: grande → pequeño)
 const EffectRings = ({ center, result }: { center: [number, number]; result: any }) => {
+  const { t } = useTranslation();
   const [hovered, setHovered] = useState<null | {
     key: string;
     label: string;
@@ -417,26 +418,26 @@ const EffectRings = ({ center, result }: { center: [number, number]; result: any
     switch (key) {
       case "crater":
         return totals.craterVaporized != null
-          ? [{ label: "Vaporized", value: totals.craterVaporized }]
+          ? [{ label: t("impactSummary:casualtyLabels.vaporized"), value: totals.craterVaporized }]
           : [];
       case "ignition":
         return totals.fireballDeaths != null
-          ? [{ label: "Fireball fatalities", value: totals.fireballDeaths }]
+          ? [{ label: t("impactSummary:casualtyLabels.fireballFatalities"), value: totals.fireballDeaths }]
           : [];
       case "burns2nd":
         const b2 = totals.burns2nd != null ? totals.burns2nd : undefined;
         const b3 = totals.burns3rd != null ? totals.burns3rd : undefined;
         return [
-          ...(b2 != null ? [{ label: "2nd-degree burns", value: b2 }] : []),
-          ...(b3 != null ? [{ label: "3rd-degree burns", value: b3 }] : []),
+          ...(b2 != null ? [{ label: t("impactSummary:casualtyLabels.burns2nd"), value: b2 }] : []),
+          ...(b3 != null ? [{ label: t("impactSummary:casualtyLabels.burns3rd"), value: b3 }] : []),
         ];
       case "blast50":
         return totals.shockwaveDeaths != null
-          ? [{ label: "Shockwave fatalities", value: totals.shockwaveDeaths }]
+          ? [{ label: t("impactSummary:casualtyLabels.shockwaveFatalities"), value: totals.shockwaveDeaths }]
           : [];
       case "blast20":
         return totals.windDeaths != null
-          ? [{ label: "Wind-related fatalities", value: totals.windDeaths }]
+          ? [{ label: t("impactSummary:casualtyLabels.windFatalities"), value: totals.windDeaths }]
           : [];
       case "blast5":
       default:
@@ -461,8 +462,8 @@ const EffectRings = ({ center, result }: { center: [number, number]; result: any
       color: "#10B981",          // green
       fillColor: "#86EFAC",
       fillOpacity: 0.05,
-      label: "Light Damage (~5 kPa)",
-      desc: "Broken windows and minor injuries due to flying glass.",
+      label: t("impactSummary:rings.blast5.label"),
+      desc: t("impactSummary:rings.blast5.desc"),
       dashArray: "4 10",
     },
     // Blast moderado (≈20 kPa)
@@ -472,8 +473,8 @@ const EffectRings = ({ center, result }: { center: [number, number]; result: any
       color: "#2563EB",          // blue
       fillColor: "#93C5FD",
       fillOpacity: 0.07,
-      label: "Moderate Blast (~20 kPa)",
-      desc: "Wall damage and roof failures; many injuries expected.",
+      label: t("impactSummary:rings.blast20.label"),
+      desc: t("impactSummary:rings.blast20.desc"),
       dashArray: "6 8",
     },
     // Blast severo (≈50 kPa)
@@ -483,8 +484,8 @@ const EffectRings = ({ center, result }: { center: [number, number]; result: any
       color: "#8B5CF6",          // violet
       fillColor: "#C4B5FD",
       fillOpacity: 0.09,
-      label: "Severe Blast (~50 kPa)",
-      desc: "Collapse of weak buildings; high fatality near ground-zero.",
+      label: t("impactSummary:rings.blast50.label"),
+      desc: t("impactSummary:rings.blast50.desc"),
       dashArray: "6 6",
     },
     // Quemaduras 2º (0.25 MJ/m²)
@@ -494,8 +495,8 @@ const EffectRings = ({ center, result }: { center: [number, number]; result: any
       color: "#FB923C",          // orange
       fillColor: "#FED7AA",
       fillOpacity: 0.12,
-      label: "2nd-Degree Burns (0.25 MJ/m²)",
-      desc: "Painful burns on exposed skin; many secondary fires.",
+      label: t("impactSummary:rings.burns2nd.label"),
+      desc: t("impactSummary:rings.burns2nd.desc"),
     },
     // Fireball / Ignición (1 MJ/m²)
     {
@@ -504,8 +505,8 @@ const EffectRings = ({ center, result }: { center: [number, number]; result: any
       color: "#DC2626",          // red
       fillColor: "#FCA5A5",
       fillOpacity: 0.18,
-      label: "Fireball / Flash Ignition (1 MJ/m²)",
-      desc: "Potentially lethal exposure; flash ignitions of flammables.",
+      label: t("impactSummary:rings.ignition.label"),
+      desc: t("impactSummary:rings.ignition.desc"),
     },
     // Cráter (radio ~ Df/2)  (más pequeño)
     {
@@ -517,8 +518,8 @@ const EffectRings = ({ center, result }: { center: [number, number]; result: any
       color: "#FACC15",          // yellow
       fillColor: "#FEF08A",
       fillOpacity: 0.35,
-      label: "Excavated Crater",
-      desc: "Excavated cavity; near-total lethality inside the rim.",
+      label: t("impactSummary:rings.crater.label"),
+      desc: t("impactSummary:rings.crater.desc"),
     },
   ];
 

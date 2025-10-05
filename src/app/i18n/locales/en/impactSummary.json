@@ -96,5 +96,39 @@
     "small": "Events on the order of decades to centuries.",
     "ironRare": "Infrequent events (decades).",
     "default": "Infrequent events (hundreds of days to few years)."
+  },
+  "rings": {
+    "blast5": {
+      "label": "Light Damage (~5 kPa)",
+      "desc": "Broken windows and minor injuries due to flying glass."
+    },
+    "blast20": {
+      "label": "Moderate Blast (~20 kPa)",
+      "desc": "Wall damage and roof failures; many injuries expected."
+    },
+    "blast50": {
+      "label": "Severe Blast (~50 kPa)",
+      "desc": "Collapse of weak buildings; high fatality near ground-zero."
+    },
+    "burns2nd": {
+      "label": "2nd-Degree Burns (0.25 MJ/m²)",
+      "desc": "Painful burns on exposed skin; many secondary fires."
+    },
+    "ignition": {
+      "label": "Fireball / Flash Ignition (1 MJ/m²)",
+      "desc": "Potentially lethal exposure; flash ignitions of flammables."
+    },
+    "crater": {
+      "label": "Excavated Crater",
+      "desc": "Excavated cavity; near-total lethality inside the rim."
+    }
+  },
+  "casualtyLabels": {
+    "vaporized": "Vaporized",
+    "fireballFatalities": "Fireball fatalities",
+    "burns2nd": "2nd-degree burns",
+    "burns3rd": "3rd-degree burns",
+    "shockwaveFatalities": "Shockwave fatalities",
+    "windFatalities": "Wind-related fatalities"
   }
 }

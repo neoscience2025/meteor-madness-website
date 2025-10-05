@@ -96,5 +96,39 @@
     "small": "Eventos del orden de décadas a siglos.",
     "ironRare": "Eventos poco frecuentes (décadas).",
     "default": "Eventos poco frecuentes (cientos de días a pocos años)."
+  },
+  "rings": {
+    "blast5": {
+      "label": "Daño Leve (~5 kPa)",
+      "desc": "Ventanas rotas y heridas menores por vidrios voladores."
+    },
+    "blast20": {
+      "label": "Explosión Moderada (~20 kPa)",
+      "desc": "Daño en paredes y fallas en techos; se esperan muchas heridas."
+    },
+    "blast50": {
+      "label": "Explosión Severa (~50 kPa)",
+      "desc": "Colapso de edificios débiles; alta mortalidad cerca del punto cero."
+    },
+    "burns2nd": {
+      "label": "Quemaduras 2º Grado (0.25 MJ/m²)",
+      "desc": "Quemaduras dolorosas en piel expuesta; muchos incendios secundarios."
+    },
+    "ignition": {
+      "label": "Bola de Fuego / Ignición Instantánea (1 MJ/m²)",
+      "desc": "Exposición potencialmente letal; ignición instantánea de materiales inflamables."
+    },
+    "crater": {
+      "label": "Cráter Excavado",
+      "desc": "Cavidad excavada; letalidad casi total dentro del borde."
+    }
+  },
+  "casualtyLabels": {
+    "vaporized": "Vaporizados",
+    "fireballFatalities": "Muertes por bola de fuego",
+    "burns2nd": "Quemaduras de 2do grado",
+    "burns3rd": "Quemaduras de 3er grado", 
+    "shockwaveFatalities": "Muertes por onda de choque",
+    "windFatalities": "Muertes relacionadas con viento"
   }
 }

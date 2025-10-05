@@ -96,5 +96,39 @@
     "small": "Ruwaykuna chunka pachak watakunapi.",
     "ironRare": "Pisi ruwaykuna (chunka watakuna).",
     "default": "Pisi ruwaykuna (pachak p'unchaykunamanta pisi watakunaman)."
+  },
+  "rings": {
+    "blast5": {
+      "label": "Yanqa Wañuy (~5 kPa)",
+      "desc": "Cristalkunaq p'akiyanku, pisi k'irikuna cristal phawayninmanta."
+    },
+    "blast20": {
+      "label": "Chawpi Phaway (~20 kPa)",
+      "desc": "Pirkakuna wañuy, wasipatapa urmayanku; achka k'irikuna suyakun."
+    },
+    "blast50": {
+      "label": "Sinchi Phaway (~50 kPa)",
+      "desc": "Samaq wasikunaq urmayanku; achka wañuy chawpi kaqpi."
+    },
+    "burns2nd": {
+      "label": "2da Grado Rawrachiy (0.25 MJ/m²)",
+      "desc": "Nanaq rawrachiy q'ara hawapi; achka iskay kaq ninakuna."
+    },
+    "ignition": {
+      "label": "Nina Pelota / Uspha Ninakuy (1 MJ/m²)",
+      "desc": "Wañuy atiq exposición; uspha ninakuy nina kamachikunapi."
+    },
+    "crater": {
+      "label": "Allqusqa Crater",
+      "desc": "Allqusqa huch'u; yaqa tukuy wañuy patapa ukhupi."
+    }
+  },
+  "casualtyLabels": {
+    "vaporized": "Vaporkuna",
+    "fireballFatalities": "Nina pelota wañuykuna",
+    "burns2nd": "2da grado rawrachiykuna",
+    "burns3rd": "3ra grado rawrachiykuna",
+    "shockwaveFatalities": "Shock onda wañuykuna", 
+    "windFatalities": "Wayra wañuykuna"
   }
 }
