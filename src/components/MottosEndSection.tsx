@@ -1,19 +1,15 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { AnimatePresence, motion, type Variants } from "framer-motion";
 import { Orbitron } from "next/font/google";
+import { useTranslation } from "react-i18next";
 
-const orbitron = Orbitron({ subsets: ["latin"], weight: ["600","700"], display: "swap" });
-
-const PHRASES = [
-  "Defend, Save and Celebrate",
-  "Saving the Earth is in your hands, and don't forget...",
-  "Together we protect our world",
-];
-
-const LOGO_SRC  = "/preview/logo.png";
-const LOGO_SIZE = 200;
+const orbitron = Orbitron({
+  subsets: ["latin"],
+  weight: ["600", "700"],
+  display: "swap",
+});
 
 // Timings
 const STAGGER = 1.0, IN_DUR = 1.0, HOLD = 2.5, OUT_DUR = 1.0;
@@ -34,27 +30,40 @@ const logoVariants: Variants = {
   show:   { opacity: 1, scale: 1,   filter: "blur(0px)" as any, transition: { duration: 0.8, ease: [0.22,1,0.36,1] } },
 };
 
-export default function MottosStaggerLoop() {
-  const [cycle, setCycle] = useState(0);
+export default function MottosEndSection() {
+  const { t } = useTranslation("preview");
 
+  // 🔥 frases y logo desde JSON
+  const phrases = (t("phrasesEnd", { returnObjects: true }) as string[]) ?? [];
+  const logoSrc = t("logo.src");
+  const logoAlt = t("logo.alt");
+  const ariaLabel = t("ariaLabelEnd");
+
+  const safePhrases = useMemo(
+    () => (Array.isArray(phrases) && phrases.length ? phrases : ["…"]),
+    [phrases]
+  );
+
+  const [cycle, setCycle] = useState(0);
   useEffect(() => {
-    const total = (PHRASES.length) * STAGGER + IN_DUR + HOLD + OUT_DUR + 0.2;
-    const t = setTimeout(() => setCycle(c => c + 1), total * 1000);
-    return () => clearTimeout(t);
-  }, [cycle]);
+    const total = safePhrases.length * STAGGER + IN_DUR + HOLD + OUT_DUR + 0.2;
+    const tmr = setTimeout(() => setCycle((c) => c + 1), total * 1000);
+    return () => clearTimeout(tmr);
+  }, [cycle, safePhrases.length]);
 
   return (
     <section
-      aria-label="Intro stagger loop"
+      aria-label={ariaLabel}
       style={{
         width: "100%",
         minHeight: "40vh",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        padding: "6vh 0 8h",
+        padding: "6vh 0 8vh",
         overflow: "visible",
-        background: "radial-gradient(circle at 50% -40%, #181a03ff 0%, #000 55%, #000 100%)",
+        background:
+          "radial-gradient(circle at 50% -40%, #181a03ff 0%, #000 55%, #000 100%)",
       }}
     >
       <div
@@ -79,10 +88,10 @@ export default function MottosStaggerLoop() {
             exit="exit"
             style={{ display: "flex", flexDirection: "column", gap: 12, alignItems: "center" }}
           >
-            {/* Frases */}
-            {PHRASES.map((t) => (
+            {/* Frases traducidas */}
+            {safePhrases.map((line) => (
               <motion.p
-                key={t}
+                key={`${cycle}-${line}`}
                 variants={lineVariants}
                 style={{
                   margin: 0,
@@ -93,25 +102,25 @@ export default function MottosStaggerLoop() {
                   whiteSpace: "pre-wrap",
                 }}
               >
-                {t}
+                {line}
               </motion.p>
             ))}
 
-            {/* Logo como último hijo, aparece después del texto */}
-            {LOGO_SRC && (
+            {/* Logo */}
+            {logoSrc && (
               <motion.img
                 variants={logoVariants}
-                src={LOGO_SRC}
-                alt="NeoScience logo"
-                width={LOGO_SIZE}
-                height={LOGO_SIZE}
+                src={logoSrc}
+                alt={logoAlt}
+                width={200}
+                height={200}
                 style={{
-                  width: LOGO_SIZE,
-                  height: LOGO_SIZE,
+                  width: 200,
+                  height: 200,
                   objectFit: "cover",
                   borderRadius: "50%",
                   boxShadow: "0 0 40px rgba(0,166,255,.45)",
-                  marginTop: 20,  // 👈 espacio entre frases y logo
+                  marginTop: 20,
                   display: "block",
                 }}
               />

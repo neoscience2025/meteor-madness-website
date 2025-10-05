@@ -9,7 +9,7 @@ const NAMESPACES_REQUIRED = [
     "team"
 ];
 
-export default async function StoryTelling({ params }) {
+export default async function Neopage({ params }) {
     const { locale } = await params;
     const { t, resources, } = await initTranslations(locale, NAMESPACES_REQUIRED);
 
@@ -18,6 +18,6 @@ export default async function StoryTelling({ params }) {
         locale={locale}
         resources={resources}
     >
-        aqui va el libro
+        aqui va el neo
     </TranslationsProvider>
 }

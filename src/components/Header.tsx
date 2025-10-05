@@ -161,7 +161,7 @@ export default function Header() {
         label: t("menu:simulation"),
         to: "",
         subitems: [
-           { key: "neopha2d", label: t("menu:neopha2d"), to: `/neopha2d` },
+           { key: "neo-pha", label: t("menu:neo-pha"), to: `/neo-pha` },
           { key: "impact-zone", label: t("menu:impact"), to: `/impact-zone` },
          
         ],

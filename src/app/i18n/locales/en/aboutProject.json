@@ -1,0 +1,64 @@
+{
+  "sectionTitle": "About the Project",
+  "objective": "Our team's objective is to transform open spatial data into actionable decisions through interactive visualizations, adjustable simulations, and micro-lessons that translate theory into practice.",
+  "badge": "2025 NASA Space Apps Challenge",
+  "challenge": {
+    "title": "The Challenge",
+    "subtitle": "Meteor Madness",
+    "description": "To build an application that converts open data on meteors and NEOs (Near-Earth Objects) into actionable decisions. This involves visualizing trajectories and events, estimating energy/impact, and simulating 'what-if' scenarios. The application must communicate risk clearly and educationally, featuring near real-time interaction."
+  },
+  "dataSources": {
+    "title": "Data Sources",
+    "items": [
+      "NASA News Feed (News Release)",
+      "NASA News Feed",
+      "JPL News Feed",
+      "NASA Open APIs Hub"
+    ]
+  },
+  "stack": {
+    "title": "Stack",
+    "items": [
+      "React",
+      "Next.js",
+      "TailwindCSS",
+      "Framer Motion",
+      "Machine Learning",
+      "AI Chatbot",
+      "OWASP Security Standards"
+    ]
+  },
+  "uiux": {
+    "title": "UI / UX",
+    "items": [
+      "Figma (prototyping & wireframes)",
+      "User-centered design",
+      "Responsive interfaces",
+      "Iterative testing"
+    ]
+  },
+  "methodology": {
+    "title": "Methodology",
+    "items": [
+      "Agile / Scrum",
+      "Sprint Planning",
+      "Trello (task management)",
+      "Team collaboration & reviews",
+      "QA Testing & Continuous Validation"
+    ]
+  },
+  "impact": {
+    "title": "Impact / Purpose",
+    "items": [
+      "Raise awareness about Near-Earth Objects (NEOs) and planetary defense",
+      "Inspire the next generation through science and technology",
+      "Transform NASA data into clear, actionable insights for everyone"
+    ]
+  },
+  "comments": {
+    "title": "Comments or Ideas?",
+    "description": "Write to us and tell us what you'd like to explore. Science is built as a team effort.",
+    "button": "Contact Us",
+    "mailto": "mailto:marian.paredes@gmail.com"
+  }
+}

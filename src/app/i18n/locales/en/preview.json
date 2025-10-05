@@ -1,0 +1,41 @@
+{
+  "sectionTitle": "Content Preview",
+  "sectionSubtitle": "Explore data, defense, and learn — all in one platform.",
+  "items": [
+    {
+      "title": "Storytelling",
+      "desc": "Discover the fascinating story of Near-Earth Objects and how they shaped our planet's history through an interactive narrative experience.",
+      "img": "/preview/storyPreview.jpeg"
+    },
+    {
+      "title": "Game",
+      "desc": "Defend Earth from incoming asteroids in our interactive space defense game. Test your reflexes and strategic thinking.",
+      "img": "/preview/gamePreview.jpeg"
+    },
+    {
+      "title": "Simulation",
+      "desc": "Explore our 2D simulation of the solar system, NEOs, and PHAs. Manipulate time and discover orbital mechanics.",
+      "img": "/preview/simulationPreview.jpeg"
+    }
+  ],
+  
+  "ariaLabel": "Intro stagger loop",
+  "phrases": [
+    "Every asteroid tells a story",
+    "Knowledge is our best defense",
+    "Prediction saves civilizations",
+    "Together we protect our world"
+  ],
+   "ariaLabelEnd": "Final stagger loop",
+  "phrasesEnd": [
+    "Defend, Save and Celebrate",
+    "Saving the Earth is in your hands, and don't forget...",
+    "Together we protect our world"
+  ],
+  "logo": {
+    "src": "/preview/logo.png",
+    "alt": "NeoScience logo"
+  }
+
+
+}

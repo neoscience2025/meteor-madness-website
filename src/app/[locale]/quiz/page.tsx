@@ -5,6 +5,6 @@ export const metadata = {
   description: "Pon a prueba tu conocimiento sobre NEOs y defensa planetaria 🚀",
 };
 
-export default function Page() {
+export default function QuizPage() {
   return <QuizMeteorMadness />;
 }
