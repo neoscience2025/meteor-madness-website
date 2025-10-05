@@ -75,7 +75,7 @@ const MapClickHandler = ({ setPosition, onPositionChange, disabled = false }) =>
         if (disabled) {
           return;
         }
-        
+
         // Prevent marker movement when clicking on UI elements
         if (e.originalEvent && e.originalEvent.target &&
           (e.originalEvent.target.closest('button') ||
@@ -100,20 +100,20 @@ const MapClickHandler = ({ setPosition, onPositionChange, disabled = false }) =>
 // Impact animation component
 const ImpactAnimation = ({ position, onComplete }) => {
   const [isVisible, setIsVisible] = useState(true);
-  
+
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsVisible(false);
       if (onComplete) onComplete();
     }, 2000); // 2 second animation
-    
+
     return () => clearTimeout(timer);
   }, [onComplete]);
-  
+
   if (!isVisible) return null;
-  
+
   return (
-    <div 
+    <div
       className="absolute z-[2000] pointer-events-none"
       style={{
         left: '50%',
@@ -216,7 +216,7 @@ const AffectedAreaCircle = ({ affectedArea, backgroundImage = "/crater.png" }) =
 
   const circleOptions = {
     color: 'transparent',
-    fillColor:'transparent',
+    fillColor: 'transparent',
     fillOpacity: 0,
     weight: 0, // Remove border
   };
@@ -252,7 +252,7 @@ export function Map({
   const [isLoadingPlace, setIsLoadingPlace] = useState(false);
   const [placeError, setPlaceError] = useState(null);
   const [mapType, setMapType] = useState('street');
-  
+
   // Impact sequence state management
   const [impactState, setImpactState] = useState<ImpactState>('idle');
   const [impactData, setImpactData] = useState<ImpactData | null>(null);
@@ -284,7 +284,7 @@ export function Map({
   const handleImpactLaunch = (result: ImpactData) => {
     setImpactData(result);
     setImpactState('launching');
-    
+
     // Start animation sequence
     setTimeout(() => {
       setImpactState('animating');
@@ -294,7 +294,7 @@ export function Map({
   // Handle animation completion
   const handleAnimationComplete = () => {
     setImpactState('showing-impact');
-    
+
     // After showing impact, change to ready for new launch
     setTimeout(() => {
       setImpactState('ready-for-new');
@@ -313,10 +313,10 @@ export function Map({
   // Determine button text based on state
   const getButtonText = () => {
     switch (impactState) {
-      case 'launching':
-        return 'Launching...';
       case 'animating':
       case 'showing-impact':
+      case 'launching':
+        return 'Launching...';
       case 'ready-for-new':
         return 'New Launch';
       default:
@@ -335,10 +335,10 @@ export function Map({
     <MainMenusGradientCard
       className="!h-auto"
       description={
-        <ImpactForm 
+        <ImpactForm
           ref={formRef}
-          latitude={markerPosition[0]} 
-          longitude={markerPosition[1]} 
+          latitude={markerPosition[0]}
+          longitude={markerPosition[1]}
           onImpactResult={handleImpactLaunch}
           onNewLaunch={handleNewLaunch}
           buttonText={getButtonText()}
@@ -381,15 +381,15 @@ export function Map({
             onPositionChange={handlePositionChange}
             isVisible={impactState === 'idle'}
           />
-          
+
           {/* Impact Animation */}
           {impactState === 'animating' && (
-            <ImpactAnimation 
+            <ImpactAnimation
               position={markerPosition}
               onComplete={handleAnimationComplete}
             />
           )}
-          
+
           {/* Affected Area Circle */}
           {(impactState === 'showing-impact' || impactState === 'ready-for-new') && !!impactData && (
             <AffectedAreaCircle
