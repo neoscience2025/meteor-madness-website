@@ -68,6 +68,8 @@
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
   // Alejamos la cámara para ver mejor las trayectorias
+
+  
   camera.position.set(0, 0, 10.5);
 
   const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
@@ -157,7 +159,9 @@
   const earthBumpTexture = textureLoader.load('https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/textures/planets/earth_bump_2048.jpg');
   const earthSpecTexture = textureLoader.load('https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/textures/planets/earth_specular_2048.jpg');
 
-  const earthGeometry = new THREE.SphereGeometry(3.5, 64, 64);
+  // 👇 Ajustá este valor si querés más/menos grande en general
+const EARTH_R = (window.innerWidth < 640 ? 2.4 : 2.5);  // antes 3.5
+  const earthGeometry = new THREE.SphereGeometry(3.2, 64, 64);
   const earthMaterial = new THREE.MeshPhongMaterial({
     map: earthDayTexture,
     specularMap: earthSpecTexture,
