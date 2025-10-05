@@ -32,17 +32,18 @@ export default function Banner() {
         background: "radial-gradient(circle at top, #0b0f29 0%, #000 100%)",
       }}
     >
-      <iframe
-        src="/earth.html"
-        title="Earth 3D"
-        style={{
-          width: "50%",
-          height: "100%",
-          border: 0,
-          zIndex: 1,
-          background: "transparent", // por si el UA pinta algo
-        }}
-      />
+     <iframe
+  src="/earth.html"
+  title="Earth 3D"
+  style={{
+    width: "70%",
+    aspectRatio: "1 / 1", // mantiene forma cuadrada
+    border: "none",
+    zIndex: 1,
+    background: "transparent",
+  }}
+/>
+
     </section>
   );
 }

@@ -1,6 +1,9 @@
-import { redirect } from "next/navigation";
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
 
-export default function Neopage() {
-    // Redirect any visit to the internal NEO/PHA route to the external simulation
-    redirect("https://nolaskote.github.io/simulatio_next");
+export function middleware(request: NextRequest) {
+  if (request.nextUrl.pathname.startsWith("/neo")) {
+    return NextResponse.redirect("https://nolaskote.github.io/simulatio_next");
+  }
+  return NextResponse.next();
 }
