@@ -28,6 +28,8 @@
 
   /* Custom blue-950 to match header color */
   --color-blue-950: #101328;
+  /* Custom blue-1000 for even darker blue */
+  --color-blue-1000: #0a0d1a;
 }
 
 /* Neoscience Global Styles */

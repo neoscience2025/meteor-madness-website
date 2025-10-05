@@ -71,7 +71,7 @@ export const MeteoriteSelector = ({
             {/* 3D Model Display - Responsive height */}
             <div
                 className={cn(
-                    "grid relative overflow-hidden rounded-[15px] bg-white/70 dark:bg-black/50",
+                    "grid relative overflow-hidden rounded-[15px] bg-black/50",
                     "h-48 md:h-64 lg:h-80", // Responsive height
                     "place-content-center",
                     disabled && "opacity-50"
@@ -102,11 +102,11 @@ export const MeteoriteSelector = ({
                     onClick={goToPrevious}
                     disabled={disabled}
                     className={cn(
-                        "p-2 transition-all duration-200",
+                        "p-2 transition-all duration-200 flex items-center",
                         "disabled:opacity-50 disabled:cursor-not-allowed"
                     )}
                 >
-                    <TbChevronLeft className="w-6 h-6 text-white hover:text-blue-900 active:text-blue-900 transition-colors duration-200" />
+                    <TbChevronLeft className="w-10 h-10 text-white hover:text-blue-900 active:text-blue-900 transition-colors duration-200" />
                 </button>
 
                 {/* Meteorite Info - Centered between controls */}
@@ -125,11 +125,11 @@ export const MeteoriteSelector = ({
                     onClick={goToNext}
                     disabled={disabled}
                     className={cn(
-                        "p-2 transition-all duration-200",
+                        "p-2 transition-all duration-200 flex items-center",
                         "disabled:opacity-50 disabled:cursor-not-allowed"
                     )}
                 >
-                    <TbChevronRight className="w-6 h-6 text-white hover:text-blue-900 active:text-blue-900 transition-colors duration-200" />
+                    <TbChevronRight className="w-10 h-10 text-white hover:text-blue-900 active:text-blue-900 transition-colors duration-200" />
                 </button>
             </div>
         </div>
