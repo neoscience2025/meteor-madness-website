@@ -1,9 +1,9 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { Canvas } from "@react-three/fiber";
+import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, useGLTF } from "@react-three/drei";
-import { Suspense, useState, useEffect } from "react";
+import { Suspense, useState, useEffect, useRef } from "react";
 import { TbChevronLeft, TbChevronRight } from "react-icons/tb";
 import { METEORITE_OPTIONS } from "@/lib/map/meteorites";
 import { MeteoriteName } from "@/interfaces/meteorites";
@@ -14,12 +14,23 @@ interface MeteoriteModelProps {
 
 function MeteoriteModel({ modelPath }: MeteoriteModelProps) {
     const { scene } = useGLTF(modelPath);
+    const meshRef = useRef<any>();
+
+    useFrame((_, delta) => {
+        if (meshRef.current) {
+            // Slow rotation on all axes
+            meshRef.current.rotation.x += delta * 0.2;
+            meshRef.current.rotation.y += delta * 0.3;
+            meshRef.current.rotation.z += delta * 0.1;
+        }
+    });
+
     return (
         <primitive
+            ref={meshRef}
             object={scene}
             scale={[1.5, 1.5, 1.5]}
             position={[0, 0, 0]}
-            rotation={[0, 0, 0]}
         />
     );
 }
