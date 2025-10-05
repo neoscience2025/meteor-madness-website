@@ -67,7 +67,7 @@ const InteractiveBook: React.FC<InteractiveBookProps> = ({ bookData }) => {
             fill
             className="object-cover"
             priority={pageIndex <= 1}
-            sizes="(max-width: 768px) 350px, 500px"
+            sizes="(max-width: 480px) 280px, (max-width: 768px) 380px, 550px"
           />
         </div>
       );
@@ -91,6 +91,7 @@ const InteractiveBook: React.FC<InteractiveBookProps> = ({ bookData }) => {
   };
 
   const [dimensions, setDimensions] = useState({ width: 800, height: 1000 });
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const updateDimensions = () => {
@@ -99,14 +100,27 @@ const InteractiveBook: React.FC<InteractiveBookProps> = ({ bookData }) => {
       
       // Maintain a 4:5 aspect ratio (width:height) to better accommodate tall images
       if (windowWidth < 768) {
-        const width = Math.min(600, windowWidth - 40);
-        setDimensions({ width, height: Math.floor(width * 1.25) });
-      } else if (windowWidth < 1024) {
-        setDimensions({ width: 700, height: 875 });
-      } else if (windowWidth < 1400) {
-        setDimensions({ width: 800, height: 1000 });
+        // Mobile devices - single page view
+        setIsMobile(true);
+        if (windowWidth < 480) {
+          // Very small screens (phones in portrait) - ensure book fits with padding
+          const width = Math.min(280, windowWidth - 32);
+          setDimensions({ width, height: Math.floor(width * 1.3) });
+        } else {
+          // Small screens (phones in landscape, small tablets)
+          const width = Math.min(380, windowWidth - 48);
+          setDimensions({ width, height: Math.floor(width * 1.25) });
+        }
       } else {
-        setDimensions({ width: 1000, height: 1250 });
+        // Desktop devices - two page spread
+        setIsMobile(false);
+        if (windowWidth < 1024) {
+          setDimensions({ width: 550, height: 688 });
+        } else if (windowWidth < 1400) {
+          setDimensions({ width: 800, height: 1000 });
+        } else {
+          setDimensions({ width: 1000, height: 1250 });
+        }
       }
     };
 
@@ -116,20 +130,20 @@ const InteractiveBook: React.FC<InteractiveBookProps> = ({ bookData }) => {
   }, []);
 
   return (
-    <div className="flex flex-col justify-center items-center min-h-screen p-4">
-      <div className="relative" role="application" aria-label="Interactive Book">
+    <div className="flex flex-col justify-center items-center min-h-screen p-2 sm:p-4 w-full max-w-full overflow-hidden">
+      <div className="relative w-full max-w-full flex justify-center mb-4 sm:mb-6" role="application" aria-label="Interactive Book">
         <HTMLFlipBook
           ref={flipBookRef}
           width={dimensions.width}
           height={dimensions.height}
-          minWidth={600}
-          minHeight={750}
+          minWidth={300}
+          minHeight={400}
           maxWidth={1200}
           maxHeight={1500}
           size="stretch"
           showCover={false}
           flippingTime={1000}
-          usePortrait={false}
+          usePortrait={isMobile}
           startZIndex={0}
           autoSize={false}
           maxShadowOpacity={0.5}
@@ -157,29 +171,29 @@ const InteractiveBook: React.FC<InteractiveBookProps> = ({ bookData }) => {
             </div>
           ))}
         </HTMLFlipBook>
-        
-        <div className="mt-6 text-center">
-          <p className="text-sm text-gray-600 bg-gray-100 px-4 py-2 rounded-full">
-            Page {Math.floor(currentPage / 2) + 1} of {Math.ceil((bookData.pages.length + 1) / 2)}
-          </p>
-          <div className="mt-4 flex gap-2 justify-center">
-            <button
-              onClick={() => flipBookRef.current?.pageFlip().flipPrev()}
-              disabled={currentPage === 0}
-              className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg disabled:opacity-50 hover:bg-gray-300 transition-colors"
-              aria-label="Previous page"
-            >
-              ← Previous
-            </button>
-            <button
-              onClick={() => flipBookRef.current?.pageFlip().flipNext()}
-              disabled={currentPage >= bookData.pages.length}
-              className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg disabled:opacity-50 hover:bg-gray-300 transition-colors"
-              aria-label="Next page"
-            >
-              Next →
-            </button>
-          </div>
+      </div>
+      
+      <div className="w-full text-center">
+        <p className="text-xs sm:text-sm text-gray-300 bg-blue-900/30 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full inline-block mb-3 sm:mb-4">
+          Page {isMobile ? currentPage + 1 : Math.floor(currentPage / 2) + 1} of {isMobile ? bookData.pages.length + 1 : Math.ceil((bookData.pages.length + 1) / 2)}
+        </p>
+        <div className="flex gap-2 justify-center flex-wrap">
+          <button
+            onClick={() => flipBookRef.current?.pageFlip().flipPrev()}
+            disabled={currentPage === 0}
+            className="px-4 py-2 sm:px-6 sm:py-3 bg-blue-900 text-white rounded-lg disabled:opacity-50 disabled:bg-gray-500 hover:bg-blue-950 transition-colors text-sm sm:text-base font-medium min-w-[100px] sm:min-w-[120px]"
+            aria-label="Previous page"
+          >
+            ← Previous
+          </button>
+          <button
+            onClick={() => flipBookRef.current?.pageFlip().flipNext()}
+            disabled={isMobile ? currentPage >= bookData.pages.length : currentPage >= bookData.pages.length}
+            className="px-4 py-2 sm:px-6 sm:py-3 bg-blue-900 text-white rounded-lg disabled:opacity-50 disabled:bg-gray-500 hover:bg-blue-950 transition-colors text-sm sm:text-base font-medium min-w-[100px] sm:min-w-[120px]"
+            aria-label="Next page"
+          >
+            Next →
+          </button>
         </div>
       </div>
 
