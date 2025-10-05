@@ -1,0 +1,77 @@
+{
+  "title": "NEO Quiz",
+  "progress": "Pregunta {{current}} de {{total}}.",
+  "score": "Puntaje: {{score}}/100",
+  "feedback": {
+    "correct": "¡Correcto! 🚀",
+    "incorrect": "Respuesta incorrecta. La opción correcta está marcada en verde."
+  },
+  "buttons": {
+    "next": "Siguiente Pregunta",
+    "finish": "Finalizar Quiz",
+    "retry": "Reintentar Quiz",
+    "shareOnLinkedin": "Compartir en LinkedIn",
+    "shareMyScore": "Compartir mi puntaje ({{score}}/100)"
+  },
+  "result": {
+    "title": "Resultado Final",
+    "win": "🎉 ¡Victoria! Lograste {{score}}/100 en NeoScience.",
+    "tryAgain": "💪 Buen esfuerzo, lograste {{score}}/100. ¡Volvé a intentarlo!"
+  },
+  "share": {
+    "pass": "¡Desafío Superado! 🚀 Acabo de completar el NEO Quiz de NeoScience y logré {{score}}/100. ¡Aceptá el reto! #NeoScience #NasaSpaceAppChallenge",
+    "fail": "Completé el NEO Quiz de NeoScience con {{score}}/100 💫. ¡Aprendé sobre defensa planetaria! #NeoScience #NasaSpaceAppChallenge"
+  },
+  "questions": {
+    "q1": {
+      "question": "¿Qué significa NEO en astronomía?",
+      "options": ["Near Earth Object", "Near Earth Orbit",  "New Earth Observation"],
+      "answerIdx": 0
+    },
+    "q2": {
+      "question": "Objetivo principal del reto Meteor Madness:",
+      "options": ["Construir cohetes", "Convertir datos abiertos de NEOs en decisiones y educación", "Crear NFTs"],
+      "answerIdx": 1
+    },
+    "q3": {
+      "question": "API de NASA para consultar NEOs por fecha:",
+      "options": ["EPIC", "EONET", "NEO Feed"],
+      "answerIdx": 2
+    },
+    "q4": {
+      "question": "Magnitud usada para estimar tamaño/energía:",
+      "options": ["Índice UV", "Magnitud absoluta H", "Paralaje anual"],
+      "answerIdx": 1
+    },
+    "q5": {
+      "question": "¿Qué busca el reto con simulaciones de impacto?",
+      "options": ["Modelar escenarios 'what-if'","Gráficas artísticas",  "Aumentar visitas"],
+      "answerIdx": 0
+    },
+    "q6": {
+      "question": "Misión que probó desviar un asteroide:",
+      "options": ["OSIRIS-REx", "DART", "JUNO", "Voyager"],
+      "answerIdx": 1
+    },
+    "q7": {
+      "question": "Requisito de la app según el reto:",
+      "options": ["Excel", "Visualizar trayectorias en tiempo real", "3D obligatorio"],
+      "answerIdx": 1
+    },
+    "q8": {
+      "question": "Rol del componente educativo:",
+      "options": ["Comunicar riesgos de forma clara","Hacer astronautas",  "Cumplir copyright"],
+      "answerIdx": 0
+    },
+    "q9": {
+      "question": "¿Cuál NO es estrategia de defensa planetaria?",
+      "options": ["Desviación gravitacional", "Impacto cinético", "Explosión nuclear"],
+      "answerIdx": 1
+    },
+    "q10": {
+      "question": "¿Por qué importa desarrollar soluciones sobre NEOs?",
+      "options": ["Vender telescopios", "Videojuegos", "Prevenir desinformación y preparar a la sociedad"],
+      "answerIdx": 2
+    }
+  }
+}

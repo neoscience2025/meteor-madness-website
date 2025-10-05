@@ -1,0 +1,46 @@
+{
+  "appGame": {
+    "title": "MISIÓN DART",
+    "tagline": "Pachamanta waqaychay! (¡Protege la Tierra!)"
+  },
+  "hudGame": {
+    "points": "Puntukunata (Puntos)",
+    "best": "Allin Markay (Mejor Puntuación)",
+    "lives": "Kawsaykuna (Vidas)",
+    "level": "Suyu / Nivel"
+  },
+  "ui": {
+    "restart": "Qallariy wakmanta (Reiniciar)",
+    "howToPlay": "Imanaraq ruwanay? (¿Cómo jugar?)",
+    "exit": "Lloqsiy (Salir)",
+    "shoot": "RINRIY (DISPARAR)",
+    "play": "PUKLLAY! (¡Jugar!)"
+  },
+  "introGame": {
+    "title": "Imanraq DART misiónmi karqa? (¿Qué fue la misión DART?)",
+    "summaryTitle": "Suyupim Riqsiy (Resumen)",
+    "summary": "DART misiónmi wasiyuq NASA primera yachay ruwasqa karqa planetawan waqaychaypaq, rikuchispa imayna huk wakichinaqa asteroide nisqata rikch’ayta atisqa, tupaspa chaywan. Rurayta ruwasqa impactador cinéticowan, kayqa chaskichisqa ruraymi — huk imata sinchispa astawan qhawaynin rikch’achiyta munaspa manan wañuchiychu, hinallataq billiarda rumita ch’uspiwan k’uyuchisqa hina. Kay pukllaypiqa, qam hina chay nave hina kachkanki: sapa rinrinki huk sinchi tupayta ruwachkan asteroidekuna rikch’ayninta hukllachiytaq manaraq pacha wañuchiytaqa rikhuykuchkanchu. Kay yachaymi pachamamanta waqaychayta atikun, hinañaqa asteroideqa imañaraq rikhuyta churay, chaymi tukuy llapan runakunata waqaychachin. Kay pukllaypi ruwaspa, kikin ima rurayta ruwanki, kaymi runakuna waqaychaypaq kikin yachay hina.",
+    "move": "puriy (mover)",
+    "shoot": "rinriy (disparar)",
+    "restart": "qallariy wakmanta (reiniciar)",
+    "pause": "sayachiy (pausar)",
+    "exit": "lloqsiy (salir)",
+    "tipsTitle": "Allin pukllaypaq rimaykuna (Consejos para jugar)",
+    "skip": "Ama qhawachiychu kay qallariyta wakmanta (No mostrar esta intro la próxima vez)",
+    "tip": "Yachay: phisk’a kawsayki kachkan (Tip: tienes 5 vidas)."
+  },
+  "tips": {
+    "anticipate": { "title": "Ñawpaqta riqsiy:", "body": "rinriy asteroide hatun karqanña." },
+    "position": { "title": "Uraypi sayay:", "body": "puriy nisqa ñanpi urayta ruray chay rikch’ayninpa." },
+    "rate": { "title": "Rinriy pacha:", "body": "sinchiña chinkaspa, allin rikch’aywan rinriy." },
+    "priority": { "title": "Waqaychaspa ñawpaqta ruwanki:", "body": "chay chawpipi hamuqqa ñawpaqta rinriy." },
+    "relax": { "title": "Sumaq kasuy, kusisqaykiwan pukllay:", "body": "chaymi pantaspa, wakmanta qallarispa allinllaña ruwanki." }
+  },
+  "banner": {
+    "start": "Nave puriy · Asteroidekunata rinriy · Pachamanta waqaychay! 🌍",
+    "levelUp": "Suyu {{level}} ↑",
+    "impact": "¡Tupay! 🌋 Huk asteroide Pachamanwan tupan",
+    "gameOver": "Pukllay tukukun · Puntukunata: {{score}} · Nivel: {{level}}",
+    "newRecord": "🎉 ¡Musuq markay! {{best}} puntukunata"
+  }
+}

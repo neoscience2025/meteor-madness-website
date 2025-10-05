@@ -233,7 +233,7 @@ function Carousel({ items }: { items: Item[] }) {
                       rel="noreferrer"
                       className="inline-block font-semibold hover:underline"
                     >
-                      Leer más →
+                      Read more  →
                     </a>
 
                     {/* Iconos de redes */}

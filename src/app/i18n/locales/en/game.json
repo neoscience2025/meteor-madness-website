@@ -1,0 +1,46 @@
+{
+  "appGame": {
+    "title": "DART MISSION",
+    "tagline": "Protect the Earth!"
+  },
+  "hudGame": {
+    "points": "Points",
+    "best": "Best Score",
+    "lives": "Lives",
+    "level": "Level"
+  },
+  "ui": {
+    "restart": "Restart",
+    "howToPlay": "How to play?",
+    "exit": "Exit",
+    "shoot": "SHOOT",
+    "play": "Play!"
+  },
+  "introGame": {
+    "title": "What was the DART mission?",
+    "summaryTitle": "Summary",
+    "summary": "The DART mission was NASA’s first planetary-defense experiment showing that a spacecraft could deflect an asteroid by crashing into it. It used the kinetic impactor technique—launching an object at high speed to change another body’s path without destroying it, like nudging a billiard ball in space. In this mini-game, you play that spacecraft: each shot is a precise impact that alters incoming meteors before they reach Earth. This concept can save our planet, because a small change in an asteroid’s direction—done early enough—can prevent a global catastrophe. So every time you fire, you’re not just playing: you’re reenacting the same principle that could protect humanity.",
+    "move": "move",
+    "shoot": "shoot",
+    "restart": "restart",
+    "pause": "pause",
+    "exit": "exit",
+    "tipsTitle": "Gameplay tips",
+    "skip": "Don’t show this intro next time",
+    "tip": "Tip: you have 5 lives."
+  },
+  "tips": {
+    "anticipate": { "title": "Anticipate:", "body": "shoot when the asteroid is still high." },
+    "position": { "title": "Get underneath:", "body": "move just enough under its path." },
+    "rate": { "title": "Fire rate:", "body": "there’s cooldown; aim well." },
+    "priority": { "title": "Prioritize danger:", "body": "if it’s headed for the center, that’s first." },
+    "relax": { "title": "Relax and enjoy:", "body": "if you miss, restart and you’ll do better next time." }
+  },
+  "banner": {
+    "start": "Move the ship · Shoot the asteroids · Protect the Earth! 🌍",
+    "levelUp": "Level {{level}} ↑",
+    "impact": "Impact! 🌋 An asteroid hit the Earth",
+    "gameOver": "Game over · Points: {{score}} · Level: {{level}}",
+    "newRecord": "🎉 New record! {{best}} points"
+  }
+}

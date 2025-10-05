@@ -4,7 +4,8 @@ import initTranslations from "../../i18n/index";
 
 const NAMESPACES_REQUIRED = [
   'menu',
-  'footer'
+  'footer',
+  'game'
 ];
 
 export default async function GamePage({ params }) {

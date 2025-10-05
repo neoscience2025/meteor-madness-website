@@ -1,0 +1,64 @@
+{
+  "sectionTitle": "Proyektu Rayku (Sobre el Proyecto)",
+  "objective": "Ñuqanchikpa llamkayninqa kanqa yachaykunata pacha mayllaymanta ruwasqa willakuyta ruranaypaq, kayta ruwaspa rikch’akuypi k’anchariywan, sinmulasyunkunawan, chaymi micro-yachachikuykuna chay teoríata ruwanakuyta tukuchin.",
+  "badge": "2025 NASA Space Apps Challenge",
+  "challenge": {
+    "title": "Ch’askiy (El Desafío)",
+    "subtitle": "Meteor Madness",
+    "description": "Ruwanay huk aplicaciónta, chayqa asteroidekuna chay NEOs (Tierra muylla qhepapi puriqkunata) willakuyta llapa runakunaman ruwanaypaq chay ruwasqawan. Kayqa rikch’ariyta, kawsay qhawayta, chay kallpawan, chinkaywan simulasqawan ima ruwasqawanmi rikuchin (‘imapas ruwaspaqa’). Kay aplicaciónqa yachachiywan ruwanakuyta sumaqta willachin, casi pachapi kawsaypim ruwanayta atikun."
+  },
+  "dataSources": {
+    "title": "Willakuymanta Qallariqkuna (Fuentes de Datos)",
+    "items": [
+      "NASA Willakuy Ñawpaq (Willakuy qillqakuna)",
+      "NASA Willakuy Ñawpaq",
+      "JPL Willakuy Ñawpaq",
+      "NASA Qhapaq APIkunata Qallariq Wasin"
+    ]
+  },
+  "stack": {
+    "title": "Yachaykuna (Tecnologías)",
+    "items": [
+      "React",
+      "Next.js",
+      "TailwindCSS",
+      "Framer Motion",
+      "Yachay Kamachiy (Aprendizaje Automático)",
+      "AI Rimay Ruray (Chatbot de IA)",
+      "OWASP Seguridad Estándarkuna"
+    ]
+  },
+  "uiux": {
+    "title": "UI / UX",
+    "items": [
+      "Figma (ñawpaq ruwanakuykuna chay prototipo, wireframekunawan)",
+      "Runa chaypi ch’usay qhawaywan ruwasqa (Diseño centrado en el usuario)",
+      "Pantallapi llapan kikinchayninwan ruwasqa (Interfaces responsivas)",
+      "Yachay Ruraykuna Kutichisqa (Pruebas iterativas)"
+    ]
+  },
+  "methodology": {
+    "title": "Ruray Ñan (Metodología)",
+    "items": [
+      "Ágil / Scrum",
+      "Sprint Riqsinakuy (Planificación de Sprints)",
+      "Trello (Ruwanay Kamachiy)",
+      "Ayllupi Yanapanakuywan (Colaboración y revisión en equipo)",
+      "Qhawariywan Kutichiykuna (QA – Pruebas y Validación Continua)"
+    ]
+  },
+  "impact": {
+    "title": "Riqsiy / Munay Ñan (Impacto / Propósito)",
+    "items": [
+      "Tierra muylla qhepapi puriqkunamanta (NEOs) y defensa planetaria yachachiy",
+      "Wawqikuna warmikuna ñawpaq pacha wiñay yachaywan willaywan ruraywan inspiray",
+      "NASA willakuykunata runakunaman sut’i yachaychayta churay"
+    ]
+  },
+  "comments": {
+    "title": "Imata rimanayta munanki? (¿Comentarios o ideas?)",
+    "description": "Qillqaykuway ñuqaykuman — ima yachayta rikunata munanki willaway. Yachayqa llapa runakunawan ruwasqa.",
+    "button": "Rimaykuway (Contáctanos)",
+    "mailto": "mailto:marian.paredes@gmail.com"
+  }
+}

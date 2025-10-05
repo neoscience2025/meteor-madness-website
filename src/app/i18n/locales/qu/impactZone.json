@@ -1,0 +1,26 @@
+{
+  "mapTitle": "Tupay Suyu: {{result}} (Zona de Impacto: {{result}})",
+  "loading": "Tupay Suyu: Ch’askiykuchkan... (Cargando...)",
+  "locationError": "Tupay Suyu: Saywapi pantay (Error de Ubicación)",
+  "unknownLocation": "Mana riqsisqa saywa (Ubicación Desconocida)",
+  "mapView": {
+    "street": "Kallikuna (Calle)",
+    "satellite": "Wara qhaway (Satélite)"
+  },
+  "form": {
+    "diameter": "K’uchu (Diámetro)",
+    "speed": "Utqay (Velocidad)",
+    "impactAngle": "Tupay k’unka (Ángulo de impacto)",
+    "launchAsteroid": "Asteroide waqaychiy (Lanzar Asteroide)",
+    "launching": "Waqaychikun... (Lanzando...)",
+    "newLaunch": "Musuq waqaychiy (Nuevo Lanzamiento)",
+    "density": "Ch’ulluy: {{density}} kg/m³ (Densidad)",
+    "materials": {
+      "gold": "Quri (Oro)",
+      "iron": "Q’illay (Hierro)",
+      "carbon": "Rikra ninriy (Carbón)",
+      "comet": "Ch’aska mayu (Cometa)",
+      "stone": "Rumi (Piedra)"
+    }
+  }
+}
