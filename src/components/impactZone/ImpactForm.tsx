@@ -181,7 +181,7 @@ export const ImpactForm = forwardRef<ImpactFormRef, {
 
   return (
     <div className="p-6">
-      <form onSubmit={handleSubmit(onSubmit)} className="md:grid md:grid-cols-2 md:gap-6 md:h-full">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-8 md:space-y-0 md:grid md:grid-cols-2 md:gap-6 md:h-full">
         {/* Left column: Meteorite selector only */}
         <div className="space-y-6">
           <Controller
