@@ -210,10 +210,6 @@ export default function OurTeam({
     (t("team:uiMember", { returnObjects: true }) as UIBlock) ??
     ({ ourTeamTitle: "Our Team", ourTeamSubtitle: "People behind Neoscience" } as UIBlock);
 
-  const count = team.length;
-  const hasTailPair = count % 3 === 2;
-  const head = hasTailPair ? team.slice(0, count - 2) : team;
-  const tail = hasTailPair ? team.slice(count - 2) : [];
 
   return (
     <section
@@ -253,28 +249,26 @@ export default function OurTeam({
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.2 }}
-        className="
-          mx-auto max-w-[1100px]
-          grid gap-6
-          grid-cols-1 sm:grid-cols-2 lg:grid-cols-3
-          justify-items-center
-        "
+        style={{
+          maxWidth: 1100,
+          margin: "0 auto",
+          display: "flex",
+          flexWrap: "wrap",
+          gap: 24,
+          justifyContent: "center",
+          alignItems: "flex-start",
+        }}
       >
-        {/* primeras filas normales */}
-        {head.map((m, i) => (
-          <MemberCard key={m.name} m={m} i={i} colors={colors} />
+        {team.map((m, i) => (
+          <motion.div
+            key={m.name}
+            variants={cardVariants}
+            custom={i}
+            style={{ flexShrink: 0 }}
+          >
+            <MemberCard m={m} i={i} colors={colors} />
+          </motion.div>
         ))}
-
-        {/* última fila: centrada y del mismo tamaño */}
-        {hasTailPair && (
-          <div className="hidden lg:flex lg:col-span-3 justify-center gap-6 w-full">
-            {tail.map((m, i) => (
-              <div key={`tail-${m.name}-${i}`} className="flex-shrink-0">
-                <MemberCard m={m} i={head.length + i} colors={colors} />
-              </div>
-            ))}
-          </div>
-        )}
       </motion.div>
     </section>
   );
