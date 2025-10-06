@@ -1,7 +1,7 @@
 "use client";
 
 import { useForm, Controller } from "react-hook-form";
-import { useState, forwardRef, useImperativeHandle } from "react";
+import { useState, forwardRef, useImperativeHandle, useEffect } from "react";
 import { TbRuler2, TbGauge, TbAngle } from "react-icons/tb";
 import { useTranslation } from "react-i18next";
 
@@ -136,6 +136,7 @@ const SliderField = ({
 
 export interface ImpactFormRef {
   reset: () => void;
+  submitWithData: (data: Partial<FormValues>) => void;
 }
 
 type FormValues = {
@@ -163,12 +164,13 @@ export const ImpactForm = forwardRef<
   {
     latitude: number;
     longitude: number;
-    onImpactResult?: (result: any) => void;
+    onImpactResult?: (result: any, formData: any) => void;
     onNewLaunch?: () => void;
     buttonText?: string;
     isReadyForNew?: boolean;
     disabled?: boolean;
     inputsDisabled?: boolean;
+    initialFormData?: Partial<FormValues> | null;
   }
 >(
   (
@@ -181,11 +183,12 @@ export const ImpactForm = forwardRef<
       isReadyForNew = false,
       disabled = false,
       inputsDisabled = false,
+      initialFormData = null,
     },
     ref
   ) => {
     const { t } = useTranslation();
-    const { control, handleSubmit, reset } = useForm<FormValues>({
+    const { control, handleSubmit, reset, setValue, getValues } = useForm<FormValues>({
       defaultValues: {
         diameter: 100,    // m
         speed: 17,        // km/s
@@ -196,10 +199,32 @@ export const ImpactForm = forwardRef<
 
     const [isLoading, setIsLoading] = useState(false);
 
+    // Update form values when initialFormData changes
+    useEffect(() => {
+      if (initialFormData) {
+        Object.entries(initialFormData).forEach(([key, value]) => {
+          if (value !== null && value !== undefined) {
+            setValue(key as keyof FormValues, value);
+          }
+        });
+      }
+    }, [initialFormData, setValue]);
+
     useImperativeHandle(ref, () => ({
       reset: () => {
         reset();
         setIsLoading(false);
+      },
+      submitWithData: async (data: Partial<FormValues>) => {
+        // Update form values with provided data
+        Object.entries(data).forEach(([key, value]) => {
+          if (value !== null && value !== undefined) {
+            setValue(key as keyof FormValues, value);
+          }
+        });
+        // Trigger submit with current form values
+        const currentValues = getValues();
+        await onSubmit(currentValues);
       },
     }));
 
@@ -223,7 +248,7 @@ export const ImpactForm = forwardRef<
         // Log en JSON para depurar
         console.log("result json:\n" + JSON.stringify(result, null, 2));
 
-        if (onImpactResult) onImpactResult(result);
+        if (onImpactResult) onImpactResult(result, data);
       } catch (error) {
         console.error("Impact calculation failed:", error);
       } finally {

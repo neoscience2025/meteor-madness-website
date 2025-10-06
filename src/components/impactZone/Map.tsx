@@ -9,6 +9,7 @@ import { extractPlaceName } from "../../lib/map/utils";
 import { useTranslation } from "react-i18next";
 import { ImpactState, ImpactData, BUTTON_TEXT_MAP } from "../../interfaces/map";
 import ImpactSummary from "./ImpactSummary";
+import { useRouter, useSearchParams, usePathname } from "next/navigation";
 
 
 // ──────────────────────────────────────────────────────────────
@@ -589,8 +590,20 @@ const EffectRings = ({ center, result }: { center: [number, number]; result: any
 
 // ──────────────────────────────────────────────────────────────
 // Main Map component
-export function Map({ lat = -1.65899, lon = -78.67901 }) {
+export function Map({ 
+  lat = -1.65899, 
+  lon = -78.67901, 
+  initialParams = {} 
+}: { 
+  lat?: number; 
+  lon?: number; 
+  initialParams?: { [key: string]: string | string[] | undefined }; 
+}) {
   const { i18n, t } = useTranslation();
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  
   const [markerPosition, setMarkerPosition] = useState<number[]>([lat, lon]);
   const [placeName, setPlaceName] = useState("");
   const [isLoadingPlace, setIsLoadingPlace] = useState(false);
@@ -599,7 +612,51 @@ export function Map({ lat = -1.65899, lon = -78.67901 }) {
 
   const [impactState, setImpactState] = useState<ImpactState>(ImpactState.IDLE);
   const [impactData, setImpactData] = useState<ImpactData | any>(null);
+  const [initialFormData, setInitialFormData] = useState<any>(null);
   const formRef = useRef<any>(null);
+
+  // Parse query parameters into form data
+  const parseQueryParams = useCallback((params: URLSearchParams | { [key: string]: string | string[] | undefined }) => {
+    const getParam = (key: string) => {
+      if (params instanceof URLSearchParams) {
+        return params.get(key);
+      }
+      const value = params[key];
+      return Array.isArray(value) ? value[0] : value;
+    };
+
+    const lat = getParam('lat');
+    const lng = getParam('lng');
+    const diameter = getParam('diameter');
+    const speed = getParam('speed');
+    const angle = getParam('angle');
+    const material = getParam('material');
+
+    return {
+      position: lat && lng ? [parseFloat(lat), parseFloat(lng)] : null,
+      formData: {
+        diameter: diameter ? parseFloat(diameter) : null,
+        speed: speed ? parseFloat(speed) : null,
+        impactAngle: angle ? parseFloat(angle) : null,
+        meteoriteType: material || null,
+      }
+    };
+  }, []);
+
+  // Update URL with current form data
+  const updateURLParams = useCallback((formData: any, position: number[]) => {
+    const params = new URLSearchParams();
+    params.set('lat', position[0].toString());
+    params.set('lng', position[1].toString());
+    params.set('diameter', formData.diameter.toString());
+    params.set('speed', formData.speed.toString());
+    params.set('angle', formData.impactAngle.toString());
+    params.set('material', formData.meteoriteType);
+
+    // Preserve the current pathname (which includes locale) and only update query parameters
+    const newURL = `${pathname}?${params.toString()}`;
+    router.replace(newURL, { scroll: false });
+  }, [router, pathname]);
 
   const handlePositionChange = useCallback(async (newPosition: number[]) => {
     const [lat, lon] = newPosition;
@@ -623,11 +680,41 @@ export function Map({ lat = -1.65899, lon = -78.67901 }) {
 
   const currentLanguage = i18n.language || "en";
   
+  // Initialize from URL parameters on mount
+  useEffect(() => {
+    const parsed = parseQueryParams(initialParams);
+    if (parsed.position) {
+      setMarkerPosition(parsed.position);
+    }
+    // Store initial form data to pass to ImpactForm
+    setInitialFormData(parsed.formData);
+  }, [initialParams, parseQueryParams]);
+
+  // Auto-load impact if URL contains complete parameters
+  useEffect(() => {
+    const hasAllParams = initialParams.lat && initialParams.lng && 
+                        initialParams.diameter && initialParams.speed && 
+                        initialParams.angle && initialParams.material;
+    
+    if (hasAllParams && initialFormData && impactState === ImpactState.IDLE) {
+      // Auto-trigger impact calculation with delay to ensure form is ready
+      const timer = setTimeout(() => {
+        if (formRef.current?.submitWithData) {
+          formRef.current.submitWithData(initialFormData);
+        }
+      }, 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [initialParams, initialFormData, impactState]);
+  
   useEffect(() => {
     handlePositionChange(markerPosition);
   }, [handlePositionChange, markerPosition, currentLanguage]);
 
-  const handleImpactLaunch = (result: ImpactData | any) => {
+  const handleImpactLaunch = (result: ImpactData | any, formData: any) => {
+    // Update URL with current parameters
+    updateURLParams(formData, markerPosition);
+    
     setImpactData(result);
     setImpactState(ImpactState.LAUNCHING);
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -673,6 +760,7 @@ export function Map({ lat = -1.65899, lon = -78.67901 }) {
             impactState === ImpactState.SHOWING_IMPACT
           }
           inputsDisabled={impactState !== ImpactState.IDLE}
+          initialFormData={initialFormData}
         />
       }
       title={getTitle()}
