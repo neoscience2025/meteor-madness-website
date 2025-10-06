@@ -20,14 +20,8 @@ export default function Banner() {
 
   return (
     <section
+      className="relative w-full h-[70vh] md:h-[90vh] flex items-start md:items-center justify-center overflow-hidden pt-4 md:pt-0"
       style={{
-        position: "relative",
-        width: "100%",
-        height: "90vh",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        overflow: "hidden",
         // 👇 mismo fondo que earth.html
         background: "radial-gradient(circle at top, #0b0f29 0%, #000 100%)",
       }}
