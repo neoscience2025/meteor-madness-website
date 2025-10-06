@@ -730,6 +730,9 @@ export function Map({
     setImpactState(ImpactState.IDLE);
     setImpactData(null);
     formRef.current?.reset?.();
+    
+    // Remove query parameters from URL without reloading the page
+    router.replace(pathname, { scroll: false });
   };
 
   const getTitle = () => {
