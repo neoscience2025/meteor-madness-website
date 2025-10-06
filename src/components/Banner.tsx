@@ -35,13 +35,7 @@ export default function Banner() {
      <iframe
   src="/earth.html"
   title="Earth 3D"
-  style={{
-    width: "70%",
-    aspectRatio: "1 / 1", // mantiene forma cuadrada
-    border: "none",
-    zIndex: 1,
-    background: "transparent",
-  }}
+  className="w-full md:w-[70%] aspect-square border-none z-[1] bg-transparent"
 />
 
     </section>
