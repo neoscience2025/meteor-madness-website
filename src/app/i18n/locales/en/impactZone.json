@@ -7,6 +7,10 @@
     "street": "Street",
     "satellite": "Satellite"
   },
+  "shareButton": "Share Impact Result",
+  "shareWith": "Share with:",
+  "shareTitle": "Asteroid Impact Simulation - {{location}}",
+  "shareText": "Check out this asteroid impact simulation at {{location}}! Diameter: {{diameter}}m, Speed: {{speed}} km/s. See the devastating effects!",
   "form": {
     "diameter": "Diameter",
     "speed": "Speed",

@@ -14,7 +14,7 @@ export const MainMenusGradientCard = ({
   clickable = false,
   onClick,
 }: {
-  title: string;
+  title: string | JSX.Element;
   description: string | JSX.Element;
   withArrow?: boolean;
   circleSize?: number;

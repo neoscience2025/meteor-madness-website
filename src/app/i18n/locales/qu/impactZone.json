@@ -7,6 +7,10 @@
     "street": "Kallikuna (Calle)",
     "satellite": "Wara qhaway (Satélite)"
   },
+  "shareButton": "Tupay ruwaypa rakinakuy (Compartir Resultado del Impacto)",
+  "shareWith": "Rakinakuy kaywan (Compartir con):",
+  "shareTitle": "Asteroide tupaypa ruwanakuynin - {{location}} (Simulación de Impacto de Asteroide - {{location}})",
+  "shareText": "¡Qhaway kay asteroide tupaypa ruwanakuyninkunata {{location}} sutiyuq chaypi! K'uchu: {{diameter}}m, Utqay: {{speed}} km/s. ¡Chinkachinakunata rikhuy! (¡Mira esta simulación de impacto de asteroide en {{location}}! Diámetro: {{diameter}}m, Velocidad: {{speed}} km/s. ¡Ve los efectos devastadores!)",
   "form": {
     "diameter": "K’uchu (Diámetro)",
     "speed": "Utqay (Velocidad)",

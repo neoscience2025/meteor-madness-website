@@ -10,6 +10,7 @@ import { useTranslation } from "react-i18next";
 import { ImpactState, ImpactData, BUTTON_TEXT_MAP } from "../../interfaces/map";
 import ImpactSummary from "./ImpactSummary";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
+import { WhatsappShareButton, TwitterShareButton, LinkedinShareButton, WhatsappIcon, TwitterIcon, LinkedinIcon } from "react-share";
 
 
 // ──────────────────────────────────────────────────────────────
@@ -253,6 +254,52 @@ const ImpactAnimation = ({ position, onComplete }) => {
         `}</style>
       </div>
     </>
+  );
+};
+
+// ──────────────────────────────────────────────────────────────
+// Share button component
+const ShareButton = ({ placeName, formData, position }: { placeName: string; formData: any; position: number[] }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const { t } = useTranslation();
+  
+  const currentUrl = typeof window !== 'undefined' ? window.location.href : '';
+  const shareTitle = t("impactZone:shareTitle", { location: placeName });
+  const shareText = t("impactZone:shareText", { 
+    location: placeName,
+    diameter: formData?.diameter,
+    speed: formData?.speed
+  });
+
+  return (
+    <div className="relative">
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="ml-3 p-2 rounded-full bg-blue-600 hover:bg-blue-700 text-white transition-colors"
+        title={t("impactZone:shareButton")}
+      >
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"/>
+        </svg>
+      </button>
+      
+      {isOpen && (
+        <div className="absolute top-full right-0 mt-2 bg-white rounded-lg shadow-lg border p-3 z-50 min-w-[200px]">
+          <div className="text-sm text-gray-600 mb-2">{t("impactZone:shareWith")}</div>
+          <div className="flex gap-2">
+            <WhatsappShareButton url={currentUrl} title={shareText}>
+              <WhatsappIcon size={32} round />
+            </WhatsappShareButton>
+            <TwitterShareButton url={currentUrl} title={shareText}>
+              <TwitterIcon size={32} round />
+            </TwitterShareButton>
+            <LinkedinShareButton url={currentUrl} title={shareTitle} summary={shareText}>
+              <LinkedinIcon size={32} round />
+            </LinkedinShareButton>
+          </div>
+        </div>
+      )}
+    </div>
   );
 };
 
@@ -736,10 +783,30 @@ export function Map({
   };
 
   const getTitle = () => {
-    if (isLoadingPlace) return t("impactZone:loading");
-    if (placeError) return t("impactZone:locationError");
-    if (placeName) return t("impactZone:mapTitle", { result: placeName });
-    return t("impactZone:mapTitle", { result: "Map" });
+    const titleText = (() => {
+      if (isLoadingPlace) return t("impactZone:loading");
+      if (placeError) return t("impactZone:locationError");
+      if (placeName) return t("impactZone:mapTitle", { result: placeName });
+      return t("impactZone:mapTitle", { result: "Map" });
+    })();
+
+    const showShareButton = impactData && (
+      impactState === ImpactState.SHOWING_IMPACT || 
+      impactState === ImpactState.READY_FOR_NEW
+    );
+
+    return (
+      <div className="flex items-center justify-between w-full">
+        <span>{titleText}</span>
+        {showShareButton && (
+          <ShareButton 
+            placeName={placeName || "Unknown Location"} 
+            formData={initialFormData} 
+            position={markerPosition} 
+          />
+        )}
+      </div>
+    );
   };
 
   const center: [number, number] = [markerPosition[0], markerPosition[1]];

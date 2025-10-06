@@ -7,6 +7,10 @@
     "street": "Calle",
     "satellite": "Satélite"
   },
+  "shareButton": "Compartir Resultado del Impacto",
+  "shareWith": "Compartir con:",
+  "shareTitle": "Simulación de Impacto de Asteroide - {{location}}",
+  "shareText": "¡Mira esta simulación de impacto de asteroide en {{location}}! Diámetro: {{diameter}}m, Velocidad: {{speed}} km/s. ¡Ve los efectos devastadores!",
   "form": {
     "diameter": "Diámetro",
     "speed": "Velocidad",
