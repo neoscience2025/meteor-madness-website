@@ -14,7 +14,7 @@ import MorphingText from "@/components/eldoraui/morphingtext";
 
 
 const texts = [
-    "NeoScience 🪐",
+  "NeoScience 🪐",
   "NeoScience 🌏",
   "NeoScience 🪐",
   "NeoScience 🌐",
@@ -161,10 +161,10 @@ export default function Header() {
         label: t("menu:simulation"),
         to: "",
         subitems: [
-           { key: "neo-pha", label: t("menu:neo-pha"), to: `https://nolaskote.github.io/simulatio_next` },
-            {/* You can check the repository here: https://github.com/Nolaskote/simulatio_next*/}
+          { key: "neo-pha", label: t("menu:neo-pha"), to: `https://nolaskote.github.io/simulatio_next` },
+          /* You can check the repository here: https://github.com/Nolaskote/simulatio_next*/
           { key: "impact-zone", label: t("menu:impact"), to: `/impact-zone` },
-         
+
         ],
       },
       {
@@ -193,9 +193,9 @@ export default function Header() {
       transition={{ duration: 0.6 }}
     >
       <div className={s.inner}>
-       <div className={s.brandLink}>
-  <MorphingTextDemo className={s.brandText} />
-</div>
+        <div className={s.brandLink}>
+          <MorphingTextDemo className={s.brandText} />
+        </div>
 
         <button
           className={s.burger}
@@ -205,8 +205,8 @@ export default function Header() {
                 ? "Cerrar menú"
                 : "Close menu"
               : currentLocale.startsWith("es")
-              ? "Abrir menú"
-              : "Open menu"
+                ? "Abrir menú"
+                : "Open menu"
           }
           aria-expanded={mobileOpen}
           aria-controls="main-nav"
@@ -232,9 +232,9 @@ export default function Header() {
             const hoverProps =
               isHoverCapable && hasSub
                 ? {
-                    onMouseEnter: () => openDropdown(item.key),
-                    onMouseLeave: () => closeDropdown(),
-                  }
+                  onMouseEnter: () => openDropdown(item.key),
+                  onMouseLeave: () => closeDropdown(),
+                }
                 : {};
 
             return (
